@@ -1,36 +1,37 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# dinkit-web
 
-## Getting Started
+Holding page for [Dink'It](https://dinkitgolf.com) — waitlist/beta signup, ahead of the full marketing site.
 
-First, run the development server:
+Next.js (App Router) + Tailwind, Prisma/Neon for storage, Resend for the confirmation email. The waitlist form is a single Server Action (`src/app/actions.ts`) — no separate API layer.
+
+## Stack
+
+- **Framework:** Next.js 16, TypeScript, Tailwind CSS 4
+- **Database:** [Neon](https://neon.tech) Postgres via Prisma (`@prisma/adapter-neon` — serverless-friendly, no connection pooling issues on Vercel)
+- **Email:** [Resend](https://resend.com) for the waitlist confirmation email
+- **Hosting:** Vercel
+
+## Local setup
 
 ```bash
+npm install
+cp .env.example .env
+# fill in DATABASE_URL, RESEND_API_KEY, RESEND_FROM_EMAIL
+npx prisma generate
+npx prisma migrate dev --name init   # creates the waitlist_signups table
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+The confirmation email only sends if `RESEND_API_KEY` is set — locally you can leave it blank and signups still work (just no email).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Deploying
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+1. **Neon:** create a project, copy the pooled connection string into `DATABASE_URL`.
+2. **Resend:** verify the sending domain (`dinkitgolf.com` or a subdomain like `mail.dinkitgolf.com`) under Domains, then create an API key.
+3. **Vercel:** import this repo, set `DATABASE_URL`, `RESEND_API_KEY`, `RESEND_FROM_EMAIL` as env vars, deploy.
+4. Run `npx prisma migrate deploy` against the production `DATABASE_URL` once (locally, or as a one-off) to create the table before the first real signup.
+5. Attach the `dinkitgolf.com` domain in Vercel project settings.
 
-## Learn More
+## Waitlist data
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Signups land in the `waitlist_signups` table (`id`, `email`, `source`, `createdAt`). Query it directly via `psql`/Neon's SQL editor, or add an export script later — there's no admin UI yet since this is just the holding page.
