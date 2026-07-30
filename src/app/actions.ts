@@ -4,20 +4,11 @@ import { z } from "zod";
 import { db } from "@/lib/db";
 import { resend, WAITLIST_FROM_EMAIL } from "@/lib/resend";
 import { waitlistConfirmationEmail } from "@/lib/emails/waitlist-confirmation";
+import type { WaitlistState } from "@/lib/waitlist-state";
 
 const emailSchema = z.object({
   email: z.string().trim().min(1, "Enter your email").email("Enter a valid email"),
 });
-
-export type WaitlistState = {
-  status: "idle" | "success" | "error";
-  message: string;
-};
-
-export const initialWaitlistState: WaitlistState = {
-  status: "idle",
-  message: "",
-};
 
 export async function joinWaitlist(
   _prevState: WaitlistState,
@@ -33,9 +24,10 @@ export async function joinWaitlist(
   }
 
   const email = parsed.data.email.toLowerCase();
+  const wantsBetaTesting = formData.get("wantsBetaTesting") === "on";
 
   try {
-    await db.waitlistSignup.create({ data: { email } });
+    await db.waitlistSignup.create({ data: { email, wantsBetaTesting } });
   } catch (err: unknown) {
     const isDuplicate =
       typeof err === "object" &&
@@ -53,7 +45,7 @@ export async function joinWaitlist(
     // Already on the list — fall through and treat as success (idempotent).
   }
 
-  if (process.env.RESEND_API_KEY) {
+  if (resend) {
     const { subject, text, html } = waitlistConfirmationEmail();
     try {
       await resend.emails.send({

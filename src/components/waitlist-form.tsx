@@ -1,7 +1,8 @@
 "use client";
 
 import { useActionState } from "react";
-import { joinWaitlist, initialWaitlistState } from "@/app/actions";
+import { joinWaitlist } from "@/app/actions";
+import { initialWaitlistState } from "@/lib/waitlist-state";
 
 export function WaitlistForm() {
   const [state, formAction, pending] = useActionState(
@@ -14,7 +15,7 @@ export function WaitlistForm() {
       <p
         role="status"
         aria-live="polite"
-        className="rounded-full border border-[#2f6b48]/30 bg-[#2f6b48]/10 px-5 py-3 text-sm font-medium text-[#1f4a32]"
+        className="rounded-lg border border-[#87ffad]/40 bg-white/10 px-5 py-4 text-center text-[15px] font-medium text-white [font-family:var(--font-42dot-sans)]"
       >
         {state.message}
       </p>
@@ -24,30 +25,44 @@ export function WaitlistForm() {
   return (
     <form
       action={formAction}
-      className="flex w-full max-w-md flex-col gap-3 sm:flex-row sm:gap-2"
+      className="flex w-full max-w-[503px] flex-col items-center gap-[22px]"
       noValidate
     >
       <label htmlFor="email" className="sr-only">
-        Email address
+        Your email address
       </label>
       <input
         id="email"
         name="email"
         type="email"
         required
-        placeholder="you@example.com"
+        placeholder="Your email address"
         autoComplete="email"
-        className="w-full flex-1 rounded-full border border-black/10 bg-white px-5 py-3 text-sm text-[#1d241f] placeholder:text-black/35 outline-none focus:border-[#2f6b48] focus:ring-2 focus:ring-[#2f6b48]/20"
+        className="h-[52px] w-full rounded-[8px] bg-white px-[19px] text-[18px] text-[#1d241f] placeholder:text-[#969696] outline-none [font-family:var(--font-42dot-sans)] focus:ring-2 focus:ring-[#87ffad]"
       />
+
+      <label className="flex items-center gap-3 text-[14px] text-white [font-family:var(--font-42dot-sans)]">
+        <input
+          type="checkbox"
+          name="wantsBetaTesting"
+          className="size-[23px] shrink-0 cursor-pointer rounded-[6px] border-2 border-[#87ffad] accent-[#87ffad]"
+        />
+        I would like to beta test the app
+      </label>
+
       <button
         type="submit"
         disabled={pending}
-        className="rounded-full bg-[#1f4a32] px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-[#173a27] disabled:opacity-60"
+        className="h-[47px] rounded-[4px] bg-[#56c186] px-[16px] text-[18px] font-medium text-white transition-colors [font-family:var(--font-space-grotesk)] hover:bg-[#4aae76] disabled:opacity-60"
       >
-        {pending ? "Joining…" : "Join the waitlist"}
+        {pending ? "Joining…" : "Join waitlist"}
       </button>
+
       {state.status === "error" && (
-        <p role="alert" className="basis-full text-sm text-[#ab4127]">
+        <p
+          role="alert"
+          className="text-center text-sm text-[#ffb4a1] [font-family:var(--font-42dot-sans)]"
+        >
           {state.message}
         </p>
       )}
