@@ -5,8 +5,8 @@ export default function Home() {
   return (
     <div className="flex flex-1 flex-col bg-[#347e55]">
       <main className="flex flex-1 flex-col items-center gap-10 pt-10 sm:gap-11 sm:pt-14">
-        <div className="flex w-full flex-col items-center px-6 text-center">
-          <div className="mb-8 h-[52px] w-[150px] sm:h-[70px] sm:w-[200px] md:h-[82px] md:w-[236px]">
+        <div className="flex w-full flex-col items-center px-6 pb-12 text-center sm:pb-14">
+          <div className="mb-12 h-[52px] w-[150px] sm:h-[70px] sm:w-[200px] md:h-[82px] md:w-[236px]">
             <img
               src="/images/dinkit-logo.svg"
               alt="Dink'it Golf"
@@ -42,7 +42,15 @@ export default function Home() {
             access
           </p>
           <p className="text-[14px] text-[#87ffad] [font-family:var(--font-42dot-sans)] sm:text-[15px]">
-            Website Design &amp; Development by Hive Creative Media
+            Website Design &amp; Development by{" "}
+            <a
+              href="https://hivecreativemedia.co.uk"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="underline underline-offset-2 hover:opacity-80"
+            >
+              Hive Creative Media
+            </a>
           </p>
         </div>
       </main>
