@@ -28,31 +28,33 @@ export function WaitlistForm() {
       className="flex w-full max-w-[503px] flex-col items-center gap-[22px]"
       noValidate
     >
-      <label htmlFor="name" className="sr-only">
-        Your name
-      </label>
-      <input
-        id="name"
-        name="name"
-        type="text"
-        required
-        placeholder="Your name"
-        autoComplete="name"
-        className="h-[52px] w-full rounded-[8px] bg-white px-[19px] text-[18px] text-[#1d241f] placeholder:text-[#969696] outline-none [font-family:var(--font-42dot-sans)] focus:ring-2 focus:ring-[#87ffad]"
-      />
+      <div className="flex w-full flex-col gap-[22px] sm:flex-row sm:gap-4">
+        <label htmlFor="name" className="sr-only">
+          Your name
+        </label>
+        <input
+          id="name"
+          name="name"
+          type="text"
+          required
+          placeholder="Your name"
+          autoComplete="name"
+          className="h-[52px] w-full flex-1 rounded-[8px] bg-white px-[19px] text-[18px] text-[#1d241f] placeholder:text-[#969696] outline-none [font-family:var(--font-42dot-sans)] focus:ring-2 focus:ring-[#87ffad]"
+        />
 
-      <label htmlFor="email" className="sr-only">
-        Your email address
-      </label>
-      <input
-        id="email"
-        name="email"
-        type="email"
-        required
-        placeholder="Your email address"
-        autoComplete="email"
-        className="h-[52px] w-full rounded-[8px] bg-white px-[19px] text-[18px] text-[#1d241f] placeholder:text-[#969696] outline-none [font-family:var(--font-42dot-sans)] focus:ring-2 focus:ring-[#87ffad]"
-      />
+        <label htmlFor="email" className="sr-only">
+          Your email address
+        </label>
+        <input
+          id="email"
+          name="email"
+          type="email"
+          required
+          placeholder="Your email address"
+          autoComplete="email"
+          className="h-[52px] w-full flex-1 rounded-[8px] bg-white px-[19px] text-[18px] text-[#1d241f] placeholder:text-[#969696] outline-none [font-family:var(--font-42dot-sans)] focus:ring-2 focus:ring-[#87ffad]"
+        />
+      </div>
 
       <label className="flex items-center gap-3 text-[14px] text-white [font-family:var(--font-42dot-sans)]">
         <input
