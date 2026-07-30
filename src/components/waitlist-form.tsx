@@ -39,7 +39,7 @@ export function WaitlistForm() {
           required
           placeholder="Your name"
           autoComplete="name"
-          className="h-[52px] w-full flex-1 rounded-[8px] bg-white px-[19px] text-[18px] text-[#1d241f] placeholder:text-[#969696] outline-none [font-family:var(--font-42dot-sans)] focus:ring-2 focus:ring-[#87ffad]"
+          className="h-[52px] w-full shrink-0 rounded-[8px] bg-white px-[19px] text-[18px] text-[#1d241f] placeholder:text-[#969696] outline-none [font-family:var(--font-42dot-sans)] focus:ring-2 focus:ring-[#87ffad] sm:flex-1"
         />
 
         <label htmlFor="email" className="sr-only">
@@ -52,7 +52,7 @@ export function WaitlistForm() {
           required
           placeholder="Your email address"
           autoComplete="email"
-          className="h-[52px] w-full flex-1 rounded-[8px] bg-white px-[19px] text-[18px] text-[#1d241f] placeholder:text-[#969696] outline-none [font-family:var(--font-42dot-sans)] focus:ring-2 focus:ring-[#87ffad]"
+          className="h-[52px] w-full shrink-0 rounded-[8px] bg-white px-[19px] text-[18px] text-[#1d241f] placeholder:text-[#969696] outline-none [font-family:var(--font-42dot-sans)] focus:ring-2 focus:ring-[#87ffad] sm:flex-1"
         />
       </div>
 
