@@ -5,8 +5,8 @@ export default function Home() {
   return (
     <div className="flex flex-1 flex-col bg-[#347e55]">
       <main className="flex flex-1 flex-col items-center gap-10 pt-10 sm:gap-11 sm:pt-14">
-        <div className="flex w-full flex-col items-center gap-8 px-6 text-center sm:gap-[22px]">
-          <div className="h-[52px] w-[150px] sm:h-[70px] sm:w-[200px] md:h-[82px] md:w-[236px]">
+        <div className="flex w-full flex-col items-center px-6 text-center">
+          <div className="mb-8 h-[52px] w-[150px] sm:h-[70px] sm:w-[200px] md:h-[82px] md:w-[236px]">
             <img
               src="/images/dinkit-logo.svg"
               alt="Dink'it Golf"
@@ -14,20 +14,22 @@ export default function Home() {
             />
           </div>
 
-          <span className="rounded-[24px] border border-[#87ffad] bg-[#212121] px-[10px] py-[4px] text-[14px] font-bold text-[#87ffad] [font-family:var(--font-space-grotesk)] sm:text-[16px]">
-            COMING SOON
-          </span>
+          <div className="flex w-full flex-col items-center gap-8 sm:gap-[22px]">
+            <span className="rounded-[24px] border border-[#87ffad] bg-[#212121] px-[10px] py-[4px] text-[14px] font-bold text-[#87ffad] [font-family:var(--font-space-grotesk)] sm:text-[16px]">
+              COMING SOON
+            </span>
 
-          <h1 className="max-w-[925px] text-[38px] leading-[1.05] font-medium tracking-[-0.6px] text-white [font-family:var(--font-space-grotesk)] sm:text-[52px] sm:tracking-[-0.9px] md:text-[66px] md:leading-[68px] md:tracking-[-1.32px]">
-            Golf Tracking, <span className="text-[#87ffad]">Simplified.</span>
-          </h1>
+            <h1 className="max-w-[925px] text-[38px] leading-[1.05] font-medium tracking-[-0.6px] text-white [font-family:var(--font-space-grotesk)] sm:text-[52px] sm:tracking-[-0.9px] md:text-[66px] md:leading-[68px] md:tracking-[-1.32px]">
+              Golf Tracking, <span className="text-[#87ffad]">Simplified.</span>
+            </h1>
 
-          <p className="max-w-[503px] text-[16px] text-white [font-family:var(--font-42dot-sans)] sm:text-[18px]">
-            Join the waitlist. The first 50 people who sign up for beta
-            testing will be eligible for premium access for life*
-          </p>
+            <p className="max-w-[503px] text-[16px] text-white [font-family:var(--font-42dot-sans)] sm:text-[18px]">
+              Join the waitlist. The first 50 people who sign up for beta
+              testing will be eligible for premium access for life*
+            </p>
 
-          <WaitlistForm />
+            <WaitlistForm />
+          </div>
         </div>
 
         <GolfIllustration />
