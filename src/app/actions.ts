@@ -6,7 +6,8 @@ import { resend, WAITLIST_FROM_EMAIL } from "@/lib/resend";
 import { waitlistConfirmationEmail } from "@/lib/emails/waitlist-confirmation";
 import type { WaitlistState } from "@/lib/waitlist-state";
 
-const emailSchema = z.object({
+const waitlistSchema = z.object({
+  name: z.string().trim().min(1, "Enter your name"),
   email: z.string().trim().min(1, "Enter your email").email("Enter a valid email"),
 });
 
@@ -14,20 +15,24 @@ export async function joinWaitlist(
   _prevState: WaitlistState,
   formData: FormData
 ): Promise<WaitlistState> {
-  const parsed = emailSchema.safeParse({ email: formData.get("email") });
+  const parsed = waitlistSchema.safeParse({
+    name: formData.get("name"),
+    email: formData.get("email"),
+  });
 
   if (!parsed.success) {
     return {
       status: "error",
-      message: parsed.error.issues[0]?.message ?? "Enter a valid email",
+      message: parsed.error.issues[0]?.message ?? "Check your details and try again",
     };
   }
 
+  const name = parsed.data.name;
   const email = parsed.data.email.toLowerCase();
   const wantsBetaTesting = formData.get("wantsBetaTesting") === "on";
 
   try {
-    await db.waitlistSignup.create({ data: { email, wantsBetaTesting } });
+    await db.waitlistSignup.create({ data: { name, email, wantsBetaTesting } });
   } catch (err: unknown) {
     const isDuplicate =
       typeof err === "object" &&

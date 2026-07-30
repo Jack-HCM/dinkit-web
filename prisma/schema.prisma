@@ -14,6 +14,7 @@ datasource db {
 
 model WaitlistSignup {
   id                String   @id @default(cuid())
+  name              String
   email             String   @unique
   wantsBetaTesting  Boolean  @default(false)
   source            String   @default("holding-page")

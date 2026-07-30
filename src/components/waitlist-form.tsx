@@ -28,6 +28,19 @@ export function WaitlistForm() {
       className="flex w-full max-w-[503px] flex-col items-center gap-[22px]"
       noValidate
     >
+      <label htmlFor="name" className="sr-only">
+        Your name
+      </label>
+      <input
+        id="name"
+        name="name"
+        type="text"
+        required
+        placeholder="Your name"
+        autoComplete="name"
+        className="h-[52px] w-full rounded-[8px] bg-white px-[19px] text-[18px] text-[#1d241f] placeholder:text-[#969696] outline-none [font-family:var(--font-42dot-sans)] focus:ring-2 focus:ring-[#87ffad]"
+      />
+
       <label htmlFor="email" className="sr-only">
         Your email address
       </label>
