@@ -4,24 +4,24 @@ import { HeroCarousel } from "@/components/hero-carousel";
 export function HeroImageSection() {
   return (
     <div className="relative w-full px-4 sm:px-6">
-      <div className="relative mx-auto w-full max-w-[1180px]">
+      <div className="relative mx-auto w-full max-w-[1280px]">
         <Image
-          src="/images/golf-scene-transparent.png"
+          src="/images/hero-scene-bleed.png"
           alt=""
-          width={2362}
-          height={1158}
-          className="pointer-events-none absolute left-1/2 top-[-42%] h-[170%] w-auto max-w-none -translate-x-1/2"
+          width={1376}
+          height={768}
+          className="pointer-events-none absolute left-1/2 top-[-7.7%] h-[111%] w-[115%] max-w-none -translate-x-1/2 object-contain"
         />
 
         <div className="relative overflow-hidden rounded-[24px] sm:rounded-[32px]">
           <Image
-            src="/images/golf-scene.png"
+            src="/images/hero-scene-box.png"
             alt=""
-            width={2362}
-            height={1158}
+            width={1376}
+            height={768}
             className="pointer-events-none absolute inset-0 h-full w-full object-cover"
           />
-          <div className="pointer-events-none absolute inset-0 bg-black/25" />
+          <div className="pointer-events-none absolute inset-0 bg-black/10" />
           <HeroCarousel />
         </div>
       </div>

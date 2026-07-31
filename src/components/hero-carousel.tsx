@@ -5,21 +5,25 @@ import { useEffect, useState, type CSSProperties } from "react";
 
 const SLIDES = [
   {
+    pill: "GPS Tracking",
     heading: "GPS tracking. Zero hardware.",
     body: "Track your shots and log your rounds in detail. No expensive attachments needed",
     image: "/images/hero-card-tracking.png",
   },
   {
+    pill: "Performance",
     heading: "Track stats like a pro.",
     body: "We simplify advanced performance data. See your driving, approach, and putting broken down cleanly. Spot exactly where to improve.",
     image: "/images/hero-card-stats.png",
   },
   {
+    pill: "Shot Patterns",
     heading: "See your true patterns.",
     body: "Stop guessing your natural miss. We map your historical shots automatically. Make smarter aiming decisions on every box.",
     image: "/images/hero-card-scorecards.png",
   },
   {
+    pill: "AI Coaching",
     heading: "Coaching and Insights",
     body: "Our AI reads your raw numbers for you. Get straightforward summaries after your rounds. Focus your practice where it matters.",
     image: "/images/hero-card-stats.png",
@@ -38,13 +42,13 @@ function slotStyle(slot: number): CSSProperties {
       };
     case 1:
       return {
-        transform: "translate(-68%, -46%) rotate(-6deg) scale(0.85)",
+        transform: "translate(-76%, -46%) rotate(-8deg) scale(0.88)",
         zIndex: 30,
         opacity: 1,
       };
     case 2:
       return {
-        transform: "translate(-32%, -46%) rotate(6deg) scale(0.85)",
+        transform: "translate(-24%, -46%) rotate(8deg) scale(0.88)",
         zIndex: 20,
         opacity: 1,
       };
@@ -71,8 +75,14 @@ export function HeroCarousel() {
 
   return (
     <div className="relative z-10 flex w-full flex-col items-center gap-10 px-6 py-12 sm:px-10 sm:py-16">
-      <div className="grid w-full max-w-[1180px] grid-cols-1 items-center gap-12 md:grid-cols-[1fr_320px_1fr] md:gap-8">
-        <div className="order-1 flex justify-center text-center md:order-1 md:justify-end md:text-right">
+      <div className="grid w-full max-w-[1280px] grid-cols-1 items-center gap-12 md:grid-cols-[1fr_400px_1fr] md:gap-6">
+        <div className="order-1 flex flex-col items-center text-center md:order-1 md:items-end md:text-right">
+          <div
+            key={`pill-${index}`}
+            className="animate-hero-fade mb-[22px] rounded-[24px] border border-[#87ffad] bg-[#212121] px-[10px] py-[4px] text-[14px] font-bold whitespace-nowrap text-[#87ffad] [font-family:var(--font-space-grotesk)] sm:text-[16px]"
+          >
+            {active.pill}
+          </div>
           <h3
             key={`heading-${index}`}
             className="animate-hero-fade max-w-[320px] text-[32px] leading-[1.1] font-bold text-white [font-family:var(--font-space-grotesk)] [text-shadow:0px_6px_32px_rgba(0,0,0,0.8)] sm:text-[40px] md:text-[48px] md:leading-[52px]"
