@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Space_Grotesk } from "next/font/google";
 import localFont from "next/font/local";
-import Script from "next/script";
+import { CookieConsent } from "@/components/cookie-consent";
 import "./globals.css";
 
 const spaceGrotesk = Space_Grotesk({
@@ -43,19 +43,8 @@ export default function RootLayout({
       className={`${spaceGrotesk.variable} ${dotSans.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
-        <Script
-          src="https://www.googletagmanager.com/gtag/js?id=G-9WFHXLHYKP"
-          strategy="afterInteractive"
-        />
-        <Script id="gtag-init" strategy="afterInteractive">
-          {`
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', 'G-9WFHXLHYKP');
-          `}
-        </Script>
         {children}
+        <CookieConsent />
       </body>
     </html>
   );

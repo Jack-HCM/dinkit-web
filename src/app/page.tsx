@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { WaitlistForm } from "@/components/waitlist-form";
 import { GolfIllustration } from "@/components/golf-illustration";
 
@@ -52,6 +53,12 @@ export default function Home() {
               Hive Creative Media
             </a>
           </p>
+          <Link
+            href="/cookie-policy"
+            className="text-[13px] text-white/70 underline underline-offset-2 hover:opacity-80 [font-family:var(--font-42dot-sans)] sm:text-[14px]"
+          >
+            Cookie Policy
+          </Link>
         </div>
       </main>
     </div>
