@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { WaitlistForm } from "@/components/waitlist-form";
-import { GolfIllustration } from "@/components/golf-illustration";
+import { HeroImageSection } from "@/components/hero-image-section";
 
 export default function Home() {
   return (
@@ -21,7 +21,9 @@ export default function Home() {
             </span>
 
             <h1 className="max-w-[925px] text-[38px] leading-[1.05] font-medium tracking-[-0.6px] text-white [font-family:var(--font-space-grotesk)] sm:text-[52px] sm:tracking-[-0.9px] md:text-[66px] md:leading-[68px] md:tracking-[-1.32px]">
-              Golf Tracking, <span className="text-[#87ffad]">Simplified.</span>
+              Track, Log, and{" "}
+              <span className="text-[#87ffad]">Master Your Game</span> from
+              Your Phone.
             </h1>
 
             <p className="max-w-[503px] text-[16px] text-white [font-family:var(--font-42dot-sans)] sm:text-[18px]">
@@ -33,7 +35,7 @@ export default function Home() {
           </div>
         </div>
 
-        <GolfIllustration />
+        <HeroImageSection />
 
         <div className="flex w-full max-w-[577px] flex-col items-center gap-6 px-6 pb-12 text-center sm:gap-8 sm:pb-16">
           <p className="text-[13px] text-white [font-family:var(--font-42dot-sans)] sm:text-[14px]">
