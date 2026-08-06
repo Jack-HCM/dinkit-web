@@ -222,21 +222,6 @@ export function HeroImageSection() {
           className="pointer-events-none absolute inset-0 object-cover"
         />
 
-        {/* Fades the box's top edge into the brand colour, strictly clipped
-            to the sky panel's own bounds so nothing bleeds into the page
-            background outside the box. */}
-        <div
-          className="pointer-events-none absolute rounded-t-[32px]"
-          style={{
-            left: `${CARD_INSET.left}%`,
-            right: `${CARD_INSET.right}%`,
-            top: `${CARD_INSET.top}%`,
-            bottom: `${CARD_INSET.bottom}%`,
-            background:
-              "linear-gradient(to bottom, #347e55 0%, rgba(52,126,85,0) 25%)",
-          }}
-        />
-
         <div className="pointer-events-none absolute inset-0 bg-black/10" />
 
         <div className="pointer-events-none absolute inset-x-0 bottom-0 h-1/4 bg-gradient-to-t from-[#347e55] to-transparent" />
