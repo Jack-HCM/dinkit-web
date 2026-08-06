@@ -38,6 +38,9 @@ const ROTATE_MS = 5000;
 // without being clipped by its rounded-corner mask.
 const CARD_INSET = { left: 6, right: 6, top: 12, bottom: 0 };
 
+const SKY_GRADIENT =
+  "linear-gradient(to bottom, #a7d8ef 0%, #cfe9f5 55%, #eef8fb 100%)";
+
 // Percentages measured against the full-bleed scene image (1376x768).
 function slotStyle(slot: number): CSSProperties {
   switch (slot) {
@@ -206,8 +209,7 @@ export function HeroImageSection() {
             right: `${CARD_INSET.right}%`,
             top: `${CARD_INSET.top}%`,
             bottom: `${CARD_INSET.bottom}%`,
-            background:
-              "linear-gradient(to bottom, #a7d8ef 0%, #cfe9f5 55%, #eef8fb 100%)",
+            background: SKY_GRADIENT,
           }}
         />
 
@@ -218,6 +220,21 @@ export function HeroImageSection() {
           priority
           sizes="100vw"
           className="pointer-events-none absolute inset-0 object-cover"
+        />
+
+        {/* Fades the box's top edge into the brand colour, strictly clipped
+            to the sky panel's own bounds so nothing bleeds into the page
+            background outside the box. */}
+        <div
+          className="pointer-events-none absolute rounded-t-[32px]"
+          style={{
+            left: `${CARD_INSET.left}%`,
+            right: `${CARD_INSET.right}%`,
+            top: `${CARD_INSET.top}%`,
+            bottom: `${CARD_INSET.bottom}%`,
+            background:
+              "linear-gradient(to bottom, #347e55 0%, rgba(52,126,85,0) 25%)",
+          }}
         />
 
         <div className="pointer-events-none absolute inset-0 bg-black/10" />
