@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { WaitlistForm } from "@/components/waitlist-form";
 import { HeroImageSection } from "@/components/hero-image-section";
+import { FeatureCarouselSection } from "@/components/feature-carousel-section";
 
 export default function Home() {
   return (
@@ -36,6 +37,8 @@ export default function Home() {
         </div>
 
         <HeroImageSection />
+
+        <FeatureCarouselSection />
 
         <div className="flex w-full max-w-[577px] flex-col items-center gap-6 px-6 pb-12 text-center sm:gap-8 sm:pb-16">
           <p className="text-[13px] text-white [font-family:var(--font-42dot-sans)] sm:text-[14px]">
