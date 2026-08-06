@@ -151,31 +151,29 @@ export function FeatureCarouselSection() {
             children, so it needs no clipping of its own. */}
         <div className="absolute inset-y-0 left-1/2 right-0 rounded-r-[24px] bg-[#a7d8ef]" />
 
-        {/* Full scene image, unclipped and taller than the panel above so
-            the clouds painted near its top can rise above the box edge
-            into the green background — same technique as the hero. No
-            rounding here: the image's sky is transparent, so the panel's
-            own rounded corners show through cleanly underneath it. */}
+        {/* Full scene image, clipped to a "T" shape: a wide strip above the
+            box (clouds bleeding past both the top and the left/right edges)
+            sitting on top of a narrower column that stays flush with the
+            panel below. Same source image and crop throughout, so nothing
+            can visibly misalign at the seam — only the clip-path changes. */}
         <div
-          className="pointer-events-none absolute top-[-9%] right-0 bottom-0 left-1/2"
+          className="pointer-events-none absolute top-[-16%] right-[-6%] bottom-0 left-[38%]"
           style={{
-            maskImage:
-              "linear-gradient(to bottom, transparent 0%, black 14%, black 100%)",
-            WebkitMaskImage:
-              "linear-gradient(to bottom, transparent 0%, black 14%, black 100%)",
+            clipPath:
+              "polygon(0% 0%, 100% 0%, 100% 13.8%, 91.2% 13.8%, 91.2% 100%, 17.6% 100%, 17.6% 13.8%, 0% 13.8%)",
           }}
         >
           <Image
             src="/images/hero-scene-bleed.png"
             alt=""
             fill
-            sizes="640px"
+            sizes="720px"
             className="object-cover"
             style={{ objectPosition: "58% 0%" }}
           />
         </div>
 
-        <div className="absolute inset-y-0 left-0 flex w-1/2 flex-col justify-center gap-6 py-10 pr-10 pl-10 lg:pl-16">
+        <div className="absolute inset-y-0 left-0 flex w-1/2 flex-col justify-center gap-6 py-10 pr-16 pl-10 lg:pr-20 lg:pl-16">
           {pill}
           {heading}
           {body}
@@ -184,7 +182,7 @@ export function FeatureCarouselSection() {
 
         <div
           ref={phoneLayerRef}
-          className="absolute top-1/2 left-1/2 h-[80%] w-[17%] -translate-x-1/2 -translate-y-1/2 rotate-[4deg]"
+          className="absolute top-1/2 left-1/2 h-[92%] w-[20%] -translate-x-1/2 -translate-y-1/2 rotate-[4deg]"
         >
           <Image
             src={active.phone}
