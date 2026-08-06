@@ -16,15 +16,12 @@ const SLIDES = [
 
 const ROTATE_MS = 5000;
 
-// Same technique as the hero: background travels further per pixel
-// scrolled than the phone, so the phone reads as closer.
-const PARALLAX_BG_SPEED = 0.12;
-const PARALLAX_PHONE_SPEED = 0.04;
+// Unlike the hero, only the phone moves here — the scene/clouds stay put.
+const PARALLAX_PHONE_SPEED = 0.08;
 
 export function FeatureCarouselSection() {
   const [index, setIndex] = useState(0);
   const sceneRef = useRef<HTMLDivElement>(null);
-  const bgLayerRef = useRef<HTMLDivElement>(null);
   const phoneLayerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -47,9 +44,6 @@ export function FeatureCarouselSection() {
       const rect = scene.getBoundingClientRect();
       const offset = window.innerHeight / 2 - (rect.top + rect.height / 2);
 
-      if (bgLayerRef.current) {
-        bgLayerRef.current.style.transform = `translateY(${offset * PARALLAX_BG_SPEED}px)`;
-      }
       if (phoneLayerRef.current) {
         phoneLayerRef.current.style.transform = `translateY(${offset * PARALLAX_PHONE_SPEED}px)`;
       }
@@ -119,14 +113,14 @@ export function FeatureCarouselSection() {
   );
 
   return (
-    <section className="flex w-full max-w-[1280px] flex-col items-center gap-10 px-6 sm:gap-12 md:gap-16">
+    <section className="flex w-full max-w-[1280px] flex-col items-center gap-12 px-6 py-10 sm:gap-14 sm:py-14 md:gap-20 md:py-20">
       <h2 className="text-center text-[32px] leading-[1.1] font-medium tracking-[-0.6px] text-white [font-family:var(--font-space-grotesk)] sm:text-[40px] md:text-[48px] md:tracking-[-0.96px]">
         Golf Tracking, <span className="text-[#87ffad]">Simplified.</span>
       </h2>
 
       {/* Mobile: stacked card, no scene image — kept simple pending a
           dedicated mobile Figma pass (same approach as the hero). */}
-      <div className="flex w-full flex-col items-center gap-6 rounded-[24px] bg-white px-6 py-10 text-center md:hidden">
+      <div className="flex w-full flex-col items-center gap-8 rounded-[24px] bg-white px-6 py-12 text-center md:hidden">
         {pill}
         <div className="relative aspect-[306/662] w-[170px] rotate-[3deg]">
           <Image
@@ -163,7 +157,6 @@ export function FeatureCarouselSection() {
             rounding here: the image's sky is transparent, so the panel's
             own rounded corners show through cleanly underneath it. */}
         <div
-          ref={bgLayerRef}
           className="pointer-events-none absolute top-[-9%] right-0 bottom-0 left-1/2"
           style={{
             maskImage:
