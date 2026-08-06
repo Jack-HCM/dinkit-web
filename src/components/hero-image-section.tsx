@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useState, type CSSProperties } from "react";
+import { useEffect, useRef, useState, type CSSProperties } from "react";
 
 const SLIDES = [
   {
@@ -87,8 +87,16 @@ function slotStyle(slot: number): CSSProperties {
   }
 }
 
+// Depth multipliers for the scroll parallax: background travels further
+// per pixel scrolled than the phone stack, so the phones read as closer.
+const PARALLAX_BG_SPEED = 0.12;
+const PARALLAX_PHONE_SPEED = 0.04;
+
 export function HeroImageSection() {
   const [index, setIndex] = useState(0);
+  const sceneRef = useRef<HTMLDivElement>(null);
+  const bgLayerRef = useRef<HTMLDivElement>(null);
+  const phonesLayerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const id = setInterval(() => {
@@ -96,6 +104,42 @@ export function HeroImageSection() {
     }, ROTATE_MS);
     return () => clearInterval(id);
   }, [index]);
+
+  useEffect(() => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+    let ticking = false;
+
+    const update = () => {
+      ticking = false;
+      const scene = sceneRef.current;
+      if (!scene) return;
+      const rect = scene.getBoundingClientRect();
+      const offset = window.innerHeight / 2 - (rect.top + rect.height / 2);
+
+      if (bgLayerRef.current) {
+        bgLayerRef.current.style.transform = `translateY(${offset * PARALLAX_BG_SPEED}px)`;
+      }
+      if (phonesLayerRef.current) {
+        phonesLayerRef.current.style.transform = `translateY(${offset * PARALLAX_PHONE_SPEED}px)`;
+      }
+    };
+
+    const onScroll = () => {
+      if (!ticking) {
+        ticking = true;
+        requestAnimationFrame(update);
+      }
+    };
+
+    update();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll);
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
+    };
+  }, []);
 
   const active = SLIDES[index];
 
@@ -201,28 +245,33 @@ export function HeroImageSection() {
           background and the bleeding clouds are pixel-identical content —
           nothing to misalign. Phone cards/text sit above everything as
           siblings of the sky card, so they're never clipped by its mask. */}
-      <div className="relative hidden aspect-[1376/768] w-full md:block">
-        <div
-          className="pointer-events-none absolute rounded-t-[32px]"
-          style={{
-            left: `${CARD_INSET.left}%`,
-            right: `${CARD_INSET.right}%`,
-            top: `${CARD_INSET.top}%`,
-            bottom: `${CARD_INSET.bottom}%`,
-            background: SKY_GRADIENT,
-          }}
-        />
+      <div
+        ref={sceneRef}
+        className="relative hidden aspect-[1376/768] w-full md:block"
+      >
+        <div ref={bgLayerRef} className="absolute inset-0">
+          <div
+            className="pointer-events-none absolute rounded-t-[32px]"
+            style={{
+              left: `${CARD_INSET.left}%`,
+              right: `${CARD_INSET.right}%`,
+              top: `${CARD_INSET.top}%`,
+              bottom: `${CARD_INSET.bottom}%`,
+              background: SKY_GRADIENT,
+            }}
+          />
 
-        <Image
-          src="/images/hero-scene-bleed.png"
-          alt=""
-          fill
-          priority
-          sizes="100vw"
-          className="pointer-events-none absolute inset-0 object-cover"
-        />
+          <Image
+            src="/images/hero-scene-bleed.png"
+            alt=""
+            fill
+            priority
+            sizes="100vw"
+            className="pointer-events-none absolute inset-0 object-cover"
+          />
 
-        <div className="pointer-events-none absolute inset-x-0 bottom-0 h-1/4 bg-gradient-to-t from-[#347e55] to-transparent" />
+          <div className="pointer-events-none absolute inset-x-0 bottom-0 h-1/4 bg-gradient-to-t from-[#347e55] to-transparent" />
+        </div>
 
         <div className="absolute" style={{ left: "8.3%", top: "34.3%", width: "21%" }}>
           {pill}
@@ -233,7 +282,9 @@ export function HeroImageSection() {
           {body}
         </div>
 
-        {cardStack}
+        <div ref={phonesLayerRef} className="absolute inset-0">
+          {cardStack}
+        </div>
 
         <div className="absolute bottom-[3.5%] left-1/2 -translate-x-1/2">{dots}</div>
       </div>
