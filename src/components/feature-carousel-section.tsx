@@ -205,16 +205,22 @@ export function FeatureCarouselSection() {
 
         {/* In-box scene: flush to the panel's own bounds, matching Figma's
             main image exactly (rounded only on the right, like the panel
-            behind it). */}
+            behind it). The image is shifted up inside an oversized inner
+            box so the visible window starts below the source's cloud
+            band — otherwise "cover" shows the full source height here
+            (this panel is shorter than it is wide), putting a raw,
+            hard-edged cloud fragment right at the panel's own top. */}
         <div className="pointer-events-none absolute inset-y-0 left-1/2 right-0 overflow-hidden rounded-r-[24px]">
-          <Image
-            src="/images/hero-scene-bleed.png"
-            alt=""
-            fill
-            sizes="640px"
-            className="object-cover"
-            style={{ objectPosition: "58% 0%" }}
-          />
+          <div className="absolute inset-x-0 top-[-40%] h-[140%]">
+            <Image
+              src="/images/hero-scene-bleed.png"
+              alt=""
+              fill
+              sizes="640px"
+              className="object-cover"
+              style={{ objectPosition: "58% 0%" }}
+            />
+          </div>
         </div>
 
         {/* Cloud bleed: a separate, independently-cropped window onto just
