@@ -4,7 +4,11 @@ import { useActionState } from "react";
 import { joinWaitlist } from "@/app/actions";
 import { initialWaitlistState } from "@/lib/waitlist-state";
 
-export function WaitlistForm() {
+export function WaitlistForm({
+  theme = "dark",
+}: {
+  theme?: "dark" | "light";
+}) {
   const [state, formAction, pending] = useActionState(
     joinWaitlist,
     initialWaitlistState
@@ -15,7 +19,11 @@ export function WaitlistForm() {
       <p
         role="status"
         aria-live="polite"
-        className="rounded-lg border border-[#87ffad]/40 bg-white/10 px-5 py-4 text-center text-[15px] font-medium text-white [font-family:var(--font-42dot-sans)]"
+        className={`rounded-lg border px-5 py-4 text-center text-[15px] font-medium [font-family:var(--font-42dot-sans)] ${
+          theme === "light"
+            ? "border-[#87ffad]/60 bg-[#347e55]/5 text-[#1d241f]"
+            : "border-[#87ffad]/40 bg-white/10 text-white"
+        }`}
       >
         {state.message}
       </p>
@@ -39,7 +47,7 @@ export function WaitlistForm() {
           required
           placeholder="Your name"
           autoComplete="name"
-          className="h-[52px] w-full shrink-0 rounded-[8px] bg-white px-[19px] text-[18px] text-[#1d241f] placeholder:text-[#969696] outline-none [font-family:var(--font-42dot-sans)] focus:ring-2 focus:ring-[#87ffad] sm:flex-1"
+          className="h-[52px] w-full shrink-0 rounded-[8px] border border-[#dedede] bg-white px-[19px] text-[18px] text-[#1d241f] placeholder:text-[#969696] outline-none [font-family:var(--font-42dot-sans)] focus:ring-2 focus:ring-[#87ffad] sm:flex-1"
         />
 
         <label htmlFor="email" className="sr-only">
@@ -52,11 +60,15 @@ export function WaitlistForm() {
           required
           placeholder="Your email address"
           autoComplete="email"
-          className="h-[52px] w-full shrink-0 rounded-[8px] bg-white px-[19px] text-[18px] text-[#1d241f] placeholder:text-[#969696] outline-none [font-family:var(--font-42dot-sans)] focus:ring-2 focus:ring-[#87ffad] sm:flex-1"
+          className="h-[52px] w-full shrink-0 rounded-[8px] border border-[#dedede] bg-white px-[19px] text-[18px] text-[#1d241f] placeholder:text-[#969696] outline-none [font-family:var(--font-42dot-sans)] focus:ring-2 focus:ring-[#87ffad] sm:flex-1"
         />
       </div>
 
-      <label className="flex items-center gap-3 text-[14px] text-white [font-family:var(--font-42dot-sans)]">
+      <label
+        className={`flex items-center gap-3 text-[14px] [font-family:var(--font-42dot-sans)] ${
+          theme === "light" ? "text-[#2d2d2d]" : "text-white"
+        }`}
+      >
         <input
           type="checkbox"
           name="wantsBetaTesting"

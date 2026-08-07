@@ -1,8 +1,8 @@
-import Link from "next/link";
 import { WaitlistForm } from "@/components/waitlist-form";
 import { HeroImageSection } from "@/components/hero-image-section";
 import { FeatureCarouselSection } from "@/components/feature-carousel-section";
 import { PricingSection } from "@/components/pricing-section";
+import { SiteFooter } from "@/components/site-footer";
 
 export default function Home() {
   return (
@@ -43,31 +43,7 @@ export default function Home() {
 
         <PricingSection />
 
-        <div className="flex w-full max-w-[577px] flex-col items-center gap-6 px-6 pb-12 text-center sm:gap-8 sm:pb-16">
-          <p className="text-[13px] text-white [font-family:var(--font-42dot-sans)] sm:text-[14px]">
-            *Taking part in beta testing will mean giving sufficient feedback
-            based on your experience with using the app in a live setting.
-            This will qualify for the &lsquo;free for life&rsquo; premium
-            access
-          </p>
-          <p className="text-[14px] text-[#87ffad] [font-family:var(--font-42dot-sans)] sm:text-[15px]">
-            Website Design &amp; Development by{" "}
-            <a
-              href="https://hivecreativemedia.co.uk"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="underline underline-offset-2 hover:opacity-80"
-            >
-              Hive Creative Media
-            </a>
-          </p>
-          <Link
-            href="/cookie-policy"
-            className="text-[13px] text-white/70 underline underline-offset-2 hover:opacity-80 [font-family:var(--font-42dot-sans)] sm:text-[14px]"
-          >
-            Cookie Policy
-          </Link>
-        </div>
+        <SiteFooter />
       </main>
     </div>
   );
