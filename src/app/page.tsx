@@ -3,6 +3,7 @@ import { HeroImageSection } from "@/components/hero-image-section";
 import { FeatureCarouselSection } from "@/components/feature-carousel-section";
 import { PricingSection } from "@/components/pricing-section";
 import { SiteFooter } from "@/components/site-footer";
+import { AboutSection } from "@/components/about-section";
 
 export default function Home() {
   return (
@@ -42,6 +43,8 @@ export default function Home() {
         <FeatureCarouselSection />
 
         <PricingSection />
+
+        <AboutSection />
 
         <SiteFooter />
       </main>
