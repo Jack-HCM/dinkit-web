@@ -203,41 +203,56 @@ export function FeatureCarouselSection() {
             children, so it needs no clipping of its own. */}
         <div className="absolute inset-y-0 left-1/2 right-0 rounded-r-[24px] bg-[#a7d8ef]" />
 
-        {/* In-box scene: flush to the panel's own bounds, matching Figma's
-            main image exactly (rounded only on the right, like the panel
-            behind it). The image is shifted up inside an oversized inner
-            box so the visible window starts below the source's cloud
-            band — otherwise "cover" shows the full source height here
-            (this panel is shorter than it is wide), putting a raw,
-            hard-edged cloud fragment right at the panel's own top. */}
+        {/* In-box scene: the panel's own flat, opaque crop straight from
+            Figma (no clouds baked in — the source crop window starts below
+            the cloud band), so there's no transparency/seam math needed
+            here at all. Percentages are Figma's exact export for this
+            image against this panel, not an approximation. */}
         <div className="pointer-events-none absolute inset-y-0 left-1/2 right-0 overflow-hidden rounded-r-[24px]">
-          <div className="absolute inset-x-0 top-[-40%] h-[140%]">
+          <div
+            className="absolute"
+            style={{ top: "-9.81%", left: "-6.73%", width: "164.53%", height: "110.18%" }}
+          >
             <Image
-              src="/images/hero-scene-bleed.png"
+              src="/images/feature-scene-box.jpg"
               alt=""
               fill
               sizes="640px"
               className="object-cover"
-              style={{ objectPosition: "58% 0%" }}
             />
           </div>
         </div>
 
-        {/* Cloud bleed: a separate, independently-cropped window onto just
-            the sky band of the same source image, sized so the clouds sit
-            fully within it (with margin) rather than being sliced by the
-            box's top edge. Floats above the box and overspills left/right,
-            unclipped — its own edges land in transparent sky, so no seam
-            or hard line shows against the green background. */}
-        <div className="pointer-events-none absolute top-[-24%] right-[-6%] bottom-[100%] left-[20%] z-10 overflow-hidden">
-          <Image
-            src="/images/hero-scene-bleed.png"
-            alt=""
-            fill
-            sizes="900px"
-            className="object-cover"
-            style={{ objectPosition: "56% 4%" }}
-          />
+        {/* Cloud bleed: two independent sprites (not one wide crop), each a
+            tightly-cropped window onto just its own cloud cluster from the
+            transparent-sky version of the same source photo. Positioned as
+            siblings of the box (not children), so they float above it
+            unclipped. Kept scoped to the box's own width so nothing bleeds
+            over the white text card on the left. Geometry — both the
+            sprites' placement and their internal image crops — is Figma's
+            exact export, scaled from box-relative to scene-relative since
+            the box is the right half of this container. */}
+        <div
+          className="pointer-events-none absolute z-10 overflow-hidden"
+          style={{ left: "57.85%", top: "-5.09%", width: "15.69%", height: "17.36%" }}
+        >
+          <div
+            className="absolute"
+            style={{ top: "-29.8%", left: "-75.74%", width: "543.12%", height: "655.48%" }}
+          >
+            <Image src="/images/feature-scene-clouds.png" alt="" fill sizes="250px" className="object-cover" />
+          </div>
+        </div>
+        <div
+          className="pointer-events-none absolute z-10 overflow-hidden"
+          style={{ left: "93.11%", top: "-5.66%", width: "13.71%", height: "20.76%" }}
+        >
+          <div
+            className="absolute"
+            style={{ top: "2.86%", left: "-291.54%", width: "474.05%", height: "417.12%" }}
+          >
+            <Image src="/images/feature-scene-clouds.png" alt="" fill sizes="220px" className="object-cover" />
+          </div>
         </div>
 
         <div className="absolute inset-y-0 left-0 flex w-1/2 max-w-[480px] flex-col justify-center gap-6 py-10 pr-16 pl-10 lg:pr-20 lg:pl-16">
