@@ -229,7 +229,7 @@ export function FeatureCarouselSection() {
             box's top edge. Floats above the box and overspills left/right,
             unclipped — its own edges land in transparent sky, so no seam
             or hard line shows against the green background. */}
-        <div className="pointer-events-none absolute top-[-24%] right-[-6%] bottom-[86%] left-[20%] z-10 overflow-hidden">
+        <div className="pointer-events-none absolute top-[-24%] right-[-6%] bottom-[100%] left-[20%] z-10 overflow-hidden">
           <Image
             src="/images/hero-scene-bleed.png"
             alt=""
