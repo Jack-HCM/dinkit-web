@@ -2,7 +2,6 @@ import { WaitlistForm } from "@/components/waitlist-form";
 import { HeroImageSection } from "@/components/hero-image-section";
 import { FeatureCarouselSection } from "@/components/feature-carousel-section";
 import { PricingSection } from "@/components/pricing-section";
-import { SiteFooter } from "@/components/site-footer";
 import { AboutSection } from "@/components/about-section";
 
 export default function Home() {
@@ -45,8 +44,6 @@ export default function Home() {
         <PricingSection />
 
         <AboutSection />
-
-        <SiteFooter />
       </main>
     </div>
   );
