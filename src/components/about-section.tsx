@@ -3,7 +3,7 @@ import { FooterContent } from "@/components/site-footer";
 
 export function AboutSection() {
   return (
-    <section className="relative flex w-full max-w-[1360px] flex-col items-center px-6 pt-[100px] sm:pt-[130px]">
+    <section className="relative flex w-full max-w-[1360px] flex-col items-center px-6 pt-[160px] sm:pt-[200px]">
       <div className="relative w-full">
         {/* Bleeds up out of the card — sits half on the green page bg,
             half over the white card top, per Figma. */}
@@ -38,24 +38,13 @@ export function AboutSection() {
             </div>
 
             <div className="relative aspect-[691/478] w-full overflow-hidden rounded-[20px] md:w-[52%]">
-              <div className="absolute left-[-0.01%] top-[-16.04%] h-[132.08%] w-[100.03%]">
-                <Image
-                  src="/images/founder-landscape-bg.png"
-                  alt=""
-                  fill
-                  sizes="(min-width: 768px) 600px, 100vw"
-                  className="object-cover"
-                />
-              </div>
-              <div className="absolute left-[-0.01%] top-[-1.64%] h-[115.69%] w-[100.03%]">
-                <Image
-                  src="/images/founder-people-transparent.png"
-                  alt="Two golfers with a golf bag on a course"
-                  fill
-                  sizes="(min-width: 768px) 600px, 100vw"
-                  className="object-cover"
-                />
-              </div>
+              <Image
+                src="/images/about-founder-photo.png"
+                alt="Two golfers with a golf bag on a course"
+                fill
+                sizes="(min-width: 768px) 600px, 100vw"
+                className="object-cover"
+              />
             </div>
           </div>
 
