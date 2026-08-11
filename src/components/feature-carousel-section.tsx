@@ -88,7 +88,7 @@ export function FeatureCarouselSection() {
   const pill = (
     <div
       key={`pill-${index}`}
-      className="animate-hero-fade inline-block self-start rounded-[24px] border border-[#44e276] px-[10px] py-[4px] text-[14px] font-bold whitespace-nowrap text-black [font-family:var(--font-space-grotesk)] sm:text-[16px]"
+      className="animate-hero-fade inline-block self-start rounded-[24px] border border-[#44e276] px-[10px] py-[4px] text-[16px] font-bold whitespace-nowrap text-black [font-family:var(--font-space-grotesk)]"
     >
       {active.pill}
     </div>
@@ -97,7 +97,7 @@ export function FeatureCarouselSection() {
   const heading = (
     <h3
       key={`heading-${index}`}
-      className="animate-hero-fade text-[28px] leading-[1.2] font-bold text-black [font-family:var(--font-space-grotesk)] sm:text-[34px] md:text-[42px] md:leading-[1.15]"
+      className="animate-hero-fade text-[24px] leading-[1.4] font-bold text-black [font-family:var(--font-space-grotesk)] sm:text-[34px] sm:leading-[1.2] md:text-[42px] md:leading-[1.15]"
     >
       {active.heading}
     </h3>
@@ -106,7 +106,7 @@ export function FeatureCarouselSection() {
   const body = (
     <p
       key={`body-${index}`}
-      className="animate-hero-fade text-[16px] leading-relaxed text-[#707070] [font-family:var(--font-42dot-sans)] sm:text-[18px] md:text-[20px]"
+      className="animate-hero-fade text-[16px] leading-[1.4] text-[#707070] [font-family:var(--font-42dot-sans)] sm:text-[18px] sm:leading-relaxed md:text-[20px]"
     >
       {active.body}
     </p>
@@ -157,7 +157,7 @@ export function FeatureCarouselSection() {
   );
 
   const controls = SLIDES.length > 1 && (
-    <div className="flex items-center gap-6">
+    <div className="flex w-full items-center justify-between sm:w-auto sm:justify-start sm:gap-6">
       {arrowButton("prev")}
       {dots}
       {arrowButton("next")}
@@ -165,27 +165,54 @@ export function FeatureCarouselSection() {
   );
 
   return (
-    <section className="flex w-full max-w-[1280px] flex-col items-center gap-12 px-6 py-10 sm:gap-14 sm:py-14 md:gap-20 md:py-20">
-      <h2 className="text-center text-[32px] leading-[1.1] font-medium tracking-[-0.6px] text-white [font-family:var(--font-space-grotesk)] sm:text-[40px] md:text-[48px] md:tracking-[-0.96px]">
+    <section className="flex w-full max-w-[1280px] flex-col items-center gap-14 px-6 py-10 sm:py-14 md:gap-20 md:py-20">
+      <h2 className="text-center text-[34px] leading-[1.1] font-medium tracking-[-0.68px] text-white [font-family:var(--font-space-grotesk)] sm:text-[40px] sm:tracking-[-0.6px] md:text-[48px] md:tracking-[-0.96px]">
         Golf Tracking, <span className="text-[#87ffad]">Simplified.</span>
       </h2>
 
-      {/* Mobile: stacked card, no scene image — kept simple pending a
-          dedicated mobile Figma pass (same approach as the hero). */}
-      <div className="flex w-full flex-col items-center gap-8 rounded-[24px] bg-white px-6 py-12 text-center md:hidden">
-        {pill}
-        <div className="relative aspect-[306/662] w-[170px] rotate-[3deg]">
-          <Image
-            src={active.phone}
-            alt=""
-            fill
-            sizes="170px"
-            className="rounded-[24px] object-contain drop-shadow-[0px_16px_32px_rgba(0,0,0,0.25)]"
-          />
+      {/* Mobile: text content left-aligned at the top of a white card,
+          phone + scene illustration bleeding out the bottom (matching the
+          GPS-scene fan's hero-scene-box.png golfer illustration). */}
+      <div className="relative w-full overflow-hidden rounded-[24px] bg-white md:hidden">
+        <div
+          className="flex flex-col items-start gap-[18px] text-left"
+          style={{ paddingTop: 39, paddingLeft: 36, paddingRight: 26 }}
+        >
+          {pill}
+          {heading}
+          {body}
+          {controls}
         </div>
-        {heading}
-        {body}
-        {controls}
+
+        <div
+          className="relative mt-9 w-full"
+          style={{ aspectRatio: "340 / 498" }}
+        >
+          <div
+            className="absolute left-0 w-full"
+            style={{ top: "49.7%", height: "50.6%" }}
+          >
+            <Image
+              src="/images/hero-scene-box.png"
+              alt=""
+              fill
+              sizes="400px"
+              className="pointer-events-none object-cover"
+            />
+          </div>
+          <div
+            className="absolute"
+            style={{ left: "32.1%", top: 0, width: "51.8%", height: "68.8%" }}
+          >
+            <Image
+              src={active.phone}
+              alt=""
+              fill
+              sizes="200px"
+              className="object-contain drop-shadow-[0px_16px_32px_rgba(0,0,0,0.25)]"
+            />
+          </div>
+        </div>
       </div>
 
       {/* Desktop: box split 50/50, image half built the same way as the
