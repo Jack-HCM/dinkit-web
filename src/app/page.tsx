@@ -33,7 +33,7 @@ export default function Home() {
               testing will be eligible for premium access for life*
             </p>
 
-            <WaitlistForm />
+            <WaitlistForm collapsible />
           </div>
         </div>
 
