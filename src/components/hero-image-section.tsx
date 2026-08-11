@@ -54,23 +54,27 @@ function slotStyle(slot: number): CSSProperties {
         zIndex: 40,
         opacity: 1,
       };
+    // Slot 1 is the "up next" card (becomes slot 0 on the next advance), so
+    // it sits on the right at +8deg — when it becomes active its rotation
+    // sweeps down to 0deg, i.e. anti-clockwise. Slot 2 (two-away, sits on
+    // the left) is the mirror.
     case 1:
-      return {
-        left: "42.1%",
-        top: "54.7%",
-        width: "18.5%",
-        height: "74%",
-        transform: "translate(-50%, -50%) rotate(-8deg)",
-        zIndex: 30,
-        opacity: 1,
-      };
-    case 2:
       return {
         left: "63.5%",
         top: "50.5%",
         width: "18.5%",
         height: "74.1%",
         transform: "translate(-50%, -50%) rotate(8deg)",
+        zIndex: 30,
+        opacity: 1,
+      };
+    case 2:
+      return {
+        left: "42.1%",
+        top: "54.7%",
+        width: "18.5%",
+        height: "74%",
+        transform: "translate(-50%, -50%) rotate(-8deg)",
         zIndex: 20,
         opacity: 1,
       };
@@ -143,6 +147,34 @@ export function HeroImageSection() {
 
   const active = SLIDES[index];
 
+  const goPrev = () => setIndex((i) => (i - 1 + SLIDES.length) % SLIDES.length);
+  const goNext = () => setIndex((i) => (i + 1) % SLIDES.length);
+
+  const arrowButton = (direction: "prev" | "next") => (
+    <button
+      type="button"
+      onClick={direction === "prev" ? goPrev : goNext}
+      aria-label={direction === "prev" ? "Previous slide" : "Next slide"}
+      className="flex h-[28px] w-[28px] shrink-0 items-center justify-center rounded-full border border-[#87ffad] bg-[#212121] transition-opacity hover:opacity-80"
+    >
+      <svg
+        width="8"
+        height="12"
+        viewBox="0 0 8 12"
+        fill="none"
+        className={direction === "prev" ? "rotate-180" : ""}
+      >
+        <path
+          d="M1 1L7 6L1 11"
+          stroke="white"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+      </svg>
+    </button>
+  );
+
   const pill = (
     <div
       key={`pill-${index}`}
@@ -168,6 +200,14 @@ export function HeroImageSection() {
     >
       {active.body}
     </p>
+  );
+
+  const pillRow = (
+    <div className="flex items-center gap-[11px]">
+      {arrowButton("prev")}
+      {pill}
+      {arrowButton("next")}
+    </div>
   );
 
   const dots = (
@@ -224,7 +264,7 @@ export function HeroImageSection() {
         />
         <div className="pointer-events-none absolute inset-0 bg-black/10" />
         <div className="relative z-10 flex w-full flex-col items-center gap-8 px-6 py-10 text-center">
-          {pill}
+          {pillRow}
           {heading}
           <div className="relative aspect-[306/662] w-[190px]">
             <Image
@@ -274,7 +314,7 @@ export function HeroImageSection() {
         </div>
 
         <div className="absolute" style={{ left: "8.3%", top: "34.3%", width: "21%" }}>
-          {pill}
+          {pillRow}
           <div className="mt-4">{heading}</div>
         </div>
 
@@ -282,7 +322,7 @@ export function HeroImageSection() {
           {body}
         </div>
 
-        <div ref={phonesLayerRef} className="absolute inset-0">
+        <div ref={phonesLayerRef} className="pointer-events-none absolute inset-0">
           {cardStack}
         </div>
 
