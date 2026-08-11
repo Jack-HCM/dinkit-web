@@ -8,9 +8,9 @@ export function AboutSection() {
         {/* Bleeds across the green/white transition — sits half on the
             green page bg, half over the white area below, per Figma.
             Mobile: 83.7% wide, rises 62% of its own height above the
-            transition line (no About text/photo — mobile drops that
-            block entirely, so this is a smaller, flatter overlap than
-            desktop's 58%/64%). */}
+            transition line (a smaller, flatter overlap than desktop's
+            58%/64%, since the mobile About text below sits directly
+            under it rather than beside it). */}
         <div className="pointer-events-none absolute left-1/2 top-0 z-10 aspect-[761/507] w-[83.7%] max-w-[760px] -translate-x-1/2 -translate-y-[62%] sm:w-[58%] sm:-translate-y-[64%]">
           <Image
             src="/images/about-putting-green.png"
@@ -22,9 +22,40 @@ export function AboutSection() {
         </div>
 
         <div className="flex w-full flex-col rounded-t-none bg-white sm:rounded-t-[24px]">
-          {/* About Us text + founder photo: dropped entirely on mobile per
-              the new Figma frame (no heading/body/CTA/photo below the
-              putting-green bleed — footer follows directly). */}
+          {/* About Us text + founder photo, mobile layout: stacked (not
+              the side-by-side tablet/desktop layout below), left-aligned,
+              re-using the same founder photo cropped to Figma's mobile
+              aspect ratio. */}
+          <div className="flex w-full flex-col sm:hidden">
+            <div className="flex flex-col items-start px-[35px] pt-[95px] text-left">
+              <p className="text-[16px] font-medium text-[#347e55] [font-family:var(--font-space-grotesk)]">
+                About Us
+              </p>
+              <h2 className="mt-[22px] text-[34px] leading-[1.1] font-medium text-black [font-family:var(--font-space-grotesk)]">
+                Why did we build Dink&rsquo;it golf?
+              </h2>
+              <p className="mt-[9px] text-[18px] leading-[1.4] text-[#707070] [font-family:var(--font-42dot-sans)]">
+                Read our story about what lead us to create the app.
+              </p>
+              <a
+                href="/our-story"
+                className="mt-[33px] inline-flex items-center rounded-[4px] bg-[#56c186] px-[16px] py-[12px] text-[18px] font-medium text-white transition-colors hover:bg-[#4aae76] [font-family:var(--font-space-grotesk)]"
+              >
+                Read our story
+              </a>
+            </div>
+
+            <div className="relative mx-4 mt-[43px] mb-[69px] aspect-[361/250] overflow-hidden rounded-[20px]">
+              <Image
+                src="/images/about-founder-photo.png"
+                alt="Two golfers with a golf bag on a course"
+                fill
+                sizes="360px"
+                className="object-cover"
+              />
+            </div>
+          </div>
+
           <div className="hidden w-full flex-col items-center gap-16 px-6 pt-16 pb-16 sm:flex sm:px-10 sm:pt-20 md:flex-row md:items-center md:gap-10 md:px-16 md:pt-24">
             <div className="flex w-full flex-col items-start gap-5 text-left md:flex-1">
               <p className="text-[18px] font-medium text-[#347e55] [font-family:var(--font-space-grotesk)] sm:text-[21px]">
