@@ -57,7 +57,7 @@ function Check({ className }: { className?: string }) {
 
 export function PricingSection() {
   return (
-    <section className="flex w-full max-w-[1280px] flex-col gap-10 px-6 py-10 sm:py-14 md:py-20 lg:flex-row lg:items-stretch lg:gap-6">
+    <section className="flex w-full max-w-[1280px] flex-col gap-10 px-5 py-10 sm:px-6 sm:py-14 md:py-20 lg:flex-row lg:items-stretch lg:gap-6">
       {/* Left column */}
       <div className="flex w-full flex-col justify-center gap-6 lg:flex-1">
         <p className="text-[18px] font-medium text-[#87ffad] [font-family:var(--font-space-grotesk)] sm:text-[21px]">
