@@ -3,11 +3,15 @@ import { FooterContent } from "@/components/site-footer";
 
 export function AboutSection() {
   return (
-    <section className="relative flex w-full max-w-[1360px] flex-col items-center px-6 pt-[160px] sm:pt-[200px]">
+    <section className="relative flex w-full max-w-[1360px] flex-col items-center px-6 pt-[95px] sm:pt-[200px]">
       <div className="relative w-full">
-        {/* Bleeds up out of the card — sits half on the green page bg,
-            half over the white card top, per Figma. */}
-        <div className="pointer-events-none absolute left-1/2 top-0 z-10 aspect-[761/507] w-[58%] max-w-[760px] -translate-x-1/2 -translate-y-[64%]">
+        {/* Bleeds across the green/white transition — sits half on the
+            green page bg, half over the white area below, per Figma.
+            Mobile: 83.7% wide, rises 62% of its own height above the
+            transition line (no About text/photo — mobile drops that
+            block entirely, so this is a smaller, flatter overlap than
+            desktop's 58%/64%). */}
+        <div className="pointer-events-none absolute left-1/2 top-0 z-10 aspect-[761/507] w-[83.7%] max-w-[760px] -translate-x-1/2 -translate-y-[62%] sm:w-[58%] sm:-translate-y-[64%]">
           <Image
             src="/images/about-putting-green.png"
             alt=""
@@ -17,8 +21,11 @@ export function AboutSection() {
           />
         </div>
 
-        <div className="flex w-full flex-col rounded-t-[24px] bg-white">
-          <div className="flex w-full flex-col items-center gap-16 px-6 pt-16 pb-16 sm:px-10 sm:pt-20 md:flex-row md:items-center md:gap-10 md:px-16 md:pt-24">
+        <div className="flex w-full flex-col rounded-t-none bg-white sm:rounded-t-[24px]">
+          {/* About Us text + founder photo: dropped entirely on mobile per
+              the new Figma frame (no heading/body/CTA/photo below the
+              putting-green bleed — footer follows directly). */}
+          <div className="hidden w-full flex-col items-center gap-16 px-6 pt-16 pb-16 sm:flex sm:px-10 sm:pt-20 md:flex-row md:items-center md:gap-10 md:px-16 md:pt-24">
             <div className="flex w-full flex-col items-start gap-5 text-left md:flex-1">
               <p className="text-[18px] font-medium text-[#347e55] [font-family:var(--font-space-grotesk)] sm:text-[21px]">
                 About Us

@@ -13,7 +13,12 @@ export function FooterContent() {
           />
         </div>
 
-        <h2 className="text-[32px] leading-[1.1] font-medium tracking-[-0.6px] text-black [font-family:var(--font-space-grotesk)] sm:text-[40px] md:text-[48px] md:tracking-[-0.96px]">
+        {/* Mobile repeats the hero's heading copy (no colour emphasis);
+            tablet/desktop keep the original "Golf Tracking, Simplified." */}
+        <h2 className="text-[34px] leading-[42px] font-medium tracking-[-0.68px] text-black [font-family:var(--font-space-grotesk)] sm:hidden">
+          Track, Log, and Master Your Game from Your Phone.
+        </h2>
+        <h2 className="hidden text-[32px] leading-[1.1] font-medium tracking-[-0.6px] text-black [font-family:var(--font-space-grotesk)] sm:block sm:text-[40px] md:text-[48px] md:tracking-[-0.96px]">
           Golf Tracking, <span className="text-[#44e276]">Simplified.</span>
         </h2>
 
