@@ -41,6 +41,54 @@ const CARD_INSET = { left: 6, right: 6, top: 12, bottom: 0 };
 const SKY_GRADIENT =
   "linear-gradient(to bottom, #a7d8ef 0%, #cfe9f5 55%, #eef8fb 100%)";
 
+// Mobile fan: percentages measured against Figma's mobile scene group
+// (903x486), which itself bleeds full-width off both edges of the phone
+// frame — same fan concept as desktop, just its own independent geometry.
+function mobileSlotStyle(slot: number): CSSProperties {
+  switch (slot) {
+    case 0:
+      return {
+        left: "49.3%",
+        top: "34.2%",
+        width: "17.1%",
+        height: "68.3%",
+        transform: "translate(-50%, -50%) rotate(0deg)",
+        zIndex: 40,
+        opacity: 1,
+      };
+    case 1:
+      return {
+        left: "67.2%",
+        top: "43.7%",
+        width: "11.6%",
+        height: "47.1%",
+        transform: "translate(-50%, -50%) rotate(8deg)",
+        zIndex: 30,
+        opacity: 1,
+      };
+    case 2:
+      return {
+        left: "31.1%",
+        top: "44.4%",
+        width: "11.7%",
+        height: "46.9%",
+        transform: "translate(-50%, -50%) rotate(-8deg)",
+        zIndex: 20,
+        opacity: 1,
+      };
+    default:
+      return {
+        left: "49.3%",
+        top: "34.2%",
+        width: "14%",
+        height: "56%",
+        transform: "translate(-50%, -50%) rotate(0deg)",
+        zIndex: 10,
+        opacity: 0,
+      };
+  }
+}
+
 // Percentages measured against the full-bleed scene image (1376x768).
 function slotStyle(slot: number): CSSProperties {
   switch (slot) {
@@ -251,32 +299,64 @@ export function HeroImageSection() {
     </>
   );
 
-  return (
-    <div className="relative w-full">
-      {/* Mobile: simple stacked layout, precise Figma fan reserved for desktop */}
-      <div className="relative w-full overflow-hidden md:hidden">
-        <Image
-          src="/images/hero-scene-box.png"
-          alt=""
-          fill
-          sizes="100vw"
-          className="pointer-events-none absolute inset-0 object-cover"
-        />
-        <div className="pointer-events-none absolute inset-0 bg-black/10" />
-        <div className="relative z-10 flex w-full flex-col items-center gap-8 px-6 py-10 text-center">
-          {pillRow}
-          {heading}
-          <div className="relative aspect-[306/662] w-[190px]">
+  const mobileCardStack = (
+    <>
+      {SLIDES.map((slide, i) => {
+        const slot = (i - index + SLIDES.length) % SLIDES.length;
+        return (
+          <div
+            key={`m-${slide.image}-${i}`}
+            className="absolute transition-all duration-[900ms] ease-[cubic-bezier(0.22,1,0.36,1)]"
+            style={mobileSlotStyle(slot)}
+          >
             <Image
-              src={active.image}
+              src={slide.image}
               alt=""
               fill
-              sizes="190px"
-              className="rounded-[24px] object-contain drop-shadow-[0px_20px_40px_rgba(0,0,0,0.45)]"
+              sizes="160px"
+              className="rounded-[16px] object-contain drop-shadow-[0px_14px_28px_rgba(0,0,0,0.4)]"
             />
           </div>
-          {body}
-          {dots}
+        );
+      })}
+    </>
+  );
+
+  return (
+    <div className="relative w-full">
+      {/* Mobile: same fan-of-3 concept as desktop, own geometry (Figma's
+          mobile scene group bleeds full-width off both edges of the phone
+          frame, unlike desktop's edge-to-edge box). */}
+      <div className="flex w-full flex-col items-center gap-[22px] px-6 pt-10 pb-16 text-center md:hidden">
+        {pillRow}
+        {heading}
+        <div className="relative mt-2 w-full" style={{ height: "123.66vw" }}>
+          <div className="absolute inset-0 flex justify-center">
+            <div
+              className="relative shrink-0"
+              style={{ width: "229.8vw", height: "123.66vw" }}
+            >
+              <Image
+                src="/images/hero-scene-box.png"
+                alt=""
+                fill
+                sizes="230vw"
+                className="pointer-events-none object-cover"
+              />
+              <div className="pointer-events-none absolute inset-0">
+                {mobileCardStack}
+              </div>
+            </div>
+          </div>
+          <div
+            className="pointer-events-auto absolute left-1/2 z-50 -translate-x-1/2"
+            style={{ top: "73%" }}
+          >
+            {dots}
+          </div>
+          <div className="absolute inset-x-2 z-50" style={{ top: "84%" }}>
+            {body}
+          </div>
         </div>
       </div>
 
