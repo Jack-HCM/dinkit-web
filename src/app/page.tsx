@@ -33,7 +33,7 @@ export default function Home() {
               testing will be eligible for premium access for life*
             </p>
 
-            <div className="mt-[33px] sm:mt-0">
+            <div className="mt-[33px] w-full max-w-[503px] sm:mt-0">
               <WaitlistForm collapsible />
             </div>
           </div>

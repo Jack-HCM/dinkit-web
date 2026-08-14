@@ -173,44 +173,79 @@ export function FeatureCarouselSection() {
       {/* Mobile: text content left-aligned at the top of a white card,
           phone + scene illustration bleeding out the bottom (matching the
           GPS-scene fan's hero-scene-box.png golfer illustration). */}
-      <div className="relative w-full overflow-hidden rounded-[24px] bg-white md:hidden">
-        <div
-          className="flex flex-col items-start gap-[18px] text-left"
-          style={{ paddingTop: 39, paddingLeft: 36, paddingRight: 26 }}
-        >
-          {pill}
-          {heading}
-          {body}
-          {controls}
+      <div className="relative w-full md:hidden">
+        <div className="overflow-hidden rounded-[24px] bg-white">
+          <div
+            className="flex flex-col items-start gap-[18px] text-left"
+            style={{ paddingTop: 39, paddingLeft: 36, paddingRight: 26 }}
+          >
+            {pill}
+            {heading}
+            {body}
+            {controls}
+          </div>
+
+          <div
+            className="relative mt-9 w-full"
+            style={{ aspectRatio: "340 / 498" }}
+          >
+            <div
+              className="absolute left-0 w-full"
+              style={{ top: "49.7%", height: "50.6%" }}
+            >
+              <Image
+                src="/images/hero-scene-box.png"
+                alt=""
+                fill
+                sizes="400px"
+                className="pointer-events-none object-cover"
+              />
+            </div>
+            <div
+              className="absolute"
+              style={{ left: "24.1%", top: 0, width: "51.8%", height: "68.8%" }}
+            >
+              <Image
+                src={active.phone}
+                alt=""
+                fill
+                sizes="200px"
+                className="object-contain drop-shadow-[0px_16px_32px_rgba(0,0,0,0.25)]"
+              />
+            </div>
+          </div>
         </div>
 
+        {/* Cloud bleed, unclipped: sits in its own box exactly overlaying
+            the scene box above (same aspect ratio, bottom-aligned to the
+            card since the scene box is the card's last child), so Figma's
+            scene-relative percentages apply directly. Same source image
+            and crops as the desktop version's two sprites. */}
         <div
-          className="relative mt-9 w-full"
+          className="pointer-events-none absolute inset-x-0 bottom-0"
           style={{ aspectRatio: "340 / 498" }}
         >
           <div
-            className="absolute left-0 w-full"
-            style={{ top: "49.7%", height: "50.6%" }}
+            className="absolute overflow-hidden"
+            style={{ left: "14.99%", top: "42.87%", width: "30.01%", height: "9.5%" }}
           >
-            <Image
-              src="/images/hero-scene-box.png"
-              alt=""
-              fill
-              sizes="400px"
-              className="pointer-events-none object-cover"
-            />
+            <div
+              className="absolute"
+              style={{ top: "-29.8%", left: "-75.74%", width: "543.12%", height: "655.48%" }}
+            >
+              <Image src="/images/feature-scene-clouds.png" alt="" fill sizes="150px" className="object-cover" />
+            </div>
           </div>
           <div
-            className="absolute"
-            style={{ left: "32.1%", top: 0, width: "51.8%", height: "68.8%" }}
+            className="absolute overflow-hidden"
+            style={{ left: "82.41%", top: "42.57%", width: "26.11%", height: "11.4%" }}
           >
-            <Image
-              src={active.phone}
-              alt=""
-              fill
-              sizes="200px"
-              className="object-contain drop-shadow-[0px_16px_32px_rgba(0,0,0,0.25)]"
-            />
+            <div
+              className="absolute"
+              style={{ top: "2.86%", left: "-291.54%", width: "474.05%", height: "417.12%" }}
+            >
+              <Image src="/images/feature-scene-clouds.png" alt="" fill sizes="150px" className="object-cover" />
+            </div>
           </div>
         </div>
       </div>
