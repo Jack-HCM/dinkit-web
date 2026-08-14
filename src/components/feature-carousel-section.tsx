@@ -190,16 +190,24 @@ export function FeatureCarouselSection() {
             style={{ aspectRatio: "340 / 498" }}
           >
             <div
-              className="absolute left-0 w-full"
+              className="pointer-events-none absolute left-0 w-full overflow-hidden"
               style={{ top: "49.7%", height: "50.6%" }}
             >
-              <Image
-                src="/images/hero-scene-box.png"
-                alt=""
-                fill
-                sizes="400px"
-                className="pointer-events-none object-cover"
-              />
+              {/* Same source photo the cloud sprites below are cropped
+                  from, at Figma's exact crop — so the baked-in clouds at
+                  its top edge line up with the bleeding sprites. */}
+              <div
+                className="absolute"
+                style={{ top: "-18.68%", left: "-6.43%", width: "157.14%", height: "119.26%" }}
+              >
+                <Image
+                  src="/images/feature-scene-box.jpg"
+                  alt=""
+                  fill
+                  sizes="400px"
+                  className="object-cover"
+                />
+              </div>
             </div>
             <div
               className="absolute"
