@@ -233,7 +233,7 @@ export function HeroImageSection() {
   const heading = (
     <h3
       key={`heading-${index}`}
-      className="animate-hero-fade text-[48px] leading-[1.083] font-bold text-white [font-family:var(--font-space-grotesk)] [text-shadow:0px_6px_32px_rgba(0,0,0,0.8)] sm:text-[40px] sm:leading-[1.1] md:text-[38px] md:leading-[1.15]"
+      className="animate-hero-fade text-[38px] leading-[48px] font-bold text-white [font-family:var(--font-space-grotesk)] [text-shadow:0px_6px_32px_rgba(0,0,0,0.8)] sm:text-[40px] sm:leading-[1.1] md:text-[38px] md:leading-[1.15]"
     >
       {active.heading}
     </h3>
@@ -330,7 +330,7 @@ export function HeroImageSection() {
       <div className="flex w-full flex-col items-center gap-[22px] px-4 pt-10 pb-16 text-center md:hidden">
         {pillRow}
         {heading}
-        <div className="relative -mx-4 mt-[51px] w-full overflow-hidden" style={{ height: "123.66vw" }}>
+        <div className="relative mt-[51px] w-screen overflow-hidden" style={{ height: "123.66vw" }}>
           <div
             className="absolute left-1/2 h-full -translate-x-1/2"
             style={{ width: "109.68vw" }}
