@@ -339,18 +339,13 @@ export function HeroImageSection() {
               className="pointer-events-none absolute overflow-hidden"
               style={{ left: "3.71%", top: "6.79%", width: "92.81%", height: "66.67%" }}
             >
-              <div
-                className="absolute"
-                style={{ left: "-27.37%", top: "2.47%", width: "154.82%", height: "106.68%" }}
-              >
-                <Image
-                  src="/images/hero-scene-box.png"
-                  alt=""
-                  fill
-                  sizes="400px"
-                  className="object-cover"
-                />
-              </div>
+              <Image
+                src="/images/hero-scene-box.png"
+                alt=""
+                fill
+                sizes="400px"
+                className="object-cover"
+              />
             </div>
 
             <div

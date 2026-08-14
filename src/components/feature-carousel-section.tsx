@@ -209,18 +209,6 @@ export function FeatureCarouselSection() {
                 />
               </div>
             </div>
-            <div
-              className="absolute"
-              style={{ left: "24.1%", top: 0, width: "51.8%", height: "68.8%" }}
-            >
-              <Image
-                src={active.phone}
-                alt=""
-                fill
-                sizes="200px"
-                className="object-contain drop-shadow-[0px_16px_32px_rgba(0,0,0,0.25)]"
-              />
-            </div>
           </div>
         </div>
 
@@ -228,7 +216,9 @@ export function FeatureCarouselSection() {
             the scene box above (same aspect ratio, bottom-aligned to the
             card since the scene box is the card's last child), so Figma's
             scene-relative percentages apply directly. Same source image
-            and crops as the desktop version's two sprites. */}
+            and crops as the desktop version's two sprites. Painted before
+            the phone below, so the phone sits in front of (occludes) the
+            cloud where they overlap, matching Figma. */}
         <div
           className="pointer-events-none absolute inset-x-0 bottom-0"
           style={{ aspectRatio: "340 / 498" }}
@@ -254,6 +244,26 @@ export function FeatureCarouselSection() {
             >
               <Image src="/images/feature-scene-clouds.png" alt="" fill sizes="150px" className="object-cover" />
             </div>
+          </div>
+        </div>
+
+        {/* Phone, unclipped: same bottom-anchored box as the clouds above,
+            but painted after so it sits in front of them. */}
+        <div
+          className="pointer-events-none absolute inset-x-0 bottom-0"
+          style={{ aspectRatio: "340 / 498" }}
+        >
+          <div
+            className="absolute"
+            style={{ left: "24.1%", top: 0, width: "51.8%", height: "68.8%" }}
+          >
+            <Image
+              src={active.phone}
+              alt=""
+              fill
+              sizes="200px"
+              className="object-contain drop-shadow-[0px_16px_32px_rgba(0,0,0,0.25)]"
+            />
           </div>
         </div>
       </div>
