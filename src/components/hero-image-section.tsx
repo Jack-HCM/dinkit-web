@@ -41,48 +41,46 @@ const CARD_INSET = { left: 6, right: 6, top: 12, bottom: 0 };
 const SKY_GRADIENT =
   "linear-gradient(to bottom, #a7d8ef 0%, #cfe9f5 55%, #eef8fb 100%)";
 
-// Mobile fan: percentages measured against Figma's mobile scene group
-// (903x486), which itself bleeds full-width off both edges of the phone
-// frame — same fan concept as desktop, just its own independent geometry.
+// Mobile slider: redesigned as a traditional horizontal peek-carousel, not
+// the desktop's 3D fan — phones sit upright (no rotation), spaced out
+// left/center/right, with the prev/next phones cropped off at the scene's
+// edges. Percentages measured against Figma's mobile scene group (431x486,
+// which itself bleeds slightly off both edges of the phone frame).
 function mobileSlotStyle(slot: number): CSSProperties {
   switch (slot) {
     case 0:
       return {
-        left: "49.3%",
-        top: "34.2%",
-        width: "17.1%",
-        height: "68.3%",
-        transform: "translate(-50%, -50%) rotate(0deg)",
-        zIndex: 40,
+        left: "32.48%",
+        top: "0%",
+        width: "35.73%",
+        height: "68.31%",
+        zIndex: 30,
         opacity: 1,
       };
     case 1:
       return {
-        left: "67.2%",
-        top: "43.7%",
-        width: "11.6%",
-        height: "47.1%",
-        transform: "translate(-50%, -50%) rotate(8deg)",
-        zIndex: 30,
+        left: "75.64%",
+        top: "20.16%",
+        width: "24.36%",
+        height: "47.12%",
+        zIndex: 20,
         opacity: 1,
       };
     case 2:
       return {
-        left: "31.1%",
-        top: "44.4%",
-        width: "11.7%",
-        height: "46.9%",
-        transform: "translate(-50%, -50%) rotate(-8deg)",
+        left: "0%",
+        top: "20.99%",
+        width: "24.59%",
+        height: "46.91%",
         zIndex: 20,
         opacity: 1,
       };
     default:
       return {
-        left: "49.3%",
-        top: "34.2%",
-        width: "14%",
-        height: "56%",
-        transform: "translate(-50%, -50%) rotate(0deg)",
+        left: "32.48%",
+        top: "0%",
+        width: "35.73%",
+        height: "68.31%",
         zIndex: 10,
         opacity: 0,
       };
@@ -226,7 +224,7 @@ export function HeroImageSection() {
   const pill = (
     <div
       key={`pill-${index}`}
-      className="animate-hero-fade inline-block rounded-[24px] border border-[#87ffad] bg-[#212121] px-[10px] py-[4px] text-[14px] font-bold whitespace-nowrap text-[#87ffad] [font-family:var(--font-space-grotesk)] sm:text-[16px]"
+      className="animate-hero-fade inline-block rounded-[24px] border border-[#87ffad] bg-[#212121] px-[10px] py-[4px] text-[16px] font-bold whitespace-nowrap text-[#87ffad] [font-family:var(--font-space-grotesk)]"
     >
       {active.pill}
     </div>
@@ -235,7 +233,7 @@ export function HeroImageSection() {
   const heading = (
     <h3
       key={`heading-${index}`}
-      className="animate-hero-fade text-[32px] leading-[1.1] font-bold text-white [font-family:var(--font-space-grotesk)] [text-shadow:0px_6px_32px_rgba(0,0,0,0.8)] sm:text-[40px] md:text-[38px] md:leading-[1.15]"
+      className="animate-hero-fade text-[48px] leading-[1.083] font-bold text-white [font-family:var(--font-space-grotesk)] [text-shadow:0px_6px_32px_rgba(0,0,0,0.8)] sm:text-[40px] sm:leading-[1.1] md:text-[38px] md:leading-[1.15]"
     >
       {active.heading}
     </h3>
@@ -324,38 +322,55 @@ export function HeroImageSection() {
 
   return (
     <div className="relative w-full">
-      {/* Mobile: same fan-of-3 concept as desktop, own geometry (Figma's
-          mobile scene group bleeds full-width off both edges of the phone
-          frame, unlike desktop's edge-to-edge box). */}
-      <div className="flex w-full flex-col items-center gap-[22px] px-6 pt-10 pb-16 text-center md:hidden">
+      {/* Mobile: traditional horizontal peek-slider, own geometry — the
+          claymation background only covers the top ~2/3 (ending under the
+          middle phone) and fades into the section's green via the same
+          gradient technique as desktop, with the body copy sitting on the
+          flat green below rather than overlaid on the image. */}
+      <div className="flex w-full flex-col items-center gap-[22px] px-4 pt-10 pb-16 text-center md:hidden">
         {pillRow}
         {heading}
-        <div className="relative mt-2 w-full" style={{ height: "123.66vw" }}>
-          <div className="absolute inset-0 flex justify-center">
+        <div className="relative -mx-4 mt-[51px] w-full overflow-hidden" style={{ height: "123.66vw" }}>
+          <div
+            className="absolute left-1/2 h-full -translate-x-1/2"
+            style={{ width: "109.68vw" }}
+          >
             <div
-              className="relative shrink-0"
-              style={{ width: "229.8vw", height: "123.66vw" }}
+              className="pointer-events-none absolute overflow-hidden"
+              style={{ left: "3.71%", top: "6.79%", width: "92.81%", height: "66.67%" }}
             >
-              <Image
-                src="/images/hero-scene-box.png"
-                alt=""
-                fill
-                sizes="230vw"
-                className="pointer-events-none object-cover"
-              />
-              <div className="pointer-events-none absolute inset-0">
-                {mobileCardStack}
+              <div
+                className="absolute"
+                style={{ left: "-27.37%", top: "2.47%", width: "154.82%", height: "106.68%" }}
+              >
+                <Image
+                  src="/images/hero-scene-box.png"
+                  alt=""
+                  fill
+                  sizes="400px"
+                  className="object-cover"
+                />
               </div>
             </div>
-          </div>
-          <div
-            className="pointer-events-auto absolute left-1/2 z-50 -translate-x-1/2"
-            style={{ top: "73%" }}
-          >
-            {dots}
-          </div>
-          <div className="absolute inset-x-2 z-50" style={{ top: "84%" }}>
-            {body}
+
+            <div
+              className="pointer-events-none absolute bg-gradient-to-t from-[#347e55] from-[12.698%] to-[rgba(52,126,85,0)]"
+              style={{ left: "4.87%", top: "40.95%", width: "91.18%", height: "35.19%" }}
+            />
+
+            <div className="pointer-events-none absolute inset-0">
+              {mobileCardStack}
+            </div>
+
+            <div
+              className="pointer-events-auto absolute left-1/2 z-50 -translate-x-1/2"
+              style={{ top: "73.46%" }}
+            >
+              {dots}
+            </div>
+            <div className="absolute z-50" style={{ left: "13.92%", width: "74.01%", top: "84.77%" }}>
+              {body}
+            </div>
           </div>
         </div>
       </div>
