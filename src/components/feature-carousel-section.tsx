@@ -335,11 +335,16 @@ export function FeatureCarouselSection() {
           </div>
         </div>
 
-        <div className="absolute inset-y-0 left-0 flex w-1/2 max-w-[480px] flex-col justify-center gap-6 py-10 pr-16 pl-10 lg:pr-20 lg:pl-16">
-          {pill}
-          {heading}
-          {body}
-          {controls}
+        <div className="absolute inset-y-0 left-0 flex w-1/2 max-w-[480px] flex-col py-10 pr-16 pl-10 lg:pr-20 lg:pl-16">
+          {/* This block fills the remaining space and centers pill/heading/
+              body within it, so the controls below always land at the same
+              fixed bottom position regardless of how long the text runs. */}
+          <div className="flex flex-1 flex-col justify-center gap-6">
+            {pill}
+            {heading}
+            {body}
+          </div>
+          <div className="pt-6">{controls}</div>
         </div>
 
         <div
