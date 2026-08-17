@@ -22,6 +22,7 @@ const SLIDES = [
     heading: "Easy GPS tracking, straight from your phone",
     body: "Stand by your ball and tap. Our app uses your phone's GPS to log every shot. No expensive hardware attachments required.",
     phone: "/images/hero-card-tracking.png",
+    phoneAspect: "612 / 1324",
     sceneBox: {
       src: "/images/feature-scene-box.jpg",
       mobileCrop: { top: "-18.68%", left: "-6.43%", width: "157.14%", height: "119.26%" } as Crop,
@@ -47,6 +48,7 @@ const SLIDES = [
     heading: "Play and compare with friends.",
     body: "Connect with your regular group easily. Compare your stats in one central place. Keep the friendly competition going between rounds.",
     phone: "/images/feature-phone-friends.png",
+    phoneAspect: "860 / 1680",
     sceneBox: {
       src: "/images/feature-scene-box-friends.png",
       mobileCrop: { top: "-5.5%", left: "-6.36%", width: "124.13%", height: "110.24%" } as Crop,
@@ -66,6 +68,7 @@ const SLIDES = [
     heading: "Find your next course.",
     body: "Discover highly rated courses right near you. Get accurate local recommendations instantly. Explore new fairways and plan your next weekend round.",
     phone: "/images/feature-phone-courses.png",
+    phoneAspect: "860 / 1684",
     sceneBox: {
       src: "/images/feature-scene-box-courses.png",
       mobileCrop: { top: "-7.4%", left: "-14.9%", width: "128.68%", height: "114.61%" } as Crop,
@@ -85,6 +88,7 @@ const SLIDES = [
     heading: "Unlock your full data.",
     body: "Upgrade to access deeper performance metrics. Review detailed tendencies to lower your score. Get serious tools to fast-track your improvement.",
     phone: "/images/feature-phone-stats.png",
+    phoneAspect: "872 / 1684",
     sceneBox: {
       src: "/images/feature-scene-box-stats.png",
       mobileCrop: { top: "-9.45%", left: "-29.28%", width: "164.42%", height: "109.46%" } as Crop,
@@ -311,15 +315,15 @@ export function FeatureCarouselSection() {
           style={{ aspectRatio: "340 / 498" }}
         >
           <div
-            className="absolute"
-            style={{ left: "24.1%", top: 0, width: "51.8%", height: "68.8%" }}
+            className="absolute -translate-x-1/2"
+            style={{ left: "50%", top: 0, height: "68.8%", aspectRatio: active.phoneAspect }}
           >
             <Image
               src={active.phone}
               alt=""
               fill
               sizes="200px"
-              className="object-contain drop-shadow-[0px_16px_32px_rgba(0,0,0,0.25)]"
+              className="object-fill drop-shadow-[0px_16px_32px_rgba(0,0,0,0.25)]"
             />
           </div>
         </div>
@@ -396,14 +400,15 @@ export function FeatureCarouselSection() {
 
         <div
           ref={phoneLayerRef}
-          className="pointer-events-none absolute top-1/2 left-1/2 h-[92%] w-[20%] -translate-x-1/2 -translate-y-1/2 rotate-[4deg]"
+          className="pointer-events-none absolute top-1/2 left-1/2 z-20 h-[92%] -translate-x-1/2 -translate-y-1/2 rotate-[4deg]"
+          style={{ aspectRatio: active.phoneAspect }}
         >
           <Image
             src={active.phone}
             alt=""
             fill
             sizes="220px"
-            className="object-contain drop-shadow-[0px_20px_40px_rgba(0,0,0,0.35)]"
+            className="object-fill drop-shadow-[0px_20px_40px_rgba(0,0,0,0.35)]"
           />
         </div>
       </div>
