@@ -275,7 +275,7 @@ export function FeatureCarouselSection() {
           so clouds can rise above the box's top edge. */}
       <div
         ref={sceneRef}
-        className="relative hidden w-full overflow-visible md:block md:aspect-[1280/529]"
+        className="relative hidden w-full overflow-visible md:block md:aspect-[1280/572]"
       >
         <div className="absolute inset-0 rounded-[24px] bg-white" />
 
@@ -335,11 +335,15 @@ export function FeatureCarouselSection() {
           </div>
         </div>
 
-        <div className="absolute inset-y-0 left-0 flex w-1/2 max-w-[480px] flex-col py-10 pr-16 pl-10 lg:pr-20 lg:pl-16">
+        <div className="absolute inset-y-0 left-0 flex w-1/2 max-w-[480px] flex-col py-10 pr-10 pl-10 lg:pr-14 lg:pl-16">
           {/* This block fills the remaining space and centers pill/heading/
               body within it, so the controls below always land at the same
-              fixed bottom position regardless of how long the text runs. */}
-          <div className="flex flex-1 flex-col justify-center gap-6">
+              fixed bottom position regardless of how long the text runs.
+              min-h-0 lets it actually shrink to that space instead of
+              overflowing (flex items default to a content-based minimum),
+              which would otherwise push the controls down and out of the
+              overflow-visible scene on the longest slide. */}
+          <div className="flex min-h-0 flex-1 flex-col justify-center gap-6">
             {pill}
             {heading}
             {body}
