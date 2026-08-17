@@ -3,21 +3,17 @@
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 
-// Each slide carries its own scene: a background "box" photo (optionally a
-// raw source with a percent crop, for the shared/legacy first slide — the
-// later slides' box images are already Figma exports cropped to the panel,
-// so they just need object-cover, no crop math), plus one or more cloud
-// sprites that bleed above the box's top edge (same idea: a shared crop for
-// the legacy slide's small sprites cut from a big shared clouds source, vs.
-// a single pre-cropped strip per newer slide).
+// Each slide carries its own scene: a background "box" photo cropped from a
+// raw source via Figma's exact percent crop, plus one or more cloud sprites
+// that bleed above the box's top edge, cropped from the same underlying
+// source image (box and cloud are two differently-windowed crops of one
+// photo, so their edges line up exactly as Figma composed them).
 type Crop = { top: string; left: string; width: string; height: string };
 type CloudSprite = {
   src: string;
   mobile: Crop;
   desktop: Crop;
-  // Present only for the legacy slide, where the sprite image is a big
-  // shared source that needs cropping down to just this cloud cluster.
-  crop?: Crop;
+  crop: Crop;
 };
 
 const SLIDES = [
@@ -51,12 +47,17 @@ const SLIDES = [
     heading: "Play and compare with friends.",
     body: "Connect with your regular group easily. Compare your stats in one central place. Keep the friendly competition going between rounds.",
     phone: "/images/feature-phone-friends.png",
-    sceneBox: { src: "/images/feature-scene-box-friends.png" },
+    sceneBox: {
+      src: "/images/feature-scene-box-friends.png",
+      mobileCrop: { top: "-5.5%", left: "-6.36%", width: "124.13%", height: "110.24%" } as Crop,
+      desktopCrop: { top: "-5.5%", left: "-6.36%", width: "124.13%", height: "110.24%" } as Crop,
+    },
     clouds: [
       {
-        src: "/images/feature-scene-clouds-friends-band.png",
+        src: "/images/feature-scene-clouds-friends.png",
         mobile: { left: "0.16%", top: "46.74%", width: "100.16%", height: "12.82%" },
         desktop: { left: "50.08%", top: "-5.86%", width: "50.08%", height: "25.33%" },
+        crop: { top: "0%", left: "-6.18%", width: "123.64%", height: "436.57%" },
       },
     ] as CloudSprite[],
   },
@@ -65,12 +66,17 @@ const SLIDES = [
     heading: "Find your next course.",
     body: "Discover highly rated courses right near you. Get accurate local recommendations instantly. Explore new fairways and plan your next weekend round.",
     phone: "/images/feature-phone-courses.png",
-    sceneBox: { src: "/images/feature-scene-box-courses.png" },
+    sceneBox: {
+      src: "/images/feature-scene-box-courses.png",
+      mobileCrop: { top: "-7.4%", left: "-14.9%", width: "128.68%", height: "114.61%" } as Crop,
+      desktopCrop: { top: "-7.4%", left: "-14.9%", width: "128.68%", height: "114.61%" } as Crop,
+    },
     clouds: [
       {
-        src: "/images/feature-scene-clouds-courses-band.png",
+        src: "/images/feature-scene-clouds-courses.png",
         mobile: { left: "0%", top: "45.97%", width: "100%", height: "13.3%" },
         desktop: { left: "50%", top: "-7.37%", width: "50%", height: "26.28%" },
+        crop: { top: "-0.11%", left: "-14.9%", width: "128.68%", height: "436.18%" },
       },
     ] as CloudSprite[],
   },
@@ -79,12 +85,17 @@ const SLIDES = [
     heading: "Unlock your full data.",
     body: "Upgrade to access deeper performance metrics. Review detailed tendencies to lower your score. Get serious tools to fast-track your improvement.",
     phone: "/images/feature-phone-stats.png",
-    sceneBox: { src: "/images/feature-scene-box-stats.png" },
+    sceneBox: {
+      src: "/images/feature-scene-box-stats.png",
+      mobileCrop: { top: "-9.45%", left: "-29.28%", width: "164.42%", height: "109.46%" } as Crop,
+      desktopCrop: { top: "-9.45%", left: "-29.28%", width: "164.42%", height: "109.46%" } as Crop,
+    },
     clouds: [
       {
-        src: "/images/feature-scene-clouds-stats-band.png",
+        src: "/images/feature-scene-clouds-stats.png",
         mobile: { left: "-12.2%", top: "44.34%", width: "112.2%", height: "13.39%" },
         desktop: { left: "43.9%", top: "-10.59%", width: "56.1%", height: "26.47%" },
+        crop: { top: "4.29%", left: "-15.22%", width: "146.54%", height: "413.62%" },
       },
     ] as CloudSprite[],
   },
@@ -94,18 +105,6 @@ const ROTATE_MS = 5000;
 
 // Unlike the hero, only the phone moves here — the scene/clouds stay put.
 const PARALLAX_PHONE_SPEED = 0.08;
-
-// The newer slides' cloud sprites are cropped straight from a full scene
-// photo (transparent sky, opaque ground), not a tightly-isolated cloud
-// cluster like the legacy slide — so their bottom edge carries a sliver of
-// terrain that never quite lines up pixel-for-pixel with the independently
-// exported box photo beneath it. Fading that edge out (well clear of the
-// clouds themselves, which sit higher up) hides the seam instead of chasing
-// exact alignment between two separately-exported crops of the same art.
-const cloudFadeStyle = {
-  WebkitMaskImage: "linear-gradient(to bottom, black 0%, black 78%, transparent 96%)",
-  maskImage: "linear-gradient(to bottom, black 0%, black 78%, transparent 96%)",
-};
 
 export function FeatureCarouselSection() {
   const [index, setIndex] = useState(0);
@@ -263,30 +262,18 @@ export function FeatureCarouselSection() {
               className="pointer-events-none absolute left-0 w-full overflow-hidden"
               style={{ top: "49.7%", height: "50.6%" }}
             >
-              {active.sceneBox.mobileCrop ? (
-                // Same source photo the cloud sprites below are cropped
-                // from, at Figma's exact crop — so the baked-in clouds at
-                // its top edge line up with the bleeding sprites.
-                <div className="absolute" style={active.sceneBox.mobileCrop}>
-                  <Image
-                    src={active.sceneBox.src}
-                    alt=""
-                    fill
-                    sizes="400px"
-                    className="object-cover"
-                  />
-                </div>
-              ) : (
-                // Already a Figma export cropped to this exact panel, so no
-                // extra crop math is needed here.
+              {/* Same source photo the cloud sprites below are cropped
+                  from, at Figma's exact crop — so the baked-in clouds at
+                  its top edge line up with the bleeding sprites. */}
+              <div className="absolute" style={active.sceneBox.mobileCrop}>
                 <Image
                   src={active.sceneBox.src}
                   alt=""
                   fill
                   sizes="400px"
-                  className="object-cover"
+                  className="object-fill"
                 />
-              )}
+              </div>
             </div>
           </div>
         </div>
@@ -304,20 +291,15 @@ export function FeatureCarouselSection() {
         >
           {active.clouds.map((cloud, i) => (
             <div key={i} className="absolute overflow-hidden" style={cloud.mobile}>
-              {cloud.crop ? (
-                <div className="absolute" style={cloud.crop}>
-                  <Image src={cloud.src} alt="" fill sizes="150px" className="object-cover" />
-                </div>
-              ) : (
+              <div className="absolute" style={cloud.crop}>
                 <Image
                   src={cloud.src}
                   alt=""
                   fill
-                  sizes="150px"
-                  className="object-cover"
-                  style={cloudFadeStyle}
+                  unoptimized
+                  className="object-fill"
                 />
-              )}
+              </div>
             </div>
           ))}
         </div>
@@ -358,62 +340,41 @@ export function FeatureCarouselSection() {
             children, so it needs no clipping of its own. */}
         <div className="absolute inset-y-0 left-1/2 right-0 rounded-r-[24px] bg-[#a7d8ef]" />
 
-        {/* In-box scene: the panel's own flat, opaque crop straight from
-            Figma (no clouds baked in — the source crop window starts below
-            the cloud band), so there's no transparency/seam math needed
-            here at all. Percentages are Figma's exact export for this
-            image against this panel, not an approximation. */}
+        {/* In-box scene: Figma's exact crop of the box photo against this
+            panel. */}
         <div className="pointer-events-none absolute inset-y-0 left-1/2 right-0 overflow-hidden rounded-r-[24px]">
-          {active.sceneBox.desktopCrop ? (
-            <div className="absolute" style={active.sceneBox.desktopCrop}>
-              <Image
-                src={active.sceneBox.src}
-                alt=""
-                fill
-                sizes="640px"
-                className="object-cover"
-              />
-            </div>
-          ) : (
+          <div className="absolute" style={active.sceneBox.desktopCrop}>
             <Image
               src={active.sceneBox.src}
               alt=""
               fill
               sizes="640px"
-              className="object-cover"
+              className="object-fill"
             />
-          )}
+          </div>
         </div>
 
-        {/* Cloud bleed: two independent sprites (not one wide crop), each a
-            tightly-cropped window onto just its own cloud cluster from the
-            transparent-sky version of the same source photo. Positioned as
-            siblings of the box (not children), so they float above it
-            unclipped. Kept scoped to the box's own width so nothing bleeds
-            over the white text card on the left. Geometry — both the
-            sprites' placement and their internal image crops — is Figma's
-            exact export, scaled from box-relative to scene-relative since
-            the box is the right half of this container. */}
+        {/* Cloud bleed: one or more sprites, each a tightly-cropped window
+            onto its own cloud cluster from the same source photo the box
+            below is cropped from — Figma's exact crop for both, so the
+            edges line up. Positioned as siblings of the box (not children),
+            so they float above it unclipped. Kept scoped to the box's own
+            width so nothing bleeds over the white text card on the left. */}
         {active.clouds.map((cloud, i) => (
           <div
             key={i}
             className="pointer-events-none absolute z-10 overflow-hidden"
             style={cloud.desktop}
           >
-            {cloud.crop ? (
-              <div className="absolute" style={cloud.crop}>
-                <Image src={cloud.src} alt="" fill sizes="250px" className="object-cover" />
-              </div>
-            ) : (
+            <div className="absolute" style={cloud.crop}>
               <Image
                 src={cloud.src}
                 alt=""
                 fill
-                sizes="250px"
-                className="object-cover"
-                style={cloudFadeStyle}
+                unoptimized
+                className="object-fill"
               />
-            )}
+            </div>
           </div>
         ))}
 
