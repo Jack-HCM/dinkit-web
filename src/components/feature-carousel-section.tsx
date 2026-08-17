@@ -3,32 +3,90 @@
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 
-// Scene + phone imagery is shared across all 4 slides for now — real,
-// slide-specific assets will be supplied later and swapped in per slide.
+// Each slide carries its own scene: a background "box" photo (optionally a
+// raw source with a percent crop, for the shared/legacy first slide — the
+// later slides' box images are already Figma exports cropped to the panel,
+// so they just need object-cover, no crop math), plus one or more cloud
+// sprites that bleed above the box's top edge (same idea: a shared crop for
+// the legacy slide's small sprites cut from a big shared clouds source, vs.
+// a single pre-cropped strip per newer slide).
+type Crop = { top: string; left: string; width: string; height: string };
+type CloudSprite = {
+  src: string;
+  mobile: Crop;
+  desktop: Crop;
+  // Present only for the legacy slide, where the sprite image is a big
+  // shared source that needs cropping down to just this cloud cluster.
+  crop?: Crop;
+};
+
 const SLIDES = [
   {
     pill: "Free Plan",
     heading: "Easy GPS tracking, straight from your phone",
     body: "Stand by your ball and tap. Our app uses your phone's GPS to log every shot. No expensive hardware attachments required.",
     phone: "/images/hero-card-tracking.png",
+    sceneBox: {
+      src: "/images/feature-scene-box.jpg",
+      mobileCrop: { top: "-18.68%", left: "-6.43%", width: "157.14%", height: "119.26%" } as Crop,
+      desktopCrop: { top: "-9.81%", left: "-6.73%", width: "164.53%", height: "110.18%" } as Crop,
+    },
+    clouds: [
+      {
+        src: "/images/feature-scene-clouds.png",
+        mobile: { left: "14.99%", top: "42.87%", width: "30.01%", height: "9.5%" },
+        desktop: { left: "57.85%", top: "-5.09%", width: "15.69%", height: "17.36%" },
+        crop: { top: "-29.8%", left: "-75.74%", width: "543.12%", height: "655.48%" },
+      },
+      {
+        src: "/images/feature-scene-clouds.png",
+        mobile: { left: "82.41%", top: "42.57%", width: "26.11%", height: "11.4%" },
+        desktop: { left: "93.11%", top: "-5.66%", width: "13.71%", height: "20.76%" },
+        crop: { top: "2.86%", left: "-291.54%", width: "474.05%", height: "417.12%" },
+      },
+    ] as CloudSprite[],
   },
   {
     pill: "Free Plan",
     heading: "Play and compare with friends.",
     body: "Connect with your regular group easily. Compare your stats in one central place. Keep the friendly competition going between rounds.",
-    phone: "/images/hero-card-tracking.png",
+    phone: "/images/feature-phone-friends.png",
+    sceneBox: { src: "/images/feature-scene-box-friends.png" },
+    clouds: [
+      {
+        src: "/images/feature-scene-clouds-friends-band.png",
+        mobile: { left: "0.16%", top: "46.74%", width: "100.16%", height: "12.82%" },
+        desktop: { left: "50.08%", top: "-5.86%", width: "50.08%", height: "25.33%" },
+      },
+    ] as CloudSprite[],
   },
   {
     pill: "No Plan Needed",
     heading: "Find your next course.",
     body: "Discover highly rated courses right near you. Get accurate local recommendations instantly. Explore new fairways and plan your next weekend round.",
-    phone: "/images/hero-card-tracking.png",
+    phone: "/images/feature-phone-courses.png",
+    sceneBox: { src: "/images/feature-scene-box-courses.png" },
+    clouds: [
+      {
+        src: "/images/feature-scene-clouds-courses-band.png",
+        mobile: { left: "0%", top: "45.97%", width: "100%", height: "13.3%" },
+        desktop: { left: "50%", top: "-7.37%", width: "50%", height: "26.28%" },
+      },
+    ] as CloudSprite[],
   },
   {
     pill: "Premium Plan",
     heading: "Unlock your full data.",
     body: "Upgrade to access deeper performance metrics. Review detailed tendencies to lower your score. Get serious tools to fast-track your improvement.",
-    phone: "/images/hero-card-tracking.png",
+    phone: "/images/feature-phone-stats.png",
+    sceneBox: { src: "/images/feature-scene-box-stats.png" },
+    clouds: [
+      {
+        src: "/images/feature-scene-clouds-stats-band.png",
+        mobile: { left: "-12.2%", top: "44.34%", width: "112.2%", height: "13.39%" },
+        desktop: { left: "43.9%", top: "-10.59%", width: "56.1%", height: "26.47%" },
+      },
+    ] as CloudSprite[],
   },
 ];
 
@@ -36,6 +94,18 @@ const ROTATE_MS = 5000;
 
 // Unlike the hero, only the phone moves here — the scene/clouds stay put.
 const PARALLAX_PHONE_SPEED = 0.08;
+
+// The newer slides' cloud sprites are cropped straight from a full scene
+// photo (transparent sky, opaque ground), not a tightly-isolated cloud
+// cluster like the legacy slide — so their bottom edge carries a sliver of
+// terrain that never quite lines up pixel-for-pixel with the independently
+// exported box photo beneath it. Fading that edge out (well clear of the
+// clouds themselves, which sit higher up) hides the seam instead of chasing
+// exact alignment between two separately-exported crops of the same art.
+const cloudFadeStyle = {
+  WebkitMaskImage: "linear-gradient(to bottom, black 0%, black 78%, transparent 96%)",
+  maskImage: "linear-gradient(to bottom, black 0%, black 78%, transparent 96%)",
+};
 
 export function FeatureCarouselSection() {
   const [index, setIndex] = useState(0);
@@ -193,21 +263,30 @@ export function FeatureCarouselSection() {
               className="pointer-events-none absolute left-0 w-full overflow-hidden"
               style={{ top: "49.7%", height: "50.6%" }}
             >
-              {/* Same source photo the cloud sprites below are cropped
-                  from, at Figma's exact crop — so the baked-in clouds at
-                  its top edge line up with the bleeding sprites. */}
-              <div
-                className="absolute"
-                style={{ top: "-18.68%", left: "-6.43%", width: "157.14%", height: "119.26%" }}
-              >
+              {active.sceneBox.mobileCrop ? (
+                // Same source photo the cloud sprites below are cropped
+                // from, at Figma's exact crop — so the baked-in clouds at
+                // its top edge line up with the bleeding sprites.
+                <div className="absolute" style={active.sceneBox.mobileCrop}>
+                  <Image
+                    src={active.sceneBox.src}
+                    alt=""
+                    fill
+                    sizes="400px"
+                    className="object-cover"
+                  />
+                </div>
+              ) : (
+                // Already a Figma export cropped to this exact panel, so no
+                // extra crop math is needed here.
                 <Image
-                  src="/images/feature-scene-box.jpg"
+                  src={active.sceneBox.src}
                   alt=""
                   fill
                   sizes="400px"
                   className="object-cover"
                 />
-              </div>
+              )}
             </div>
           </div>
         </div>
@@ -223,28 +302,24 @@ export function FeatureCarouselSection() {
           className="pointer-events-none absolute inset-x-0 bottom-0"
           style={{ aspectRatio: "340 / 498" }}
         >
-          <div
-            className="absolute overflow-hidden"
-            style={{ left: "14.99%", top: "42.87%", width: "30.01%", height: "9.5%" }}
-          >
-            <div
-              className="absolute"
-              style={{ top: "-29.8%", left: "-75.74%", width: "543.12%", height: "655.48%" }}
-            >
-              <Image src="/images/feature-scene-clouds.png" alt="" fill sizes="150px" className="object-cover" />
+          {active.clouds.map((cloud, i) => (
+            <div key={i} className="absolute overflow-hidden" style={cloud.mobile}>
+              {cloud.crop ? (
+                <div className="absolute" style={cloud.crop}>
+                  <Image src={cloud.src} alt="" fill sizes="150px" className="object-cover" />
+                </div>
+              ) : (
+                <Image
+                  src={cloud.src}
+                  alt=""
+                  fill
+                  sizes="150px"
+                  className="object-cover"
+                  style={cloudFadeStyle}
+                />
+              )}
             </div>
-          </div>
-          <div
-            className="absolute overflow-hidden"
-            style={{ left: "82.41%", top: "42.57%", width: "26.11%", height: "11.4%" }}
-          >
-            <div
-              className="absolute"
-              style={{ top: "2.86%", left: "-291.54%", width: "474.05%", height: "417.12%" }}
-            >
-              <Image src="/images/feature-scene-clouds.png" alt="" fill sizes="150px" className="object-cover" />
-            </div>
-          </div>
+          ))}
         </div>
 
         {/* Phone, unclipped: same bottom-anchored box as the clouds above,
@@ -289,18 +364,25 @@ export function FeatureCarouselSection() {
             here at all. Percentages are Figma's exact export for this
             image against this panel, not an approximation. */}
         <div className="pointer-events-none absolute inset-y-0 left-1/2 right-0 overflow-hidden rounded-r-[24px]">
-          <div
-            className="absolute"
-            style={{ top: "-9.81%", left: "-6.73%", width: "164.53%", height: "110.18%" }}
-          >
+          {active.sceneBox.desktopCrop ? (
+            <div className="absolute" style={active.sceneBox.desktopCrop}>
+              <Image
+                src={active.sceneBox.src}
+                alt=""
+                fill
+                sizes="640px"
+                className="object-cover"
+              />
+            </div>
+          ) : (
             <Image
-              src="/images/feature-scene-box.jpg"
+              src={active.sceneBox.src}
               alt=""
               fill
               sizes="640px"
               className="object-cover"
             />
-          </div>
+          )}
         </div>
 
         {/* Cloud bleed: two independent sprites (not one wide crop), each a
@@ -312,28 +394,28 @@ export function FeatureCarouselSection() {
             sprites' placement and their internal image crops — is Figma's
             exact export, scaled from box-relative to scene-relative since
             the box is the right half of this container. */}
-        <div
-          className="pointer-events-none absolute z-10 overflow-hidden"
-          style={{ left: "57.85%", top: "-5.09%", width: "15.69%", height: "17.36%" }}
-        >
+        {active.clouds.map((cloud, i) => (
           <div
-            className="absolute"
-            style={{ top: "-29.8%", left: "-75.74%", width: "543.12%", height: "655.48%" }}
+            key={i}
+            className="pointer-events-none absolute z-10 overflow-hidden"
+            style={cloud.desktop}
           >
-            <Image src="/images/feature-scene-clouds.png" alt="" fill sizes="250px" className="object-cover" />
+            {cloud.crop ? (
+              <div className="absolute" style={cloud.crop}>
+                <Image src={cloud.src} alt="" fill sizes="250px" className="object-cover" />
+              </div>
+            ) : (
+              <Image
+                src={cloud.src}
+                alt=""
+                fill
+                sizes="250px"
+                className="object-cover"
+                style={cloudFadeStyle}
+              />
+            )}
           </div>
-        </div>
-        <div
-          className="pointer-events-none absolute z-10 overflow-hidden"
-          style={{ left: "93.11%", top: "-5.66%", width: "13.71%", height: "20.76%" }}
-        >
-          <div
-            className="absolute"
-            style={{ top: "2.86%", left: "-291.54%", width: "474.05%", height: "417.12%" }}
-          >
-            <Image src="/images/feature-scene-clouds.png" alt="" fill sizes="220px" className="object-cover" />
-          </div>
-        </div>
+        ))}
 
         <div className="absolute inset-y-0 left-0 flex w-1/2 max-w-[480px] flex-col py-10 pr-10 pl-10 lg:pr-14 lg:pl-16">
           {/* This block fills the remaining space and centers pill/heading/
