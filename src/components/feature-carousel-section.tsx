@@ -21,8 +21,8 @@ const SLIDES = [
     pill: "Free Plan",
     heading: "Easy GPS tracking, straight from your phone",
     body: "Stand by your ball and tap. Our app uses your phone's GPS to log every shot. No expensive hardware attachments required.",
-    phone: "/images/hero-card-tracking.png",
-    phoneAspect: "612 / 1324",
+    phone: "/images/feature-phone-tracking.png",
+    phoneAspect: "860 / 1861",
     sceneBox: {
       src: "/images/feature-scene-box.jpg",
       mobileCrop: { top: "-18.68%", left: "-6.43%", width: "157.14%", height: "119.26%" } as Crop,
@@ -112,16 +112,20 @@ const PARALLAX_PHONE_SPEED = 0.08;
 
 export function FeatureCarouselSection() {
   const [index, setIndex] = useState(0);
+  const [paused, setPaused] = useState(false);
   const sceneRef = useRef<HTMLDivElement>(null);
   const phoneLayerRef = useRef<HTMLDivElement>(null);
 
+  // Depending on `index` means any manual navigation (arrows/dots) restarts
+  // the interval from zero, instead of the auto-advance firing moments
+  // after a manual click.
   useEffect(() => {
-    if (SLIDES.length < 2) return;
+    if (SLIDES.length < 2 || paused) return;
     const id = setInterval(() => {
       setIndex((i) => (i + 1) % SLIDES.length);
     }, ROTATE_MS);
     return () => clearInterval(id);
-  }, []);
+  }, [index, paused]);
 
   useEffect(() => {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
@@ -269,7 +273,11 @@ export function FeatureCarouselSection() {
               {/* Same source photo the cloud sprites below are cropped
                   from, at Figma's exact crop — so the baked-in clouds at
                   its top edge line up with the bleeding sprites. */}
-              <div className="absolute" style={active.sceneBox.mobileCrop}>
+              <div
+                key={`scene-mobile-${index}`}
+                className="animate-hero-fade absolute"
+                style={active.sceneBox.mobileCrop}
+              >
                 <Image
                   src={active.sceneBox.src}
                   alt=""
@@ -294,7 +302,11 @@ export function FeatureCarouselSection() {
           style={{ aspectRatio: "340 / 498" }}
         >
           {active.clouds.map((cloud, i) => (
-            <div key={i} className="absolute overflow-hidden" style={cloud.mobile}>
+            <div
+              key={`${index}-${i}`}
+              className="animate-hero-fade absolute overflow-hidden"
+              style={cloud.mobile}
+            >
               <div className="absolute" style={cloud.crop}>
                 <Image
                   src={cloud.src}
@@ -318,13 +330,15 @@ export function FeatureCarouselSection() {
             className="absolute -translate-x-1/2"
             style={{ left: "50%", top: 0, height: "68.8%", aspectRatio: active.phoneAspect }}
           >
-            <Image
-              src={active.phone}
-              alt=""
-              fill
-              sizes="200px"
-              className="object-fill drop-shadow-[0px_16px_32px_rgba(0,0,0,0.25)]"
-            />
+            <div key={`phone-mobile-${index}`} className="animate-hero-fade relative h-full w-full">
+              <Image
+                src={active.phone}
+                alt=""
+                fill
+                sizes="200px"
+                className="object-fill drop-shadow-[0px_16px_32px_rgba(0,0,0,0.25)]"
+              />
+            </div>
           </div>
         </div>
       </div>
@@ -336,6 +350,8 @@ export function FeatureCarouselSection() {
           so clouds can rise above the box's top edge. */}
       <div
         ref={sceneRef}
+        onMouseEnter={() => setPaused(true)}
+        onMouseLeave={() => setPaused(false)}
         className="relative hidden w-full overflow-visible md:block md:aspect-[1280/572]"
       >
         <div className="absolute inset-0 rounded-[24px] bg-white" />
@@ -347,7 +363,11 @@ export function FeatureCarouselSection() {
         {/* In-box scene: Figma's exact crop of the box photo against this
             panel. */}
         <div className="pointer-events-none absolute inset-y-0 left-1/2 right-0 overflow-hidden rounded-r-[24px]">
-          <div className="absolute" style={active.sceneBox.desktopCrop}>
+          <div
+            key={`scene-desktop-${index}`}
+            className="animate-hero-fade absolute"
+            style={active.sceneBox.desktopCrop}
+          >
             <Image
               src={active.sceneBox.src}
               alt=""
@@ -366,8 +386,8 @@ export function FeatureCarouselSection() {
             width so nothing bleeds over the white text card on the left. */}
         {active.clouds.map((cloud, i) => (
           <div
-            key={i}
-            className="pointer-events-none absolute z-10 overflow-hidden"
+            key={`${index}-${i}`}
+            className="animate-hero-fade pointer-events-none absolute z-10 overflow-hidden"
             style={cloud.desktop}
           >
             <div className="absolute" style={cloud.crop}>
@@ -403,13 +423,15 @@ export function FeatureCarouselSection() {
           className="pointer-events-none absolute top-1/2 left-1/2 z-20 h-[92%] -translate-x-1/2 -translate-y-1/2 rotate-[4deg]"
           style={{ aspectRatio: active.phoneAspect }}
         >
-          <Image
-            src={active.phone}
-            alt=""
-            fill
-            sizes="220px"
-            className="object-fill drop-shadow-[0px_20px_40px_rgba(0,0,0,0.35)]"
-          />
+          <div key={`phone-desktop-${index}`} className="animate-hero-fade relative h-full w-full">
+            <Image
+              src={active.phone}
+              alt=""
+              fill
+              sizes="220px"
+              className="object-fill drop-shadow-[0px_20px_40px_rgba(0,0,0,0.35)]"
+            />
+          </div>
         </div>
       </div>
     </section>
