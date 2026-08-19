@@ -192,6 +192,24 @@ export function FeatureCarouselSection() {
   const goPrev = () => setIndex((i) => (i - 1 + SLIDES.length) % SLIDES.length);
   const goNext = () => setIndex((i) => (i + 1) % SLIDES.length);
 
+  const touchStart = useRef<{ x: number; y: number } | null>(null);
+  const SWIPE_THRESHOLD = 40;
+
+  const onTouchStart = (e: React.TouchEvent) => {
+    touchStart.current = { x: e.touches[0].clientX, y: e.touches[0].clientY };
+  };
+
+  const onTouchEnd = (e: React.TouchEvent) => {
+    const start = touchStart.current;
+    touchStart.current = null;
+    if (!start) return;
+    const dx = e.changedTouches[0].clientX - start.x;
+    const dy = e.changedTouches[0].clientY - start.y;
+    if (Math.abs(dx) < SWIPE_THRESHOLD || Math.abs(dx) < Math.abs(dy)) return;
+    if (dx < 0) goNext();
+    else goPrev();
+  };
+
   const arrowButton = (direction: "prev" | "next") => (
     <button
       type="button"
@@ -250,7 +268,11 @@ export function FeatureCarouselSection() {
       {/* Mobile: text content left-aligned at the top of a white card,
           phone + scene illustration bleeding out the bottom (matching the
           GPS-scene fan's hero-scene-box.png golfer illustration). */}
-      <div className="relative w-full md:hidden">
+      <div
+        className="relative w-full md:hidden"
+        onTouchStart={onTouchStart}
+        onTouchEnd={onTouchEnd}
+      >
         <div className="overflow-hidden rounded-[24px] bg-white">
           <div
             className="flex flex-col items-start gap-[18px] text-left"

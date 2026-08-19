@@ -196,6 +196,24 @@ export function HeroImageSection() {
   const goPrev = () => setIndex((i) => (i - 1 + SLIDES.length) % SLIDES.length);
   const goNext = () => setIndex((i) => (i + 1) % SLIDES.length);
 
+  const touchStart = useRef<{ x: number; y: number } | null>(null);
+  const SWIPE_THRESHOLD = 40;
+
+  const onTouchStart = (e: React.TouchEvent) => {
+    touchStart.current = { x: e.touches[0].clientX, y: e.touches[0].clientY };
+  };
+
+  const onTouchEnd = (e: React.TouchEvent) => {
+    const start = touchStart.current;
+    touchStart.current = null;
+    if (!start) return;
+    const dx = e.changedTouches[0].clientX - start.x;
+    const dy = e.changedTouches[0].clientY - start.y;
+    if (Math.abs(dx) < SWIPE_THRESHOLD || Math.abs(dx) < Math.abs(dy)) return;
+    if (dx < 0) goNext();
+    else goPrev();
+  };
+
   const arrowButton = (direction: "prev" | "next") => (
     <button
       type="button"
@@ -327,7 +345,12 @@ export function HeroImageSection() {
           middle phone) and fades into the section's green via the same
           gradient technique as desktop, with the body copy sitting on the
           flat green below rather than overlaid on the image. */}
-      <div className="flex w-full flex-col items-center gap-[22px] px-4 pt-10 pb-16 text-center md:hidden">
+      <div
+        className="flex w-full flex-col items-center gap-[22px] px-4 pt-10 pb-16 text-center md:hidden"
+        onTouchStart={onTouchStart}
+        onTouchEnd={onTouchEnd}
+      >
+
         {pillRow}
         {heading}
         <div className="relative mt-[51px] w-screen overflow-hidden" style={{ height: "123.66vw" }}>
