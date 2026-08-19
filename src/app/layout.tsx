@@ -21,12 +21,12 @@ export const metadata: Metadata = {
   title: "Dink'It — Golf, tracked properly",
   description:
     "Per-shot GPS tracking, Strokes Gained, and AI coaching for golfers who want to actually understand their game. Join the waitlist for early access.",
-  metadataBase: new URL("https://dinkitgolf.com"),
+  metadataBase: new URL("https://www.dinkitgolf.com"),
   openGraph: {
     title: "Dink'It — Golf, tracked properly",
     description:
       "Per-shot GPS tracking, Strokes Gained, and AI coaching for golfers who want to actually understand their game.",
-    url: "https://dinkitgolf.com",
+    url: "https://www.dinkitgolf.com",
     siteName: "Dink'It",
     type: "website",
   },
