@@ -30,6 +30,12 @@ export const metadata: Metadata = {
     siteName: "Dink'It",
     type: "website",
   },
+  twitter: {
+    card: "summary_large_image",
+    title: "Dink'It — Golf, tracked properly",
+    description:
+      "Per-shot GPS tracking, Strokes Gained, and AI coaching for golfers who want to actually understand their game.",
+  },
 };
 
 export default function RootLayout({
