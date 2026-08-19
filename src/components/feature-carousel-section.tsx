@@ -390,7 +390,7 @@ export function FeatureCarouselSection() {
                   fill
                   priority
                   sizes="200px"
-                  className="object-fill drop-shadow-[0px_16px_32px_rgba(0,0,0,0.25)]"
+                  className="object-fill drop-shadow-[0px_10px_16px_rgba(0,0,0,0.16)]"
                 />
               </div>
             ))}
@@ -490,7 +490,7 @@ export function FeatureCarouselSection() {
                 fill
                 priority
                 sizes="220px"
-                className="object-fill drop-shadow-[0px_20px_40px_rgba(0,0,0,0.35)]"
+                className="object-fill drop-shadow-[0px_12px_20px_rgba(0,0,0,0.2)]"
               />
             </div>
           ))}
