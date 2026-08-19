@@ -4,7 +4,10 @@ import { WaitlistForm } from "@/components/waitlist-form";
 export function FooterContent() {
   return (
     <div className="w-full px-6 pt-16 pb-[140px] sm:px-10 sm:pb-[170px] md:px-16 md:pb-[210px]">
-      <div className="mx-auto flex w-full max-w-[503px] flex-col items-center gap-8 text-center sm:gap-[22px]">
+      <div
+        id="waitlist"
+        className="mx-auto flex w-full max-w-[503px] flex-col items-center gap-8 text-center sm:gap-[22px]"
+      >
         <div className="h-[38px] w-[98px] sm:h-[46px] sm:w-[119px]">
           <img
             src="/images/dinkit-logo-dark.svg"

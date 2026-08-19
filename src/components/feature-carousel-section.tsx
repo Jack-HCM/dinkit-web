@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, type CSSProperties } from "react";
 
 // Each slide carries its own scene: a background "box" photo cropped from a
 // raw source via Figma's exact percent crop, plus one or more cloud sprites
@@ -22,7 +22,7 @@ const SLIDES = [
     heading: "Easy GPS tracking, straight from your phone",
     body: "Stand by your ball and tap. Our app uses your phone's GPS to log every shot. No expensive hardware attachments required.",
     phone: "/images/feature-phone-tracking.png",
-    phoneAspect: "860 / 1861",
+    phoneAspect: "900 / 1746",
     sceneBox: {
       src: "/images/feature-scene-box.jpg",
       mobileCrop: { top: "-18.68%", left: "-6.43%", width: "157.14%", height: "119.26%" } as Crop,
@@ -48,7 +48,7 @@ const SLIDES = [
     heading: "Play and compare with friends.",
     body: "Connect with your regular group easily. Compare your stats in one central place. Keep the friendly competition going between rounds.",
     phone: "/images/feature-phone-friends.png",
-    phoneAspect: "860 / 1680",
+    phoneAspect: "900 / 1758",
     sceneBox: {
       src: "/images/feature-scene-box-friends.png",
       mobileCrop: { top: "-5.5%", left: "-6.36%", width: "124.13%", height: "110.24%" } as Crop,
@@ -68,7 +68,7 @@ const SLIDES = [
     heading: "Find your next course.",
     body: "Discover highly rated courses right near you. Get accurate local recommendations instantly. Explore new fairways and plan your next weekend round.",
     phone: "/images/feature-phone-courses.png",
-    phoneAspect: "860 / 1684",
+    phoneAspect: "900 / 1762",
     sceneBox: {
       src: "/images/feature-scene-box-courses.png",
       mobileCrop: { top: "-7.4%", left: "-14.9%", width: "128.68%", height: "114.61%" } as Crop,
@@ -88,7 +88,7 @@ const SLIDES = [
     heading: "Unlock your full data.",
     body: "Upgrade to access deeper performance metrics. Review detailed tendencies to lower your score. Get serious tools to fast-track your improvement.",
     phone: "/images/feature-phone-stats.png",
-    phoneAspect: "872 / 1684",
+    phoneAspect: "900 / 1738",
     sceneBox: {
       src: "/images/feature-scene-box-stats.png",
       mobileCrop: { top: "-9.45%", left: "-29.28%", width: "164.42%", height: "109.46%" } as Crop,
@@ -109,6 +109,32 @@ const ROTATE_MS = 5000;
 
 // Unlike the hero, only the phone moves here — the scene/clouds stay put.
 const PARALLAX_PHONE_SPEED = 0.08;
+
+// All four phone exports share almost the same aspect ratio (~0.51-0.52) —
+// a single shared box avoids the container itself resizing/animating when
+// the active slide changes, and the ~1% per-slide difference is invisible
+// stretched via object-fill.
+const PHONE_ASPECT = "900 / 1751";
+
+// Keeps every slide's phone mounted at all times (so images are fetched
+// once up front, not on-demand when a slide first becomes active — that
+// on-demand fetch was the "pop in" users saw on first swipe) and cross-fades
+// + slides horizontally between the active and inactive slots.
+function phoneSlideStyle(slideIndex: number, activeIndex: number, total: number): CSSProperties {
+  let diff = (slideIndex - activeIndex) % total;
+  if (diff > total / 2) diff -= total;
+  if (diff < -total / 2) diff += total;
+
+  if (diff === 0) {
+    return { transform: "translateX(0%)", opacity: 1, zIndex: 2 };
+  }
+  return {
+    transform: `translateX(${diff > 0 ? 14 : -14}%)`,
+    opacity: 0,
+    zIndex: 1,
+    pointerEvents: "none",
+  };
+}
 
 export function FeatureCarouselSection() {
   const [index, setIndex] = useState(0);
@@ -350,17 +376,24 @@ export function FeatureCarouselSection() {
         >
           <div
             className="absolute -translate-x-1/2"
-            style={{ left: "50%", top: 0, height: "68.8%", aspectRatio: active.phoneAspect }}
+            style={{ left: "50%", top: 0, height: "68.8%", aspectRatio: PHONE_ASPECT }}
           >
-            <div key={`phone-mobile-${index}`} className="animate-hero-fade relative h-full w-full">
-              <Image
-                src={active.phone}
-                alt=""
-                fill
-                sizes="200px"
-                className="object-fill drop-shadow-[0px_16px_32px_rgba(0,0,0,0.25)]"
-              />
-            </div>
+            {SLIDES.map((slide, i) => (
+              <div
+                key={slide.phone}
+                className="absolute inset-0 transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)]"
+                style={phoneSlideStyle(i, index, SLIDES.length)}
+              >
+                <Image
+                  src={slide.phone}
+                  alt=""
+                  fill
+                  priority
+                  sizes="200px"
+                  className="object-fill drop-shadow-[0px_16px_32px_rgba(0,0,0,0.25)]"
+                />
+              </div>
+            ))}
           </div>
         </div>
       </div>
@@ -443,17 +476,24 @@ export function FeatureCarouselSection() {
         <div
           ref={phoneLayerRef}
           className="pointer-events-none absolute top-1/2 left-1/2 z-20 h-[92%] -translate-x-1/2 -translate-y-1/2 rotate-[4deg]"
-          style={{ aspectRatio: active.phoneAspect }}
+          style={{ aspectRatio: PHONE_ASPECT }}
         >
-          <div key={`phone-desktop-${index}`} className="animate-hero-fade relative h-full w-full">
-            <Image
-              src={active.phone}
-              alt=""
-              fill
-              sizes="220px"
-              className="object-fill drop-shadow-[0px_20px_40px_rgba(0,0,0,0.35)]"
-            />
-          </div>
+          {SLIDES.map((slide, i) => (
+            <div
+              key={slide.phone}
+              className="absolute inset-0 transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)]"
+              style={phoneSlideStyle(i, index, SLIDES.length)}
+            >
+              <Image
+                src={slide.phone}
+                alt=""
+                fill
+                priority
+                sizes="220px"
+                className="object-fill drop-shadow-[0px_20px_40px_rgba(0,0,0,0.35)]"
+              />
+            </div>
+          ))}
         </div>
       </div>
     </section>

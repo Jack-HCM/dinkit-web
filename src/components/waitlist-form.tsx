@@ -82,7 +82,7 @@ export function WaitlistForm({
           </div>
 
           <label
-            className={`flex items-center gap-3 pb-[22px] text-[14px] [font-family:var(--font-42dot-sans)] transition-opacity duration-500 ${
+            className={`flex items-center justify-center gap-3 pb-[22px] text-[14px] [font-family:var(--font-42dot-sans)] transition-opacity duration-500 ${
               theme === "light" ? "text-[#2d2d2d]" : "text-white"
             } ${open ? "opacity-100 delay-150" : "opacity-0"}`}
           >

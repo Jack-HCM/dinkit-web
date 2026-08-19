@@ -307,7 +307,7 @@ export function HeroImageSection() {
               alt=""
               fill
               sizes="310px"
-              className="rounded-[24px] object-contain drop-shadow-[0px_20px_40px_rgba(0,0,0,0.45)]"
+              className="object-contain drop-shadow-[0px_20px_40px_rgba(0,0,0,0.45)]"
             />
           </div>
         );
@@ -330,7 +330,7 @@ export function HeroImageSection() {
               alt=""
               fill
               sizes="160px"
-              className="rounded-[16px] object-contain drop-shadow-[0px_14px_28px_rgba(0,0,0,0.4)]"
+              className="object-contain drop-shadow-[0px_14px_28px_rgba(0,0,0,0.4)]"
             />
           </div>
         );
