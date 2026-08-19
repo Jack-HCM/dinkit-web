@@ -26,7 +26,7 @@ const SLIDES = [
     pill: "AI Coaching",
     heading: "Coaching and Insights",
     body: "Our AI reads your raw numbers for you. Get straightforward summaries after your rounds. Focus your practice where it matters.",
-    image: "/images/hero-card-stats.png",
+    image: "/images/hero-card-coaching.png",
   },
 ];
 
