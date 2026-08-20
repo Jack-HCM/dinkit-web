@@ -2,8 +2,11 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Cookie Policy — Dink'It",
+  title: "Cookie Policy",
   description: "How Dink'It uses cookies and similar technologies on dinkitgolf.com.",
+  alternates: {
+    canonical: "/cookie-policy",
+  },
 };
 
 export default function CookiePolicy() {

@@ -17,26 +17,59 @@ const dotSans = localFont({
   display: "swap",
 });
 
+const TITLE = "Dink'It — GPS Golf Shot Tracker, Stats & AI Coaching App";
+const DESCRIPTION =
+  "Track every shot with your phone's GPS, see Strokes Gained analytics, and get AI-powered coaching insights — no extra hardware needed. Join the Dink'It waitlist for early access.";
+
 export const metadata: Metadata = {
-  title: "Dink'It — Golf, tracked properly",
-  description:
-    "Per-shot GPS tracking, Strokes Gained, and AI coaching for golfers who want to actually understand their game. Join the waitlist for early access.",
+  title: {
+    default: TITLE,
+    template: "%s | Dink'It",
+  },
+  description: DESCRIPTION,
   metadataBase: new URL("https://www.dinkitgolf.com"),
+  alternates: {
+    canonical: "/",
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+    },
+  },
   openGraph: {
-    title: "Dink'It — Golf, tracked properly",
-    description:
-      "Per-shot GPS tracking, Strokes Gained, and AI coaching for golfers who want to actually understand their game.",
+    title: TITLE,
+    description: DESCRIPTION,
     url: "https://www.dinkitgolf.com",
     siteName: "Dink'It",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Dink'It — Golf, tracked properly",
-    description:
-      "Per-shot GPS tracking, Strokes Gained, and AI coaching for golfers who want to actually understand their game.",
+    title: TITLE,
+    description: DESCRIPTION,
   },
 };
+
+const jsonLd = [
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    name: "Dink'It",
+    url: "https://www.dinkitgolf.com",
+    logo: "https://www.dinkitgolf.com/images/dinkit-logo.svg",
+    description: DESCRIPTION,
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    name: "Dink'It",
+    url: "https://www.dinkitgolf.com",
+  },
+];
 
 export default function RootLayout({
   children,
@@ -49,6 +82,10 @@ export default function RootLayout({
       className={`${spaceGrotesk.variable} ${dotSans.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
         {children}
         <CookieConsent />
       </body>

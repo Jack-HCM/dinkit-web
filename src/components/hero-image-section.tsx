@@ -249,12 +249,12 @@ export function HeroImageSection() {
   );
 
   const heading = (
-    <h3
+    <h2
       key={`heading-${index}`}
       className="animate-hero-fade text-[38px] leading-[48px] font-bold text-white [font-family:var(--font-space-grotesk)] [text-shadow:0px_6px_32px_rgba(0,0,0,0.8)] sm:text-[40px] sm:leading-[1.1] md:text-[38px] md:leading-[1.15]"
     >
       {active.heading}
-    </h3>
+    </h2>
   );
 
   const body = (
@@ -304,7 +304,7 @@ export function HeroImageSection() {
           >
             <Image
               src={slide.image}
-              alt=""
+              alt={slide.heading}
               fill
               sizes="310px"
               className="object-contain drop-shadow-[0px_20px_40px_rgba(0,0,0,0.45)]"
@@ -327,7 +327,7 @@ export function HeroImageSection() {
           >
             <Image
               src={slide.image}
-              alt=""
+              alt={slide.heading}
               fill
               sizes="160px"
               className="object-contain drop-shadow-[0px_14px_28px_rgba(0,0,0,0.4)]"

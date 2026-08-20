@@ -386,7 +386,7 @@ export function FeatureCarouselSection() {
               >
                 <Image
                   src={slide.phone}
-                  alt=""
+                  alt={slide.heading}
                   fill
                   priority
                   sizes="200px"
@@ -486,7 +486,7 @@ export function FeatureCarouselSection() {
             >
               <Image
                 src={slide.phone}
-                alt=""
+                alt={slide.heading}
                 fill
                 priority
                 sizes="220px"
