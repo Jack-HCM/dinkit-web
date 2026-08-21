@@ -4,6 +4,6 @@ import type { LandingPageData } from "./types";
 
 export async function getLandingPage(): Promise<LandingPageData> {
   return client.fetch<LandingPageData>(landingPageQuery, {}, {
-    next: { revalidate: 60 },
+    next: { revalidate: 5 },
   });
 }
