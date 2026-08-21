@@ -1,4 +1,5 @@
 import { WaitlistForm } from "@/components/waitlist-form";
+import { SiteNav } from "@/components/site-nav";
 import { HeroImageSection } from "@/components/hero-image-section";
 import { FeatureCarouselSection } from "@/components/feature-carousel-section";
 import { PricingSection } from "@/components/pricing-section";
@@ -12,9 +13,13 @@ export default async function Home() {
 
   return (
     <div className="flex flex-1 flex-col bg-[#347e55]">
+      <SiteNav />
       <main className="flex flex-1 flex-col items-center gap-10 pt-10 sm:gap-11 sm:pt-14">
         <div className="flex w-full flex-col items-center px-6 pb-0 text-center sm:pb-14">
-          <div className="mb-[42px] h-[64px] w-[163px] sm:mb-12 sm:h-[70px] sm:w-[200px] md:h-[82px] md:w-[236px]">
+          <div
+            id="hero-logo"
+            className="mb-[42px] h-[64px] w-[163px] sm:mb-12 sm:h-[70px] sm:w-[200px] md:h-[82px] md:w-[236px]"
+          >
             <img
               src="/images/dinkit-logo.svg"
               alt="Dink'it Golf"
