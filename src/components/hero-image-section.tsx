@@ -2,33 +2,7 @@
 
 import Image from "next/image";
 import { useEffect, useRef, useState, type CSSProperties } from "react";
-
-const SLIDES = [
-  {
-    pill: "GPS Tracking",
-    heading: "GPS tracking. Zero hardware.",
-    body: "Track your shots and log your rounds in detail. No expensive attachments needed",
-    image: "/images/hero-card-tracking.png",
-  },
-  {
-    pill: "Performance",
-    heading: "Track stats like a pro.",
-    body: "We simplify advanced performance data. See your driving, approach, and putting broken down cleanly. Spot exactly where to improve.",
-    image: "/images/hero-card-stats.png",
-  },
-  {
-    pill: "Shot Patterns",
-    heading: "See your true patterns.",
-    body: "Stop guessing your natural miss. We map your historical shots automatically. Make smarter aiming decisions on every box.",
-    image: "/images/hero-card-scorecards.png",
-  },
-  {
-    pill: "AI Coaching",
-    heading: "Coaching and Insights",
-    body: "Our AI reads your raw numbers for you. Get straightforward summaries after your rounds. Focus your practice where it matters.",
-    image: "/images/hero-card-coaching.png",
-  },
-];
+import type { HeroSlide } from "@/sanity/lib/types";
 
 const ROTATE_MS = 5000;
 
@@ -142,7 +116,7 @@ function slotStyle(slot: number): CSSProperties {
 const PARALLAX_BG_SPEED = 0.12;
 const PARALLAX_PHONE_SPEED = 0.04;
 
-export function HeroImageSection() {
+export function HeroImageSection({ slides }: { slides: HeroSlide[] }) {
   const [index, setIndex] = useState(0);
   const sceneRef = useRef<HTMLDivElement>(null);
   const bgLayerRef = useRef<HTMLDivElement>(null);
@@ -150,10 +124,10 @@ export function HeroImageSection() {
 
   useEffect(() => {
     const id = setInterval(() => {
-      setIndex((i) => (i + 1) % SLIDES.length);
+      setIndex((i) => (i + 1) % slides.length);
     }, ROTATE_MS);
     return () => clearInterval(id);
-  }, [index]);
+  }, [index, slides.length]);
 
   useEffect(() => {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
@@ -191,10 +165,10 @@ export function HeroImageSection() {
     };
   }, []);
 
-  const active = SLIDES[index];
+  const active = slides[index];
 
-  const goPrev = () => setIndex((i) => (i - 1 + SLIDES.length) % SLIDES.length);
-  const goNext = () => setIndex((i) => (i + 1) % SLIDES.length);
+  const goPrev = () => setIndex((i) => (i - 1 + slides.length) % slides.length);
+  const goNext = () => setIndex((i) => (i + 1) % slides.length);
 
   const touchStart = useRef<{ x: number; y: number } | null>(null);
   const SWIPE_THRESHOLD = 40;
@@ -276,7 +250,7 @@ export function HeroImageSection() {
 
   const dots = (
     <div className="flex items-center gap-3">
-      {SLIDES.map((_, i) => (
+      {slides.map((_, i) => (
         <button
           key={i}
           type="button"
@@ -294,8 +268,8 @@ export function HeroImageSection() {
 
   const cardStack = (
     <>
-      {SLIDES.map((slide, i) => {
-        const slot = (i - index + SLIDES.length) % SLIDES.length;
+      {slides.map((slide, i) => {
+        const slot = (i - index + slides.length) % slides.length;
         return (
           <div
             key={slide.image + i}
@@ -317,8 +291,8 @@ export function HeroImageSection() {
 
   const mobileCardStack = (
     <>
-      {SLIDES.map((slide, i) => {
-        const slot = (i - index + SLIDES.length) % SLIDES.length;
+      {slides.map((slide, i) => {
+        const slot = (i - index + slides.length) % slides.length;
         return (
           <div
             key={`m-${slide.image}-${i}`}

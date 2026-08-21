@@ -2,6 +2,8 @@
 
 import Image from "next/image";
 import { useEffect, useRef, useState, type CSSProperties } from "react";
+import type { FeatureSlide, HeadingWithHighlight } from "@/sanity/lib/types";
+import { renderHeading } from "@/lib/heading";
 
 // Each slide carries its own scene: a background "box" photo cropped from a
 // raw source via Figma's exact percent crop, plus one or more cloud sprites
@@ -16,12 +18,13 @@ type CloudSprite = {
   crop: Crop;
 };
 
-const SLIDES = [
+// Background scene illustrations and cloud art are hand-tuned per slide
+// (unique crop percentages matching each source photo) and are not
+// content-managed — only pill/heading/body/phone come from the CMS, zipped
+// with this array by index. Adding a CMS slide beyond this array's length
+// falls back to the last scene rather than crashing.
+const SCENES = [
   {
-    pill: "Free Plan",
-    heading: "Easy GPS tracking, straight from your phone",
-    body: "Stand by your ball and tap. Our app uses your phone's GPS to log every shot. No expensive hardware attachments required.",
-    phone: "/images/feature-phone-tracking.png",
     phoneAspect: "900 / 1746",
     sceneBox: {
       src: "/images/feature-scene-box.jpg",
@@ -44,10 +47,6 @@ const SLIDES = [
     ] as CloudSprite[],
   },
   {
-    pill: "Free Plan",
-    heading: "Play and compare with friends.",
-    body: "Connect with your regular group easily. Compare your stats in one central place. Keep the friendly competition going between rounds.",
-    phone: "/images/feature-phone-friends.png",
     phoneAspect: "900 / 1758",
     sceneBox: {
       src: "/images/feature-scene-box-friends.png",
@@ -64,10 +63,6 @@ const SLIDES = [
     ] as CloudSprite[],
   },
   {
-    pill: "No Plan Needed",
-    heading: "Find your next course.",
-    body: "Discover highly rated courses right near you. Get accurate local recommendations instantly. Explore new fairways and plan your next weekend round.",
-    phone: "/images/feature-phone-courses.png",
     phoneAspect: "900 / 1762",
     sceneBox: {
       src: "/images/feature-scene-box-courses.png",
@@ -84,10 +79,6 @@ const SLIDES = [
     ] as CloudSprite[],
   },
   {
-    pill: "Premium Plan",
-    heading: "Unlock your full data.",
-    body: "Upgrade to access deeper performance metrics. Review detailed tendencies to lower your score. Get serious tools to fast-track your improvement.",
-    phone: "/images/feature-phone-stats.png",
     phoneAspect: "900 / 1738",
     sceneBox: {
       src: "/images/feature-scene-box-stats.png",
@@ -136,7 +127,13 @@ function phoneSlideStyle(slideIndex: number, activeIndex: number, total: number)
   };
 }
 
-export function FeatureCarouselSection() {
+export function FeatureCarouselSection({
+  sectionHeading,
+  slides,
+}: {
+  sectionHeading: HeadingWithHighlight;
+  slides: FeatureSlide[];
+}) {
   const [index, setIndex] = useState(0);
   const [paused, setPaused] = useState(false);
   const sceneRef = useRef<HTMLDivElement>(null);
@@ -146,12 +143,12 @@ export function FeatureCarouselSection() {
   // the interval from zero, instead of the auto-advance firing moments
   // after a manual click.
   useEffect(() => {
-    if (SLIDES.length < 2 || paused) return;
+    if (slides.length < 2 || paused) return;
     const id = setInterval(() => {
-      setIndex((i) => (i + 1) % SLIDES.length);
+      setIndex((i) => (i + 1) % slides.length);
     }, ROTATE_MS);
     return () => clearInterval(id);
-  }, [index, paused]);
+  }, [index, paused, slides.length]);
 
   useEffect(() => {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
@@ -186,14 +183,15 @@ export function FeatureCarouselSection() {
     };
   }, []);
 
-  const active = SLIDES[index];
+  const activeSlide = slides[index];
+  const activeScene = SCENES[index] ?? SCENES[SCENES.length - 1];
 
   const pill = (
     <div
       key={`pill-${index}`}
       className="animate-hero-fade inline-block self-start rounded-[24px] border border-[#44e276] px-[10px] py-[4px] text-[16px] font-bold whitespace-nowrap text-black [font-family:var(--font-space-grotesk)]"
     >
-      {active.pill}
+      {activeSlide.pill}
     </div>
   );
 
@@ -202,7 +200,7 @@ export function FeatureCarouselSection() {
       key={`heading-${index}`}
       className="animate-hero-fade text-[24px] leading-[1.4] font-bold text-black [font-family:var(--font-space-grotesk)] sm:text-[34px] sm:leading-[1.2] md:text-[42px] md:leading-[1.15]"
     >
-      {active.heading}
+      {activeSlide.heading}
     </h3>
   );
 
@@ -211,12 +209,12 @@ export function FeatureCarouselSection() {
       key={`body-${index}`}
       className="animate-hero-fade text-[16px] leading-[1.4] text-[#707070] [font-family:var(--font-42dot-sans)] sm:text-[18px] sm:leading-relaxed md:text-[20px]"
     >
-      {active.body}
+      {activeSlide.body}
     </p>
   );
 
-  const goPrev = () => setIndex((i) => (i - 1 + SLIDES.length) % SLIDES.length);
-  const goNext = () => setIndex((i) => (i + 1) % SLIDES.length);
+  const goPrev = () => setIndex((i) => (i - 1 + slides.length) % slides.length);
+  const goNext = () => setIndex((i) => (i + 1) % slides.length);
 
   const touchStart = useRef<{ x: number; y: number } | null>(null);
   const SWIPE_THRESHOLD = 40;
@@ -261,9 +259,9 @@ export function FeatureCarouselSection() {
     </button>
   );
 
-  const dots = SLIDES.length > 1 && (
+  const dots = slides.length > 1 && (
     <div className="flex items-center gap-[7px]">
-      {SLIDES.map((_, i) => (
+      {slides.map((_, i) => (
         <button
           key={i}
           type="button"
@@ -277,7 +275,7 @@ export function FeatureCarouselSection() {
     </div>
   );
 
-  const controls = SLIDES.length > 1 && (
+  const controls = slides.length > 1 && (
     <div className="flex w-full items-center justify-between sm:w-auto sm:justify-start sm:gap-6">
       {arrowButton("prev")}
       {dots}
@@ -288,7 +286,7 @@ export function FeatureCarouselSection() {
   return (
     <section className="flex w-full max-w-[1280px] flex-col items-center gap-14 px-6 py-10 sm:py-14 md:gap-20 md:py-20">
       <h2 className="text-center text-[34px] leading-[1.1] font-medium tracking-[-0.68px] text-white [font-family:var(--font-space-grotesk)] sm:text-[40px] sm:tracking-[-0.6px] md:text-[48px] md:tracking-[-0.96px]">
-        Golf Tracking, <span className="text-[#87ffad]">Simplified.</span>
+        {renderHeading(sectionHeading, "text-[#87ffad]")}
       </h2>
 
       {/* Mobile: text content left-aligned at the top of a white card,
@@ -324,10 +322,10 @@ export function FeatureCarouselSection() {
               <div
                 key={`scene-mobile-${index}`}
                 className="animate-hero-fade absolute"
-                style={active.sceneBox.mobileCrop}
+                style={activeScene.sceneBox.mobileCrop}
               >
                 <Image
-                  src={active.sceneBox.src}
+                  src={activeScene.sceneBox.src}
                   alt=""
                   fill
                   sizes="400px"
@@ -349,7 +347,7 @@ export function FeatureCarouselSection() {
           className="pointer-events-none absolute inset-x-0 bottom-0"
           style={{ aspectRatio: "340 / 498" }}
         >
-          {active.clouds.map((cloud, i) => (
+          {activeScene.clouds.map((cloud, i) => (
             <div
               key={`${index}-${i}`}
               className="animate-hero-fade absolute overflow-hidden"
@@ -378,14 +376,14 @@ export function FeatureCarouselSection() {
             className="absolute -translate-x-1/2"
             style={{ left: "50%", top: 0, height: "68.8%", aspectRatio: PHONE_ASPECT }}
           >
-            {SLIDES.map((slide, i) => (
+            {slides.map((slide, i) => (
               <div
-                key={slide.phone}
+                key={slide.phoneImage}
                 className="absolute inset-0 transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)]"
-                style={phoneSlideStyle(i, index, SLIDES.length)}
+                style={phoneSlideStyle(i, index, slides.length)}
               >
                 <Image
-                  src={slide.phone}
+                  src={slide.phoneImage}
                   alt={slide.heading}
                   fill
                   priority
@@ -421,10 +419,10 @@ export function FeatureCarouselSection() {
           <div
             key={`scene-desktop-${index}`}
             className="animate-hero-fade absolute"
-            style={active.sceneBox.desktopCrop}
+            style={activeScene.sceneBox.desktopCrop}
           >
             <Image
-              src={active.sceneBox.src}
+              src={activeScene.sceneBox.src}
               alt=""
               fill
               sizes="640px"
@@ -439,7 +437,7 @@ export function FeatureCarouselSection() {
             edges line up. Positioned as siblings of the box (not children),
             so they float above it unclipped. Kept scoped to the box's own
             width so nothing bleeds over the white text card on the left. */}
-        {active.clouds.map((cloud, i) => (
+        {activeScene.clouds.map((cloud, i) => (
           <div
             key={`${index}-${i}`}
             className="animate-hero-fade pointer-events-none absolute z-10 overflow-hidden"
@@ -478,14 +476,14 @@ export function FeatureCarouselSection() {
           className="pointer-events-none absolute top-1/2 left-1/2 z-20 h-[92%] -translate-x-1/2 -translate-y-1/2 rotate-[4deg]"
           style={{ aspectRatio: PHONE_ASPECT }}
         >
-          {SLIDES.map((slide, i) => (
+          {slides.map((slide, i) => (
             <div
-              key={slide.phone}
+              key={slide.phoneImage}
               className="absolute inset-0 transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)]"
-              style={phoneSlideStyle(i, index, SLIDES.length)}
+              style={phoneSlideStyle(i, index, slides.length)}
             >
               <Image
-                src={slide.phone}
+                src={slide.phoneImage}
                 alt={slide.heading}
                 fill
                 priority
