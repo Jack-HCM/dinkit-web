@@ -12,3 +12,5 @@ if (process.env.NODE_ENV !== "production") globalForResend.resend = resend;
 
 export const WAITLIST_FROM_EMAIL =
   process.env.RESEND_FROM_EMAIL ?? "Dink'It <hello@dinkitgolf.com>";
+
+export const BETA_NOTIFICATION_EMAIL = "jack@dinkitgolf.com";

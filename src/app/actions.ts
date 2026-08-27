@@ -2,8 +2,9 @@
 
 import { z } from "zod";
 import { db } from "@/lib/db";
-import { resend, WAITLIST_FROM_EMAIL } from "@/lib/resend";
+import { resend, WAITLIST_FROM_EMAIL, BETA_NOTIFICATION_EMAIL } from "@/lib/resend";
 import { waitlistConfirmationEmail } from "@/lib/emails/waitlist-confirmation";
+import { betaSignupNotificationEmail } from "@/lib/emails/beta-signup-notification";
 import type { WaitlistState } from "@/lib/waitlist-state";
 
 const waitlistSchema = z.object({
@@ -63,6 +64,19 @@ export async function joinWaitlist(
     } catch (err) {
       // Signup already succeeded — a failed confirmation email shouldn't block the user.
       console.error("waitlist confirmation email failed", err);
+    }
+
+    if (wantsBetaTesting) {
+      const notification = betaSignupNotificationEmail(name, email);
+      try {
+        await resend.emails.send({
+          from: WAITLIST_FROM_EMAIL,
+          to: BETA_NOTIFICATION_EMAIL,
+          ...notification,
+        });
+      } catch (err) {
+        console.error("beta signup notification email failed", err);
+      }
     }
   }
 
