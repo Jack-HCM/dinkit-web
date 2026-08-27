@@ -284,10 +284,7 @@ export function FeatureCarouselSection({
   );
 
   return (
-    <section
-      id="features"
-      className="flex w-full max-w-[1280px] scroll-mt-[110px] flex-col items-center gap-14 px-6 py-10 sm:py-14 md:gap-20 md:py-20"
-    >
+    <section className="flex w-full max-w-[1280px] flex-col items-center gap-14 px-6 py-10 sm:py-14 md:gap-20 md:py-20">
       <h2 className="text-center text-[34px] leading-[1.1] font-medium tracking-[-0.68px] text-white [font-family:var(--font-space-grotesk)] sm:text-[40px] sm:tracking-[-0.6px] md:text-[48px] md:tracking-[-0.96px]">
         {renderHeading(sectionHeading, "text-[#87ffad]")}
       </h2>

@@ -16,10 +16,7 @@ export function AboutSection({
   copyright: string;
 }) {
   return (
-    <section
-      id="about"
-      className="relative flex w-full max-w-[1360px] scroll-mt-[110px] flex-col items-center px-6"
-    >
+    <section className="relative flex w-full max-w-[1360px] flex-col items-center px-6">
       <div className="relative w-full">
         <div className="flex w-full flex-col rounded-t-none bg-white sm:rounded-t-[24px]">
           <FooterContent
