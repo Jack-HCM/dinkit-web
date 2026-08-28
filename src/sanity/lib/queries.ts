@@ -39,3 +39,23 @@ export const landingPageQuery = groq`
     }
   }
 `;
+
+export const featuresPageQuery = groq`
+  *[_type == "featuresPage"][0]{
+    hero{
+      badge,
+      heading{text, highlight},
+      subtext
+    },
+    freeSection{
+      heading,
+      subtext,
+      features[]{title, desc, note, tag}
+    },
+    premiumSection{
+      heading,
+      subtext,
+      features[]{title, desc, note, tag}
+    }
+  }
+`;

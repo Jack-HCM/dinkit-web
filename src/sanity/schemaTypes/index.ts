@@ -6,7 +6,18 @@ import { heroSlide } from "./heroSlide";
 import { featureSlide } from "./featureSlide";
 import { plan } from "./plan";
 import { planFeature } from "./planFeature";
+import { featuresPage } from "./featuresPage";
+import { featureItem } from "./featureItem";
 
 export const schema: { types: SchemaTypeDefinition[] } = {
-  types: [landingPage, headingWithHighlight, heroSlide, featureSlide, plan, planFeature],
+  types: [
+    landingPage,
+    headingWithHighlight,
+    heroSlide,
+    featureSlide,
+    plan,
+    planFeature,
+    featuresPage,
+    featureItem,
+  ],
 };

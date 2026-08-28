@@ -34,6 +34,31 @@ export type Plan = {
   features: PlanFeature[];
 };
 
+export type FeatureItem = {
+  title: string;
+  desc: string;
+  note?: string | null;
+  tag?: string | null;
+};
+
+export type FeaturesPageData = {
+  hero: {
+    badge: string;
+    heading: HeadingWithHighlight;
+    subtext: string;
+  };
+  freeSection: {
+    heading: string;
+    subtext: string;
+    features: FeatureItem[];
+  };
+  premiumSection: {
+    heading: string;
+    subtext: string;
+    features: FeatureItem[];
+  };
+};
+
 export type LandingPageData = {
   hero: {
     badge?: string | null;
