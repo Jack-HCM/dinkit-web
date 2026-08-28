@@ -5,7 +5,9 @@ import { db } from "@/lib/db";
 import { resend, WAITLIST_FROM_EMAIL, BETA_NOTIFICATION_EMAIL } from "@/lib/resend";
 import { waitlistConfirmationEmail } from "@/lib/emails/waitlist-confirmation";
 import { betaSignupNotificationEmail } from "@/lib/emails/beta-signup-notification";
+import { contactNotificationEmail } from "@/lib/emails/contact-notification";
 import type { WaitlistState } from "@/lib/waitlist-state";
+import type { ContactState } from "@/lib/contact-state";
 
 const waitlistSchema = z.object({
   name: z.string().trim().min(1, "Enter your name"),
@@ -83,5 +85,59 @@ export async function joinWaitlist(
   return {
     status: "success",
     message: "You're on the list — check your inbox for confirmation.",
+  };
+}
+
+const contactSchema = z.object({
+  name: z.string().trim().min(1, "Enter your name"),
+  email: z.string().trim().min(1, "Enter your email").email("Enter a valid email"),
+  message: z.string().trim().min(1, "Enter a message"),
+});
+
+export async function submitContactMessage(
+  _prevState: ContactState,
+  formData: FormData
+): Promise<ContactState> {
+  const parsed = contactSchema.safeParse({
+    name: formData.get("name"),
+    email: formData.get("email"),
+    message: formData.get("message"),
+  });
+
+  if (!parsed.success) {
+    return {
+      status: "error",
+      message: parsed.error.issues[0]?.message ?? "Check your details and try again",
+    };
+  }
+
+  const { name, message } = parsed.data;
+  const email = parsed.data.email.toLowerCase();
+
+  try {
+    await db.contactMessage.create({ data: { name, email, message } });
+  } catch (err) {
+    console.error("contact message insert failed", err);
+    return {
+      status: "error",
+      message: "Something went wrong. Please try again.",
+    };
+  }
+
+  if (resend) {
+    try {
+      await resend.emails.send({
+        from: WAITLIST_FROM_EMAIL,
+        to: BETA_NOTIFICATION_EMAIL,
+        ...contactNotificationEmail(name, email, message),
+      });
+    } catch (err) {
+      console.error("contact notification email failed", err);
+    }
+  }
+
+  return {
+    status: "success",
+    message: "Thanks — we've got your message and will get back to you soon.",
   };
 }
