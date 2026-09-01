@@ -54,6 +54,10 @@ export function FooterContent({
           {copyright}
         </p>
         <p className="text-[14px] text-[#707070] [font-family:var(--font-42dot-sans)] sm:text-[15px]">
+          Dink&apos;it Golf is operated by Hive Creator Studio, a trading name of Hive
+          Creative Media Ltd [Co. No. 14699478]
+        </p>
+        <p className="text-[14px] text-[#707070] [font-family:var(--font-42dot-sans)] sm:text-[15px]">
           Website design and build by{" "}
           <a
             href="https://hivecreativemedia.co.uk"
