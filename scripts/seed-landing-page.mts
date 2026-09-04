@@ -63,7 +63,7 @@ async function main() {
         highlight: "Master Your Game",
       },
       subtext:
-        "Join the waitlist. The first 50 people who sign up for beta testing will be eligible for premium access for life*",
+        "Join the waitlist for GPS shot tracking, live round stats, and AI-powered coaching insights — straight from your phone, no extra hardware needed.",
     },
     heroCarousel: {
       slides: [
@@ -201,9 +201,9 @@ async function main() {
       mobileHeading: "Track, Log, and Master Your Game from Your Phone.",
       desktopHeading: { text: "Golf Tracking, Simplified.", highlight: "Simplified." },
       subtext:
-        "Join the waitlist. The first 50 people who sign up for beta testing will be eligible for premium access for life*",
+        "Join the waitlist for GPS shot tracking, live round stats, and AI-powered coaching insights — straight from your phone, no extra hardware needed.",
       disclaimer:
-        "*Taking part in beta testing will mean giving sufficient feedback based on your experience with using the app in a live setting. This will qualify for the ‘free for life’ premium access",
+        "We're building fast — join the waitlist to get early access the moment beta opens.",
       copyright: "© Dink’it Golf 2026 | All rights reserved",
     },
   };

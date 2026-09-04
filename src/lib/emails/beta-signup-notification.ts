@@ -3,9 +3,7 @@ export function betaSignupNotificationEmail(name: string, email: string) {
 
   const text = `${name} just signed up for beta testing.
 
-Email: ${email}
-
-Remember: first 50 beta testers who give feedback get premium access for life.`;
+Email: ${email}`;
 
   const html = `
   <div style="background:#f6f4ef;padding:32px 16px;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;color:#1d241f;">
@@ -15,11 +13,8 @@ Remember: first 50 beta testers who give feedback get premium access for life.`;
       <p style="font-size:15px;line-height:1.6;margin:0 0 8px;color:#3a4038;">
         <strong>${name}</strong> just signed up and opted in to beta test.
       </p>
-      <p style="font-size:15px;line-height:1.6;margin:0 0 24px;color:#3a4038;">
+      <p style="font-size:15px;line-height:1.6;margin:0;color:#3a4038;">
         ${email}
-      </p>
-      <p style="font-size:13px;line-height:1.6;color:#8a9086;margin:0;">
-        First 50 beta testers who give feedback get premium access for life.
       </p>
     </div>
   </div>`;
