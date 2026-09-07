@@ -81,6 +81,28 @@ export type RoadmapPageData = {
   rows: RoadmapRow[];
 };
 
+export type AboutStep = {
+  title: string;
+  body: string;
+  image?: string | null;
+};
+
+export type AboutPageData = {
+  hero: {
+    badge: string;
+    heading: HeadingWithHighlight;
+    subtext: string;
+  };
+  steps: AboutStep[];
+  story: {
+    eyebrow: string;
+    heading: string;
+    image: string;
+    body: string;
+    landscapeImage: string;
+  };
+};
+
 export type LandingPageData = {
   hero: {
     badge?: string | null;

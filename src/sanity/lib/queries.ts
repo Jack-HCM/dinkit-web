@@ -73,3 +73,25 @@ export const roadmapPageQuery = groq`
     }
   }
 `;
+
+export const aboutPageQuery = groq`
+  *[_type == "aboutPage"][0]{
+    hero{
+      badge,
+      heading{text, highlight},
+      subtext
+    },
+    steps[]{
+      title,
+      body,
+      "image": image.asset->url
+    },
+    story{
+      eyebrow,
+      heading,
+      "image": image.asset->url,
+      body,
+      "landscapeImage": landscapeImage.asset->url
+    }
+  }
+`;

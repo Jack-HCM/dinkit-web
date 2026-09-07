@@ -11,6 +11,8 @@ import { featureItem } from "./featureItem";
 import { roadmapPage } from "./roadmapPage";
 import { roadmapRow } from "./roadmapRow";
 import { roadmapFeature } from "./roadmapFeature";
+import { aboutPage } from "./aboutPage";
+import { aboutStep } from "./aboutStep";
 
 export const schema: { types: SchemaTypeDefinition[] } = {
   types: [
@@ -25,5 +27,7 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     roadmapPage,
     roadmapRow,
     roadmapFeature,
+    aboutPage,
+    aboutStep,
   ],
 };
