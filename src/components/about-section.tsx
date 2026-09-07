@@ -9,6 +9,7 @@ export function AboutSection({
   disclaimer,
   copyright,
   children,
+  extraTopClearance,
 }: {
   mobileHeading: string;
   desktopHeading: HeadingWithHighlight;
@@ -16,11 +17,17 @@ export function AboutSection({
   disclaimer: string;
   copyright: string;
   children?: React.ReactNode;
+  // Reserves extra green space above the card for children (e.g.
+  // AboutTeaser) that bleed a decorative image up past the card's own top
+  // edge — the normal inter-section gap isn't enough room for that.
+  extraTopClearance?: boolean;
 }) {
   return (
     <section
       id="about"
-      className="relative flex w-full max-w-[1360px] scroll-mt-[110px] flex-col items-center px-6"
+      className={`relative flex w-full max-w-[1360px] scroll-mt-[110px] flex-col items-center px-6 ${
+        extraTopClearance ? "pt-[95px] sm:pt-[200px]" : ""
+      }`}
     >
       <div className="relative w-full">
         <div className="flex w-full flex-col rounded-t-[24px] bg-white">

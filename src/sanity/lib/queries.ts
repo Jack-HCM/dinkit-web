@@ -90,8 +90,7 @@ export const aboutPageQuery = groq`
       eyebrow,
       heading,
       "image": image.asset->url,
-      body,
-      "landscapeImage": landscapeImage.asset->url
+      body
     }
   }
 `;

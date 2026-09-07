@@ -99,7 +99,6 @@ export type AboutPageData = {
     heading: string;
     image: string;
     body: string;
-    landscapeImage: string;
   };
 };
 

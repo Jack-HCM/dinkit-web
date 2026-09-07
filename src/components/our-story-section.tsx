@@ -24,7 +24,7 @@ export function OurStorySection({ story }: { story: AboutPageData["story"] }) {
           />
         </div>
 
-        <div className="mt-10 flex max-w-[579px] flex-col gap-5">
+        <div className="mt-10 flex max-w-[579px] flex-col gap-5 pb-16 sm:pb-20">
           {paragraphs.map((paragraph, index) => (
             <p
               key={index}
@@ -34,16 +34,6 @@ export function OurStorySection({ story }: { story: AboutPageData["story"] }) {
             </p>
           ))}
         </div>
-      </div>
-
-      <div className="relative -mx-6 mt-4 h-[220px] sm:h-[320px] md:h-[420px] lg:h-[500px]">
-        <Image
-          src={story.landscapeImage}
-          alt=""
-          fill
-          sizes="1280px"
-          className="object-cover"
-        />
       </div>
     </section>
   );

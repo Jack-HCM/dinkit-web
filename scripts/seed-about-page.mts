@@ -33,10 +33,7 @@ async function uploadImage(filename: string) {
 }
 
 async function main() {
-  const [storyImage, landscapeImage] = await Promise.all([
-    uploadImage("about-founder-photo.png"),
-    uploadImage("golf-scene.png"),
-  ]);
+  const storyImage = await uploadImage("about-founder-photo.png");
 
   const doc = {
     _id: "aboutPage",
@@ -48,23 +45,23 @@ async function main() {
         highlight: "Dink'It Golf",
       },
       subtext:
-        "From a rough idea to something you'll actually trust on the course — here's our process, and the story behind why we started.",
+        "From a rough idea to something you'll actually trust on the course: here's our process, and the story behind why we started.",
     },
     steps: [
       {
         _key: "designed-and-scoped",
         title: "Designed and scoped by humans",
-        body: "Every feature starts with a real problem from a real round of golf. We scope it ourselves first — what a golfer actually needs, what data has to be accurate, and what can wait — before a single line of code gets written.",
+        body: "Every feature starts with a real problem from a real round of golf. We scope it ourselves first, working out what a golfer actually needs, what data has to be accurate, and what can wait, before a single line of code gets written.",
       },
       {
         _key: "built-with-claude",
         title: "Built with Claude",
-        body: "We build fast by pairing with Claude, Anthropic's AI. It writes and ships real production code — the app, the CMS, the tracking and stats engine — under our direction, so a small team can move at the pace of a much bigger one without cutting corners.",
+        body: "We build fast by pairing with Claude, Anthropic's AI. It writes and ships real production code, including the app, the CMS, and the tracking and stats engine, under our direction, so a small team can move at the pace of a much bigger one without cutting corners.",
       },
       {
         _key: "audited-and-refined",
         title: "Audited and refined by Claude (Fable) + Humans",
-        body: "Nothing ships on the first pass. Every feature gets a second, independent review — Claude's Fable model checks the code and copy for bugs, edge cases and rough edges, then we go through it ourselves before it goes anywhere near the app.",
+        body: "Nothing ships on the first pass. Every feature gets a second, independent review: Claude's Fable model checks the code and copy for bugs, edge cases and rough edges, then we go through it ourselves before it goes anywhere near the app.",
       },
       {
         _key: "tested-by-golfers",
@@ -76,14 +73,13 @@ async function main() {
       eyebrow: "Our Story",
       heading: "Why we built Dink'it Golf",
       image: storyImage,
-      body: `My grandad's golf clubs sat in the garage for years after he passed — until, at 32, I finally took them out for a round. I was hooked instantly. Golf became my way to switch off, get outside, and slow down.
+      body: `My grandad's golf clubs sat in the garage for years after he passed. Then, at 32, I finally took them out for a round. I was hooked instantly. Golf became my way to switch off, get outside, and slow down.
 
-That love for the game collided with my day job at Hive Creative Media, and Dink'it Golf was born — an app to help golfers like me find and rank nearby courses, so we could work our way up instead of getting thrown in the deep end.
+That love for the game collided with my day job at Hive Creative Media, and Dink'it Golf was born: an app to help golfers like me find and rank nearby courses, so we could work our way up instead of getting thrown in the deep end.
 
 It grew from there. Shot tracking and performance stats came next, so my friends and I could actually see ourselves improving, round after round.
 
 I think I finally understand why my grandad loved this game so much.`,
-      landscapeImage,
     },
   };
 

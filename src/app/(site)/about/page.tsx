@@ -10,7 +10,7 @@ import { renderHeading } from "@/lib/heading";
 export const metadata: Metadata = {
   title: "About Us",
   description:
-    "How Dink'It Golf gets built — from human-scoped design through Claude-assisted development to real golfers testing it on the course. Plus the story behind why we started.",
+    "How Dink'It Golf gets built: from human-scoped design through Claude-assisted development to real golfers testing it on the course. Plus the story behind why we started.",
   alternates: {
     canonical: "/about",
   },

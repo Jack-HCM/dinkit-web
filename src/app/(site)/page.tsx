@@ -4,6 +4,7 @@ import { HeroImageSection } from "@/components/hero-image-section";
 import { FeatureCarouselSection } from "@/components/feature-carousel-section";
 import { PricingSection } from "@/components/pricing-section";
 import { AboutSection } from "@/components/about-section";
+import { AboutTeaser } from "@/components/about-teaser";
 import { getLandingPage } from "@/sanity/lib/landing-page";
 import { renderHeading } from "@/lib/heading";
 
@@ -70,7 +71,10 @@ export default async function Home() {
           subtext={footer.subtext}
           disclaimer={footer.disclaimer}
           copyright={footer.copyright}
-        />
+          extraTopClearance
+        >
+          <AboutTeaser />
+        </AboutSection>
       </main>
     </div>
   );
