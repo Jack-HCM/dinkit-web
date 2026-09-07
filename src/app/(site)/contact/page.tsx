@@ -5,7 +5,7 @@ import { AboutSection } from "@/components/about-section";
 import { getLandingPage } from "@/sanity/lib/landing-page";
 
 export const metadata: Metadata = {
-  title: "Contact / Feature Request",
+  title: "Contact",
   description:
     "Got feedback on Dink'It? Let us know what you'd like to see in the app, or flag anything that's not working.",
   alternates: {

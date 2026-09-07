@@ -59,3 +59,17 @@ export const featuresPageQuery = groq`
     }
   }
 `;
+
+export const roadmapPageQuery = groq`
+  *[_type == "roadmapPage"][0]{
+    hero{
+      heading,
+      subtext
+    },
+    rows[]{
+      layout,
+      "image": image.asset->url,
+      features[]{title, description, status}
+    }
+  }
+`;

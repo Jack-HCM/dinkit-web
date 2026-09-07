@@ -59,6 +59,28 @@ export type FeaturesPageData = {
   };
 };
 
+export type RoadmapStatus = "inBuild" | "planning" | "planned" | "futureConsideration";
+
+export type RoadmapFeature = {
+  title: string;
+  description: string;
+  status: RoadmapStatus;
+};
+
+export type RoadmapRow = {
+  layout: "imageLeft" | "imageRight" | "twoColumn";
+  image?: string | null;
+  features: RoadmapFeature[];
+};
+
+export type RoadmapPageData = {
+  hero: {
+    heading: string;
+    subtext: string;
+  };
+  rows: RoadmapRow[];
+};
+
 export type LandingPageData = {
   hero: {
     badge?: string | null;

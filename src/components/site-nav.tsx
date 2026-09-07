@@ -49,7 +49,10 @@ export function SiteNav({ alwaysVisible = false }: { alwaysVisible?: boolean } =
             About Us
           </a>
           <a href="/contact" className="transition-opacity hover:opacity-80">
-            Contact / Feature Request
+            Contact
+          </a>
+          <a href="/roadmap" className="transition-opacity hover:opacity-80">
+            Roadmap
           </a>
         </div>
 

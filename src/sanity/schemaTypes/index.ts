@@ -8,6 +8,9 @@ import { plan } from "./plan";
 import { planFeature } from "./planFeature";
 import { featuresPage } from "./featuresPage";
 import { featureItem } from "./featureItem";
+import { roadmapPage } from "./roadmapPage";
+import { roadmapRow } from "./roadmapRow";
+import { roadmapFeature } from "./roadmapFeature";
 
 export const schema: { types: SchemaTypeDefinition[] } = {
   types: [
@@ -19,5 +22,8 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     planFeature,
     featuresPage,
     featureItem,
+    roadmapPage,
+    roadmapRow,
+    roadmapFeature,
   ],
 };

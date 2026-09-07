@@ -32,3 +32,13 @@ model ContactMessage {
 
   @@map("contact_messages")
 }
+
+model FeatureRequest {
+  id        String   @id @default(cuid())
+  name      String
+  email     String
+  message   String
+  createdAt DateTime @default(now())
+
+  @@map("feature_requests")
+}

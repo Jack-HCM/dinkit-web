@@ -6,8 +6,10 @@ import { resend, WAITLIST_FROM_EMAIL, BETA_NOTIFICATION_EMAIL } from "@/lib/rese
 import { waitlistConfirmationEmail } from "@/lib/emails/waitlist-confirmation";
 import { betaSignupNotificationEmail } from "@/lib/emails/beta-signup-notification";
 import { contactNotificationEmail } from "@/lib/emails/contact-notification";
+import { featureRequestNotificationEmail } from "@/lib/emails/feature-request-notification";
 import type { WaitlistState } from "@/lib/waitlist-state";
 import type { ContactState } from "@/lib/contact-state";
+import type { FeatureRequestState } from "@/lib/feature-request-state";
 
 const waitlistSchema = z.object({
   name: z.string().trim().min(1, "Enter your name"),
@@ -139,5 +141,59 @@ export async function submitContactMessage(
   return {
     status: "success",
     message: "Thanks — we've got your message and will get back to you soon.",
+  };
+}
+
+const featureRequestSchema = z.object({
+  name: z.string().trim().min(1, "Enter your name"),
+  email: z.string().trim().min(1, "Enter your email").email("Enter a valid email"),
+  message: z.string().trim().min(1, "Enter a message"),
+});
+
+export async function submitFeatureRequest(
+  _prevState: FeatureRequestState,
+  formData: FormData
+): Promise<FeatureRequestState> {
+  const parsed = featureRequestSchema.safeParse({
+    name: formData.get("name"),
+    email: formData.get("email"),
+    message: formData.get("message"),
+  });
+
+  if (!parsed.success) {
+    return {
+      status: "error",
+      message: parsed.error.issues[0]?.message ?? "Check your details and try again",
+    };
+  }
+
+  const { name, message } = parsed.data;
+  const email = parsed.data.email.toLowerCase();
+
+  try {
+    await db.featureRequest.create({ data: { name, email, message } });
+  } catch (err) {
+    console.error("feature request insert failed", err);
+    return {
+      status: "error",
+      message: "Something went wrong. Please try again.",
+    };
+  }
+
+  if (resend) {
+    try {
+      await resend.emails.send({
+        from: WAITLIST_FROM_EMAIL,
+        to: BETA_NOTIFICATION_EMAIL,
+        ...featureRequestNotificationEmail(name, email, message),
+      });
+    } catch (err) {
+      console.error("feature request notification email failed", err);
+    }
+  }
+
+  return {
+    status: "success",
+    message: "Thanks — we've got your request and will take a look.",
   };
 }
