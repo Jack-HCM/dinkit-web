@@ -22,15 +22,15 @@ export default async function Contact() {
       <main className="flex flex-1 flex-col items-center gap-10 sm:gap-11">
         <div className="pt-[130px] sm:pt-[150px]" />
 
-        <ContactSection />
-
         <AboutSection
           mobileHeading={footer.mobileHeading}
           desktopHeading={footer.desktopHeading}
           subtext={footer.subtext}
           disclaimer={footer.disclaimer}
           copyright={footer.copyright}
-        />
+        >
+          <ContactSection />
+        </AboutSection>
       </main>
     </div>
   );

@@ -45,15 +45,15 @@ export default async function Roadmap() {
 
         <RoadmapGrid rows={rows} />
 
-        <FeatureRequestSection />
-
         <AboutSection
           mobileHeading={footer.mobileHeading}
           desktopHeading={footer.desktopHeading}
           subtext={footer.subtext}
           disclaimer={footer.disclaimer}
           copyright={footer.copyright}
-        />
+        >
+          <FeatureRequestSection />
+        </AboutSection>
       </main>
     </div>
   );
