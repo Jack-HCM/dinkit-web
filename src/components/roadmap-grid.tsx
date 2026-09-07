@@ -29,7 +29,7 @@ function ImageRow({ row, imageOnLeft }: { row: RoadmapRowData; imageOnLeft: bool
   if (!feature || !row.image) return null;
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2">
+    <div className="grid grid-cols-1 md:min-h-[320px] md:grid-cols-2">
       <div
         className={`flex flex-col justify-center px-[26px] py-[40px] sm:px-[56px] sm:py-[56px] ${
           imageOnLeft ? "md:order-2" : "md:order-1"
@@ -46,7 +46,7 @@ function ImageRow({ row, imageOnLeft }: { row: RoadmapRowData; imageOnLeft: bool
 
 function TwoColumnRow({ row }: { row: RoadmapRowData }) {
   return (
-    <div className="grid grid-cols-1 divide-y divide-[#ece7db] md:grid-cols-2 md:divide-x md:divide-y-0">
+    <div className="grid grid-cols-1 divide-y divide-[#ece7db] md:min-h-[320px] md:grid-cols-2 md:divide-x md:divide-y-0">
       {row.features.map((feature) => (
         <div
           key={feature.title}
