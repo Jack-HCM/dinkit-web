@@ -23,7 +23,7 @@ export function AboutSection({
       className="relative flex w-full max-w-[1360px] scroll-mt-[110px] flex-col items-center px-6"
     >
       <div className="relative w-full">
-        <div className="flex w-full flex-col rounded-t-none bg-white sm:rounded-t-[24px]">
+        <div className="flex w-full flex-col rounded-t-[24px] bg-white">
           {children}
           <FooterContent
             mobileHeading={mobileHeading}
