@@ -73,11 +73,11 @@ async function main() {
       eyebrow: "Our Story",
       heading: "Why we built Dink'it Golf",
       image: storyImage,
-      body: `My grandad's golf clubs sat in the garage for years after he passed. Then, at 32, I finally took them out for a round. I was hooked instantly. Golf became my way to switch off, get outside, and slow down.
+      body: `After my grandad passed, his golf clubs sat in the garage for years until I finally picked them up at 32. I was hooked from the first round: golf became my way to switch off, get outside, and escape the day to day.
 
-That love for the game collided with my day job at Hive Creative Media, and Dink'it Golf was born: an app to help golfers like me find and rank nearby courses, so we could work our way up instead of getting thrown in the deep end.
+That new love for the game collided with my passion for building things at Hive Creative Media, the company I run, and the idea for Dink'it Golf was born: an app to help golfers like me find and rank nearby courses, so we could work our way up in difficulty instead of getting thrown in the deep end.
 
-It grew from there. Shot tracking and performance stats came next, so my friends and I could actually see ourselves improving, round after round.
+The idea quickly grew in scope. Shot tracking and performance analysis came next, so my friends and I could track our progress and actually see ourselves improving. From there it kept growing into the app Dink'it Golf is today, still in development and getting ready for release.
 
 I think I finally understand why my grandad loved this game so much.`,
     },
