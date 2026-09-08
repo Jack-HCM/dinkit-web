@@ -34,6 +34,74 @@ export type Plan = {
   features: PlanFeature[];
 };
 
+export type FeatureItem = {
+  title: string;
+  desc: string;
+  note?: string | null;
+  tag?: string | null;
+};
+
+export type FeaturesPageData = {
+  hero: {
+    badge: string;
+    heading: HeadingWithHighlight;
+    subtext: string;
+  };
+  freeSection: {
+    heading: string;
+    subtext: string;
+    features: FeatureItem[];
+  };
+  premiumSection: {
+    heading: string;
+    subtext: string;
+    features: FeatureItem[];
+  };
+};
+
+export type RoadmapStatus = "inBuild" | "planning" | "planned" | "futureConsideration";
+
+export type RoadmapFeature = {
+  title: string;
+  description: string;
+  status: RoadmapStatus;
+};
+
+export type RoadmapRow = {
+  layout: "imageLeft" | "imageRight" | "twoColumn";
+  image?: string | null;
+  features: RoadmapFeature[];
+};
+
+export type RoadmapPageData = {
+  hero: {
+    heading: string;
+    subtext: string;
+  };
+  rows: RoadmapRow[];
+};
+
+export type AboutStep = {
+  title: string;
+  body: string;
+  image?: string | null;
+};
+
+export type AboutPageData = {
+  hero: {
+    badge: string;
+    heading: HeadingWithHighlight;
+    subtext: string;
+  };
+  steps: AboutStep[];
+  story: {
+    eyebrow: string;
+    heading: string;
+    image: string;
+    body: string;
+  };
+};
+
 export type LandingPageData = {
   hero: {
     badge?: string | null;

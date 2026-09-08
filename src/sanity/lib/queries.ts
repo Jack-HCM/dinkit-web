@@ -39,3 +39,58 @@ export const landingPageQuery = groq`
     }
   }
 `;
+
+export const featuresPageQuery = groq`
+  *[_type == "featuresPage"][0]{
+    hero{
+      badge,
+      heading{text, highlight},
+      subtext
+    },
+    freeSection{
+      heading,
+      subtext,
+      features[]{title, desc, note, tag}
+    },
+    premiumSection{
+      heading,
+      subtext,
+      features[]{title, desc, note, tag}
+    }
+  }
+`;
+
+export const roadmapPageQuery = groq`
+  *[_type == "roadmapPage"][0]{
+    hero{
+      heading,
+      subtext
+    },
+    rows[]{
+      layout,
+      "image": image.asset->url,
+      features[]{title, description, status}
+    }
+  }
+`;
+
+export const aboutPageQuery = groq`
+  *[_type == "aboutPage"][0]{
+    hero{
+      badge,
+      heading{text, highlight},
+      subtext
+    },
+    steps[]{
+      title,
+      body,
+      "image": image.asset->url
+    },
+    story{
+      eyebrow,
+      heading,
+      "image": image.asset->url,
+      body
+    }
+  }
+`;

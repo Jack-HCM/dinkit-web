@@ -24,6 +24,12 @@ export default defineConfig({
               .child(
                 S.document().schemaType("landingPage").documentId("landingPage")
               ),
+            S.listItem()
+              .title("Features Page")
+              .id("featuresPage")
+              .child(
+                S.document().schemaType("featuresPage").documentId("featuresPage")
+              ),
           ]),
     }),
     visionTool({ defaultApiVersion: apiVersion }),

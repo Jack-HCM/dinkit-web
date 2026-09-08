@@ -68,12 +68,26 @@ export function FooterContent({
             Hive Creative Media
           </a>
         </p>
-        <Link
-          href="/cookie-policy"
-          className="text-[13px] text-[#707070] underline underline-offset-2 hover:opacity-80 [font-family:var(--font-42dot-sans)] sm:text-[14px]"
-        >
-          Cookie Policy
-        </Link>
+        <div className="flex flex-wrap items-center justify-center gap-x-3 gap-y-1">
+          <Link
+            href="/privacy"
+            className="text-[13px] text-[#707070] underline underline-offset-2 hover:opacity-80 [font-family:var(--font-42dot-sans)] sm:text-[14px]"
+          >
+            Privacy Policy
+          </Link>
+          <Link
+            href="/terms"
+            className="text-[13px] text-[#707070] underline underline-offset-2 hover:opacity-80 [font-family:var(--font-42dot-sans)] sm:text-[14px]"
+          >
+            Terms of Service
+          </Link>
+          <Link
+            href="/cookie-policy"
+            className="text-[13px] text-[#707070] underline underline-offset-2 hover:opacity-80 [font-family:var(--font-42dot-sans)] sm:text-[14px]"
+          >
+            Cookie Policy
+          </Link>
+        </div>
       </div>
     </div>
   );
