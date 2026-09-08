@@ -11,31 +11,29 @@ function StepNumber({ index }: { index: number }) {
 
 function Step({ step, index }: { step: AboutStep; index: number }) {
   return (
-    <div className="flex w-full flex-col gap-6 border-t border-white/15 pt-10 first:border-t-0 first:pt-0 sm:flex-row sm:gap-10">
+    <div className="flex h-full w-full flex-col gap-5 rounded-[20px] border border-white/15 bg-white/[0.04] p-8 sm:p-10">
       <StepNumber index={index} />
-      <div className="flex flex-1 flex-col gap-4 sm:flex-row sm:items-start sm:gap-10">
-        <div className="flex flex-1 flex-col gap-3">
-          <h3 className="max-w-[540px] text-[26px] leading-[1.15] font-medium tracking-[-0.52px] text-white [font-family:var(--font-space-grotesk)] sm:text-[32px]">
-            {step.title}
-          </h3>
-          <p className="max-w-[480px] text-[16px] leading-[1.55] text-white/80 [font-family:var(--font-42dot-sans)] sm:text-[17px]">
-            {step.body}
-          </p>
-        </div>
-
-        {step.image && (
-          <div className="relative h-[200px] w-full overflow-hidden rounded-[16px] sm:h-[180px] sm:w-[280px] sm:shrink-0">
-            <Image src={step.image} alt="" fill sizes="280px" className="object-cover" />
-          </div>
-        )}
+      <div className="flex flex-1 flex-col gap-3">
+        <h3 className="max-w-[440px] text-[24px] leading-[1.15] font-medium tracking-[-0.48px] text-white [font-family:var(--font-space-grotesk)] sm:text-[28px]">
+          {step.title}
+        </h3>
+        <p className="max-w-[440px] text-[16px] leading-[1.55] text-white/80 [font-family:var(--font-42dot-sans)] sm:text-[17px]">
+          {step.body}
+        </p>
       </div>
+
+      {step.image && (
+        <div className="relative h-[200px] w-full overflow-hidden rounded-[16px]">
+          <Image src={step.image} alt="" fill sizes="(min-width: 768px) 570px, 100vw" className="object-cover" />
+        </div>
+      )}
     </div>
   );
 }
 
 export function AboutStepsList({ steps }: { steps: AboutStep[] }) {
   return (
-    <section className="flex w-full max-w-[1220px] flex-col gap-10 px-6 sm:gap-14">
+    <section className="grid w-full max-w-[1220px] grid-cols-1 gap-6 px-6 md:grid-cols-2 md:gap-8">
       {steps.map((step, index) => (
         <Step key={step.title} step={step} index={index} />
       ))}

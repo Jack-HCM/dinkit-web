@@ -9,8 +9,8 @@ import { useEffect, useState } from "react";
 const NAV_LINKS = [
   { href: "/features", label: "App features" },
   { href: "/about", label: "About Us" },
-  { href: "/contact", label: "Contact" },
   { href: "/roadmap", label: "Roadmap" },
+  { href: "/contact", label: "Contact" },
 ];
 
 export function SiteNav({ alwaysVisible = false }: { alwaysVisible?: boolean } = {}) {
@@ -37,12 +37,12 @@ export function SiteNav({ alwaysVisible = false }: { alwaysVisible?: boolean } =
 
   return (
     <div
-      className={`fixed inset-x-0 top-0 z-50 flex flex-col items-center px-6 pt-4 transition-all duration-500 ease-in-out sm:px-10 md:px-14 ${
+      className={`fixed inset-x-0 top-0 z-50 flex flex-col items-center px-6 pt-4 transition-[transform,opacity] duration-500 ease-in-out will-change-transform sm:px-10 md:px-14 ${
         visible ? "translate-y-0 opacity-100" : "-translate-y-full opacity-0"
       } ${visible ? "pointer-events-auto" : "pointer-events-none"}`}
     >
       <nav
-        className="flex w-full max-w-[1326px] items-center justify-between rounded-[8px] bg-[rgba(25,75,52,0.5)] p-[12px] backdrop-blur-[24px]"
+        className="flex w-full max-w-[1326px] items-center justify-between rounded-[8px] border border-white/15 bg-[rgba(25,75,52,0.45)] p-[12px] shadow-[0_8px_32px_rgba(0,0,0,0.18)] backdrop-blur-[14px] backdrop-saturate-[160%]"
         aria-hidden={!visible}
       >
         <a href="/" className="h-[38px] w-[97px] shrink-0 sm:h-[51px] sm:w-[130px]">

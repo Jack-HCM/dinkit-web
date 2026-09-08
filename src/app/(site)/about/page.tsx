@@ -38,9 +38,9 @@ export default async function About() {
           </p>
         </div>
 
-        <AboutStepsList steps={steps} />
-
         <OurStorySection story={story} />
+
+        <AboutStepsList steps={steps} />
 
         <AboutSection
           mobileHeading={footer.mobileHeading}
