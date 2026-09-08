@@ -23,6 +23,8 @@ export default async function TermsPage() {
     <div className="flex flex-1 flex-col bg-[#347e55]">
       <SiteNav alwaysVisible />
       <main className="flex flex-1 flex-col items-center">
+        <div className="pt-[130px] sm:pt-[150px]" />
+
         <AboutSection
           mobileHeading={footer.mobileHeading}
           desktopHeading={footer.desktopHeading}
