@@ -71,7 +71,7 @@ export function FeaturesList({
   premiumSection: { heading: string; subtext: string; features: FeatureItem[] };
 }) {
   return (
-    <div className="flex w-full max-w-[1280px] flex-col gap-10 px-6 py-10 sm:py-14 md:gap-14">
+    <div className="flex w-full max-w-[1280px] flex-col gap-10 px-6 pb-10 sm:pb-14 md:gap-14">
       <div className="flex flex-col gap-6 rounded-[24px] bg-white px-[26px] py-[32px] sm:px-[40px] sm:py-[44px]">
         <div className="flex flex-col gap-2">
           <h2 className="text-[26px] font-medium tracking-[-0.4px] text-[#347e55] [font-family:var(--font-space-grotesk)] sm:text-[32px]">

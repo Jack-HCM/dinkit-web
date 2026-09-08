@@ -37,8 +37,8 @@ export function SiteNav({ alwaysVisible = false }: { alwaysVisible?: boolean } =
 
   return (
     <div
-      className={`fixed inset-x-0 top-0 z-50 flex flex-col items-center px-6 pt-4 transition-[transform,opacity] duration-500 ease-in-out will-change-transform sm:px-10 md:px-14 ${
-        visible ? "translate-y-0 opacity-100" : "-translate-y-full opacity-0"
+      className={`fixed inset-x-0 top-0 z-50 flex flex-col items-center px-6 pt-4 transition-transform duration-500 ease-in-out will-change-transform sm:px-10 md:px-14 ${
+        visible ? "translate-y-0" : "-translate-y-full"
       } ${visible ? "pointer-events-auto" : "pointer-events-none"}`}
     >
       <nav
