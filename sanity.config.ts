@@ -30,6 +30,12 @@ export default defineConfig({
               .child(
                 S.document().schemaType("featuresPage").documentId("featuresPage")
               ),
+            S.listItem()
+              .title("Roadmap Page")
+              .id("roadmapPage")
+              .child(
+                S.document().schemaType("roadmapPage").documentId("roadmapPage")
+              ),
           ]),
     }),
     visionTool({ defaultApiVersion: apiVersion }),
