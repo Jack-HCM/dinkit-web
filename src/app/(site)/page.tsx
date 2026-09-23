@@ -1,4 +1,3 @@
-import { WaitlistForm } from "@/components/waitlist-form";
 import { SiteNav } from "@/components/site-nav";
 import { HeroImageSection } from "@/components/hero-image-section";
 import { FeatureCarouselSection } from "@/components/feature-carousel-section";
@@ -43,8 +42,19 @@ export default async function Home() {
               {hero.subtext}
             </p>
 
-            <div className="mt-[33px] w-full max-w-[503px] sm:mt-0">
-              <WaitlistForm collapsible />
+            <div className="mt-[33px] flex w-full max-w-[503px] flex-col items-center gap-[14px] sm:mt-0 sm:w-auto sm:flex-row sm:gap-4">
+              <a
+                href="https://app.dinkitgolf.com"
+                className="w-full shrink-0 rounded-[4px] bg-[#56c186] px-[16px] py-[12px] text-center text-[18px] font-medium whitespace-nowrap text-white transition-colors hover:bg-[#4aae76] [font-family:var(--font-space-grotesk)] sm:w-auto"
+              >
+                Start Tracking Free
+              </a>
+              <a
+                href="/features"
+                className="w-full shrink-0 rounded-[4px] bg-[#1b6d40] px-[16px] py-[12px] text-center text-[18px] font-medium whitespace-nowrap text-white transition-colors hover:bg-[#155a34] [font-family:var(--font-space-grotesk)] sm:w-auto"
+              >
+                See How It Works
+              </a>
             </div>
           </div>
         </div>
