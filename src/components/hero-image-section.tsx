@@ -397,7 +397,7 @@ export function HeroImageSection({ slides }: { slides: HeroSlide[] }) {
             className="pointer-events-none absolute inset-0 object-cover"
           />
 
-          <div className="pointer-events-none absolute inset-x-0 bottom-0 h-1/4 bg-gradient-to-t from-[#347e55] to-transparent" />
+          <div className="pointer-events-none absolute inset-x-0 -bottom-px h-1/4 bg-gradient-to-t from-[#347e55] to-transparent" />
         </div>
 
         <div className="absolute" style={{ left: "8.3%", top: "34.3%", width: "21%" }}>
