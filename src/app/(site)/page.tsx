@@ -47,7 +47,7 @@ export default async function Home() {
                 href="https://app.dinkitgolf.com/dashboard"
                 className="w-full shrink-0 rounded-[4px] bg-[#56c186] px-[16px] py-[12px] text-center text-[18px] font-medium whitespace-nowrap text-white transition-colors hover:bg-[#4aae76] [font-family:var(--font-space-grotesk)] sm:w-auto"
               >
-                Start Tracking Free
+                Join Beta Testing
               </a>
               <a
                 href="/features"

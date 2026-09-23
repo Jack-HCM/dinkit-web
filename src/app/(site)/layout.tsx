@@ -19,7 +19,7 @@ const dotSans = localFont({
 
 const TITLE = "Dink'It — GPS Golf Shot Tracker, Stats & AI Coaching App";
 const DESCRIPTION =
-  "Track every shot with your phone's GPS, see Strokes Gained analytics, and get AI-powered coaching insights — no extra hardware needed. Join the Dink'It waitlist for early access.";
+  "Track every shot with your phone's GPS, see Strokes Gained analytics, and get AI-powered coaching insights — no extra hardware needed. Join Dink'It beta testing today.";
 
 export const metadata: Metadata = {
   title: {

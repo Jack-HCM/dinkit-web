@@ -70,7 +70,7 @@ export function SiteNav({ alwaysVisible = false }: { alwaysVisible?: boolean } =
             href="https://app.dinkitgolf.com/dashboard"
             className="shrink-0 rounded-[4px] bg-[#56c186] px-[16px] py-[12px] text-[14px] font-medium whitespace-nowrap text-white transition-colors hover:bg-[#4aae76] [font-family:var(--font-space-grotesk)] sm:text-[18px]"
           >
-            Start Tracking Free
+            Join Beta Testing
           </a>
 
           <button
