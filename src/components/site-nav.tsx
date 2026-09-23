@@ -42,7 +42,7 @@ export function SiteNav({ alwaysVisible = false }: { alwaysVisible?: boolean } =
       } ${visible ? "pointer-events-auto" : "pointer-events-none"}`}
     >
       <nav
-        className={`flex w-full max-w-[1326px] items-center justify-between rounded-[8px] border p-[12px] transition-[backdrop-filter,background-color,box-shadow,border-color] duration-500 ease-in-out ${
+        className={`flex w-full max-w-[1326px] items-center justify-between rounded-[8px] border p-[12px] transition-[backdrop-filter,background-color,box-shadow,border-color] duration-500 ease-in-out will-change-[backdrop-filter] ${
           visible
             ? "border-white/15 bg-[rgba(25,75,52,0.45)] shadow-[0_8px_32px_rgba(0,0,0,0.18)] backdrop-blur-[14px] backdrop-saturate-[160%]"
             : "border-transparent bg-[rgba(25,75,52,0)] shadow-[0_8px_32px_rgba(0,0,0,0)] backdrop-blur-[0px] backdrop-saturate-100"
