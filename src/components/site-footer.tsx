@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { WaitlistForm } from "@/components/waitlist-form";
 import { renderHeading } from "@/lib/heading";
 import type { HeadingWithHighlight } from "@/sanity/lib/types";
 
@@ -43,7 +42,20 @@ export function FooterContent({
           {subtext}
         </p>
 
-        <WaitlistForm theme="light" />
+        <div className="flex w-full max-w-[503px] flex-col items-center gap-[14px] sm:w-auto sm:flex-row sm:gap-4">
+          <a
+            href="https://app.dinkitgolf.com/dashboard"
+            className="w-full shrink-0 rounded-[4px] bg-[#56c186] px-[16px] py-[12px] text-center text-[18px] font-medium whitespace-nowrap text-white transition-colors hover:bg-[#4aae76] [font-family:var(--font-space-grotesk)] sm:w-auto"
+          >
+            Start Tracking Free
+          </a>
+          <a
+            href="/features"
+            className="w-full shrink-0 rounded-[4px] bg-[#1b6d40] px-[16px] py-[12px] text-center text-[18px] font-medium whitespace-nowrap text-white transition-colors hover:bg-[#155a34] [font-family:var(--font-space-grotesk)] sm:w-auto"
+          >
+            See How It Works
+          </a>
+        </div>
       </div>
 
       <div className="mx-auto mt-16 flex w-full max-w-[577px] flex-col items-center gap-3 pb-10 text-center">
