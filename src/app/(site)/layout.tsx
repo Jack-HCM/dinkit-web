@@ -69,6 +69,29 @@ const jsonLd = [
     name: "Dink'It",
     url: "https://www.dinkitgolf.com",
   },
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    name: "Dink'It",
+    url: "https://app.dinkitgolf.com",
+    applicationCategory: "SportsApplication",
+    operatingSystem: "Web",
+    description: DESCRIPTION,
+    offers: [
+      {
+        "@type": "Offer",
+        name: "Free",
+        price: "0",
+        priceCurrency: "GBP",
+      },
+      {
+        "@type": "Offer",
+        name: "Premium",
+        price: "5.99",
+        priceCurrency: "GBP",
+      },
+    ],
+  },
 ];
 
 export default function RootLayout({

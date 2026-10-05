@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { SiteNav } from "@/components/site-nav";
 import { HeroImageSection } from "@/components/hero-image-section";
 import { FeatureCarouselSection } from "@/components/feature-carousel-section";
@@ -18,12 +19,14 @@ export default async function Home() {
         <div className="flex w-full flex-col items-center px-6 pb-0 text-center sm:pb-14">
           <div
             id="hero-logo"
-            className="mb-[42px] h-[64px] w-[163px] sm:mb-12 sm:h-[70px] sm:w-[200px] md:h-[82px] md:w-[236px]"
+            className="relative mb-[42px] h-[64px] w-[163px] sm:mb-12 sm:h-[70px] sm:w-[200px] md:h-[82px] md:w-[236px]"
           >
-            <img
+            <Image
               src="/images/dinkit-logo.svg"
               alt="Dink'it Golf"
-              className="h-full w-full object-contain"
+              fill
+              priority
+              className="object-contain"
             />
           </div>
 

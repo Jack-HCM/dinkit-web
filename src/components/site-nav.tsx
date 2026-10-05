@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useEffect, useState } from "react";
 
 // Watches the hero logo (rendered separately, higher up the page) and
@@ -49,11 +50,12 @@ export function SiteNav({ alwaysVisible = false }: { alwaysVisible?: boolean } =
         }`}
         aria-hidden={!visible}
       >
-        <a href="/" className="h-[38px] w-[97px] shrink-0 sm:h-[51px] sm:w-[130px]">
-          <img
+        <a href="/" className="relative h-[38px] w-[97px] shrink-0 sm:h-[51px] sm:w-[130px]">
+          <Image
             src="/images/dinkit-logo.svg"
             alt="Dink'it Golf"
-            className="h-full w-full object-contain"
+            fill
+            className="object-contain"
           />
         </a>
 

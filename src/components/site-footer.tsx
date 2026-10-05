@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { renderHeading } from "@/lib/heading";
 import type { HeadingWithHighlight } from "@/sanity/lib/types";
@@ -21,11 +22,12 @@ export function FooterContent({
         id="waitlist"
         className="mx-auto flex w-full max-w-[503px] flex-col items-center gap-8 text-center sm:gap-[22px]"
       >
-        <div className="h-[38px] w-[98px] sm:h-[46px] sm:w-[119px]">
-          <img
+        <div className="relative h-[38px] w-[98px] sm:h-[46px] sm:w-[119px]">
+          <Image
             src="/images/dinkit-logo-dark.svg"
             alt="Dink'it Golf"
-            className="h-full w-full object-contain"
+            fill
+            className="object-contain"
           />
         </div>
 
