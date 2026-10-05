@@ -27,7 +27,7 @@ const CATEGORIES = [
   },
   {
     title: "Approach",
-    body: "Shots into the green from outside short-game range — usually the category with the biggest swings for mid-to-high handicappers.",
+    body: "Shots into the green from outside short-game range, usually the category with the biggest swings for mid-to-high handicappers.",
   },
   {
     title: "Short game",
@@ -56,8 +56,8 @@ export default async function WhatIsStrokesGained() {
           </h1>
 
           <p className="mt-[21px] max-w-[580px] text-[16px] leading-[1.4] text-white [font-family:var(--font-42dot-sans)] sm:text-[18px]">
-            Your scorecard tells you what you shot. Strokes Gained tells you why — by comparing
-            every shot you hit to a baseline, instead of just adding up strokes.
+            Your scorecard tells you what you shot. Strokes Gained tells you why, by comparing
+            every shot you hit to a baseline instead of just adding up strokes.
           </p>
         </div>
 
@@ -69,8 +69,8 @@ export default async function WhatIsStrokesGained() {
               <p className="text-[16px] leading-[1.7] text-white/85 [font-family:var(--font-42dot-sans)]">
                 Two golfers can both shoot 88 and have completely different rounds. One leaked
                 strokes off the tee and scrambled well. The other drove it beautifully and
-                three-putted half the back nine. Final score can&apos;t tell them apart —
-                it&apos;s just a total. Strokes Gained is built to tell them apart.
+                three-putted half the back nine. Final score can&apos;t tell them apart: it&apos;s
+                just a total. Strokes Gained is built to tell them apart.
               </p>
               <p className="text-[16px] leading-[1.7] text-white/85 [font-family:var(--font-42dot-sans)]">
                 Instead of only counting strokes, Strokes Gained compares each shot you hit
@@ -78,7 +78,7 @@ export default async function WhatIsStrokesGained() {
                 distance and lie. Hit a shot better than that baseline and you &quot;gain&quot; a
                 fraction of a stroke on the field. Hit it worse, and you lose one. Add every shot
                 in the round up by category, and you get a breakdown of exactly where your round
-                was won or lost — not just what you scored.
+                was won or lost, not just what you scored.
               </p>
             </section>
 
@@ -118,8 +118,8 @@ export default async function WhatIsStrokesGained() {
                 A score tells you the destination, not the route. If you don&apos;t know whether
                 a bad round came from the tee, the approach, around the green, or on it,
                 you&apos;re practising on a guess. Strokes Gained turns &quot;I played badly&quot;
-                into &quot;I lost 1.8 strokes on approach shots from 120-150 yards&quot; —
-                something you can actually do something about.
+                into &quot;I lost 1.8 strokes on approach shots from 120-150 yards,&quot; something you
+                can actually do something about.
               </p>
             </section>
 
@@ -128,7 +128,7 @@ export default async function WhatIsStrokesGained() {
                 How to see your own Strokes Gained
               </h2>
               <p className="text-[16px] leading-[1.7] text-white/85 [font-family:var(--font-42dot-sans)]">
-                Strokes Gained can&apos;t be worked out after the fact from a scorecard alone — it
+                Strokes Gained can&apos;t be worked out after the fact from a scorecard alone. It
                 needs to know where each shot was actually hit from. That&apos;s what
                 Dink&apos;It&apos;s{" "}
                 <a href="/golf-shot-tracker" className="text-[#87ffad] underline underline-offset-2">
@@ -137,7 +137,7 @@ export default async function WhatIsStrokesGained() {
                 is for: tap to log each shot&apos;s position and club as you play, free, no extra
                 hardware. Once a round has shots tracked, Premium turns that into a full Strokes
                 Gained breakdown by category, plus a trend line across every round you&apos;ve
-                tracked — so you can watch a weak category actually improve over a season, not
+                tracked, so you can watch a weak category actually improve over a season, not
                 just guess at it.
               </p>
               <a

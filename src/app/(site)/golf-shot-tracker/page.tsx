@@ -5,9 +5,9 @@ import { AboutSection } from "@/components/about-section";
 import { getLandingPage } from "@/sanity/lib/landing-page";
 
 export const metadata: Metadata = {
-  title: "Golf Shot Tracker — GPS Shot-by-Shot Tracking",
+  title: "Golf Shot Tracker: GPS Shot-by-Shot Tracking",
   description:
-    "Track every shot's GPS position, club, and penalties as you play, on a satellite map that rotates to your direction. Free, no extra hardware — just your phone.",
+    "Track every shot's GPS position, club, and penalties as you play, on a satellite map that rotates to your direction. Free, no extra hardware, just your phone.",
   alternates: {
     canonical: "/golf-shot-tracker",
   },
@@ -16,19 +16,19 @@ export const metadata: Metadata = {
 const HOW_IT_WORKS = [
   {
     title: "Tap to log each shot",
-    body: "Tap where you played from and Dink'It records that shot's GPS position, the club you used, and any penalty — no continuous background tracking draining your battery.",
+    body: "Tap where you played from and Dink'It records that shot's GPS position, the club you used, and any penalty, with no continuous background tracking draining your battery.",
     image: "/images/howto-shot-tracker-1-log-shot.jpg",
     alt: "Dink'It live GPS screen showing a tracked tee shot on Hole 1, with distance to pin and the Log Shot button",
   },
   {
     title: "Aim before you swing, get a club suggestion",
-    body: "Not sure what to hit? Drop a target anywhere on the hole in Aim mode and Dink'It recommends a club — built from your own tracked and manual distances in My Bag, not a generic chart.",
+    body: "Not sure what to hit? Drop a target anywhere on the hole in Aim mode and Dink'It recommends a club, built from your own tracked and manual distances in My Bag, not a generic chart.",
     image: "/images/howto-shot-tracker-2-aim-mode.jpg",
     alt: "Dink'It Aim mode showing a recommended Sand Wedge at 39 yards to a target dropped on the green",
   },
   {
     title: "Review a shot-by-shot log of the hole",
-    body: "Once a hole's done, every stroke is plotted on its own map with the club and distance attached — a full shot log you can look back on, not just a score.",
+    body: "Once a hole's done, every stroke is plotted on its own map with the club and distance attached: a full shot log you can look back on, not just a score.",
     image: "/images/howto-shot-tracker-3-shot-log.jpg",
     alt: "Dink'It shot log screen for Hole 1 at Highgate Golf Club, showing each tracked stroke's club and distance",
   },
@@ -37,7 +37,7 @@ const HOW_IT_WORKS = [
 const FAQS = [
   {
     q: "Does the golf shot tracker need extra hardware?",
-    a: "No. Dink'It uses your phone's GPS — there's no sensor, tag, or separate device to buy or charge.",
+    a: "No. Dink'It uses your phone's GPS, so there's no sensor, tag, or separate device to buy or charge.",
   },
   {
     q: "Does it track my position continuously during a round?",
@@ -49,7 +49,7 @@ const FAQS = [
   },
   {
     q: "What do I get once I've tracked a few rounds?",
-    a: "Lifetime stats, per-round breakdowns, and — on Premium — Strokes Gained and shot dispersion analysis, which need tracked shot data to work. The more rounds you track, the more those numbers mean.",
+    a: "Lifetime stats, per-round breakdowns, and (on Premium) Strokes Gained and shot dispersion analysis, which need tracked shot data to work. The more rounds you track, the more those numbers mean.",
   },
 ];
 
@@ -72,7 +72,7 @@ export default async function GolfShotTracker() {
 
             <p className="mt-[21px] max-w-[500px] text-[16px] leading-[1.4] text-white [font-family:var(--font-42dot-sans)] sm:text-[18px]">
               Tap-to-track each shot&apos;s position, club, and penalties on a satellite map that
-              rotates to your play direction — no extra hardware, no subscription required.
+              rotates to your play direction, with no extra hardware and no subscription required.
             </p>
 
             <a
@@ -142,7 +142,7 @@ export default async function GolfShotTracker() {
             <a href="/strokes-gained/what-is-strokes-gained" className="text-[#87ffad] underline underline-offset-2">
               Strokes Gained analysis
             </a>{" "}
-            and shot dispersion breakdowns — so the more rounds you track, the sharper the picture
+            and shot dispersion breakdowns, so the more rounds you track, the sharper the picture
             of where you&apos;re actually gaining and losing strokes.
           </p>
           <a
