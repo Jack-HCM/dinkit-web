@@ -84,8 +84,15 @@ survives context resets.
   Play Time because the round's `finishedAt` was never set, and the Driver's tracked distance in My
   Bag read 82 yards because the shot's GPS position had been placed too close to the next shot
   (both fixed directly against the test account's data).
-
-## In progress: the playbook's actual Phase 1
+- **2026-10-05 — `/golf-stats-app/` expanded with a Premium section** (`dinkit-web` `staging`):
+  seeded 2 more rounds onto `seo-test-13219133@dinkitgolf.com` (3 total), including one fully
+  GPS-tracked round built to produce realistic, braggable Shot Highlights (245-yard Longest Drive,
+  11-yard Longest Putt) and a "tracked" (not "estimated") Strokes Gained result. Re-captured SS1
+  (`/dashboard`, stats expanded) and SS2 (`/scorecards/[id]`, Show Shots expanded) against the new
+  data; SS3 (My Bag) left untouched. Added a second 3-box section, "Three Premium stats features",
+  duplicating the existing card pattern, with 3 new screenshots: Strokes Gained by category for a
+  real tracked round (`/scorecards/[id]/game-stats`), club-by-club distances from the dashboard's
+  Club and total stats panel, and an AI coaching narrative from `/scorecards/[id]/analyse`.
 The strategy doc's own "Phase 1 — first 15 pages" (commercial + educational pillar around Shot
 Tracking / Stats / Strokes Gained / Dispersion / Club Distances — see source doc lines 1231–1250)
 is the thing the playbook calls P0. The coverage page above is useful and user-requested, but it's

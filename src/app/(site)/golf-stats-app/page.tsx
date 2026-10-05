@@ -34,6 +34,27 @@ const HOW_IT_WORKS = [
   },
 ];
 
+const PREMIUM_FEATURES = [
+  {
+    title: "Strokes Gained, by category",
+    body: "See a tracked round broken down into Driving, Approach, Short Game, and Putting, so you know exactly which part of your game cost you the most shots, not just that you shot 84.",
+    image: "/images/howto-stats-4-strokes-gained.jpg",
+    alt: "Dink'It Strokes Gained screen for a round at Highgate Golf Club, showing overall Strokes Gained, Putting, and Tee to Green totals",
+  },
+  {
+    title: "Club distances that actually update",
+    body: "Club and total stats roll up every tracked shot into real yardages per club, driver through putter, so your distances reflect how you're hitting it now, not a number you guessed once.",
+    image: "/images/howto-stats-5-club-stats.jpg",
+    alt: "Dink'It Club and total stats panel showing total yards and total shots for Driver, 4 Iron, 5 Iron, and 6 Iron",
+  },
+  {
+    title: "AI coaching after every round",
+    body: "Analyse Round reads your scorecard and shot data and writes a plain-English breakdown of what went well, what didn't, and where to focus practice next.",
+    image: "/images/howto-stats-6-ai-coaching.jpg",
+    alt: "Dink'It Analyse Round screen showing AI coaching feedback on overall play for a round at Highgate Golf Club",
+  },
+];
+
 const FAQS = [
   {
     q: "Is the stats tracking free?",
@@ -149,6 +170,44 @@ export default async function GolfStatsApp() {
           >
             See every Dink&apos;It feature →
           </a>
+        </section>
+
+        <section className="flex w-full max-w-[1120px] flex-col items-center gap-10 px-6">
+          <h2 className="max-w-[640px] text-center text-[28px] leading-[1.15] font-medium tracking-[-0.48px] text-white [font-family:var(--font-space-grotesk)] sm:text-[36px]">
+            Three Premium stats features
+          </h2>
+
+          <div className="grid w-full grid-cols-1 gap-6 md:grid-cols-3 md:gap-8">
+            {PREMIUM_FEATURES.map((step, index) => (
+              <div
+                key={step.title}
+                className="flex h-full w-full flex-col gap-5 overflow-hidden rounded-[20px] border border-white/15 bg-white/[0.04]"
+              >
+                <div className="relative flex w-full justify-center pt-8">
+                  <span className="absolute left-4 top-4 z-10 flex h-[36px] w-[36px] shrink-0 items-center justify-center rounded-full border border-[#87ffad]/60 bg-[#212121] text-[14px] font-bold text-[#87ffad] [font-family:var(--font-space-grotesk)]">
+                    {String(index + 1).padStart(2, "0")}
+                  </span>
+                  <div className="relative aspect-[390/844] w-[62%] max-w-[230px] overflow-hidden rounded-[18px] shadow-[0_12px_32px_rgba(0,0,0,0.35)]">
+                    <Image
+                      src={step.image}
+                      alt={step.alt}
+                      fill
+                      sizes="230px"
+                      className="object-contain object-top"
+                    />
+                  </div>
+                </div>
+                <div className="flex flex-1 flex-col gap-3 px-8 pb-8">
+                  <h3 className="text-[20px] leading-[1.15] font-medium tracking-[-0.4px] text-white [font-family:var(--font-space-grotesk)]">
+                    {step.title}
+                  </h3>
+                  <p className="text-[15px] leading-[1.55] text-white/80 [font-family:var(--font-42dot-sans)]">
+                    {step.body}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
         </section>
 
         <section className="flex w-full max-w-[820px] flex-col gap-8 px-6 pb-4">
