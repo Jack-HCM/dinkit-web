@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { SiteNav } from "@/components/site-nav";
 import { AboutSection } from "@/components/about-section";
 import { getLandingPage } from "@/sanity/lib/landing-page";
@@ -16,14 +17,20 @@ const HOW_IT_WORKS = [
   {
     title: "Tap to log each shot",
     body: "Tap where you played from and Dink'It records that shot's GPS position, the club you used, and any penalty — no continuous background tracking draining your battery.",
+    image: "/images/howto-shot-tracker-1-log-shot.jpg",
+    alt: "Dink'It live GPS screen showing a tracked tee shot on Hole 1, with distance to pin and the Log Shot button",
   },
   {
-    title: "Watch the map rotate with you",
-    body: "The satellite map turns to face your direction of play, so the hole always reads the way you're standing on it. Pinch to zoom, twist to rotate manually, one tap to recenter.",
+    title: "Aim before you swing, get a club suggestion",
+    body: "Not sure what to hit? Drop a target anywhere on the hole in Aim mode and Dink'It recommends a club — built from your own tracked and manual distances in My Bag, not a generic chart.",
+    image: "/images/howto-shot-tracker-2-aim-mode.jpg",
+    alt: "Dink'It Aim mode showing a recommended Sand Wedge at 39 yards to a target dropped on the green",
   },
   {
-    title: "Get a shot-by-shot map of the hole",
-    body: "Every tracked shot lands on a per-hole map with distances and drop reasons attached — shareable with a direct link if you want someone else to see exactly how a hole played out.",
+    title: "Review a shot-by-shot log of the hole",
+    body: "Once a hole's done, every stroke is plotted on its own map with the club and distance attached — a full shot log you can look back on, not just a score.",
+    image: "/images/howto-shot-tracker-3-shot-log.jpg",
+    alt: "Dink'It shot log screen for Hole 1 at Highgate Golf Club, showing each tracked stroke's club and distance",
   },
 ];
 
@@ -53,26 +60,39 @@ export default async function GolfShotTracker() {
     <div className="flex flex-1 flex-col bg-[#347e55]">
       <SiteNav alwaysVisible />
       <main className="flex flex-1 flex-col items-center gap-16 sm:gap-20">
-        <div className="flex w-full flex-col items-center px-6 pt-[130px] pb-0 text-center sm:pt-[150px] sm:pb-6">
-          <span className="inline-block rounded-[24px] border border-[#87ffad] bg-[#212121] px-[10px] py-[4px] text-[14px] font-bold text-[#87ffad] [font-family:var(--font-space-grotesk)] sm:text-[16px]">
-            Golf Shot Tracker
-          </span>
+        <div className="flex w-full flex-col items-center gap-10 px-6 pt-[130px] pb-0 sm:pt-[150px] sm:pb-6 md:flex-row md:items-center md:gap-14 md:px-16">
+          <div className="flex w-full flex-col items-center text-center md:flex-1 md:items-start md:text-left">
+            <span className="inline-block rounded-[24px] border border-[#87ffad] bg-[#212121] px-[10px] py-[4px] text-[14px] font-bold text-[#87ffad] [font-family:var(--font-space-grotesk)] sm:text-[16px]">
+              Golf Shot Tracker
+            </span>
 
-          <h1 className="mt-[18px] max-w-[760px] text-[36px] leading-[1.1] font-medium tracking-[-0.72px] text-white [font-family:var(--font-space-grotesk)] sm:text-[52px] sm:tracking-[-0.9px]">
-            Track every shot&apos;s <span className="text-[#87ffad]">GPS position</span>, free
-          </h1>
+            <h1 className="mt-[18px] max-w-[560px] text-[36px] leading-[1.1] font-medium tracking-[-0.72px] text-white [font-family:var(--font-space-grotesk)] sm:text-[52px] sm:tracking-[-0.9px]">
+              Track every shot&apos;s <span className="text-[#87ffad]">GPS position</span>, free
+            </h1>
 
-          <p className="mt-[21px] max-w-[580px] text-[16px] leading-[1.4] text-white [font-family:var(--font-42dot-sans)] sm:text-[18px]">
-            Tap-to-track each shot&apos;s position, club, and penalties on a satellite map that
-            rotates to your play direction — no extra hardware, no subscription required.
-          </p>
+            <p className="mt-[21px] max-w-[500px] text-[16px] leading-[1.4] text-white [font-family:var(--font-42dot-sans)] sm:text-[18px]">
+              Tap-to-track each shot&apos;s position, club, and penalties on a satellite map that
+              rotates to your play direction — no extra hardware, no subscription required.
+            </p>
 
-          <a
-            href="https://app.dinkitgolf.com/dashboard"
-            className="mt-[28px] shrink-0 rounded-[4px] bg-[#56c186] px-[20px] py-[14px] text-center text-[18px] font-medium whitespace-nowrap text-white transition-colors hover:bg-[#4aae76] [font-family:var(--font-space-grotesk)]"
-          >
-            Track Your Next Round Free
-          </a>
+            <a
+              href="https://app.dinkitgolf.com/dashboard"
+              className="mt-[28px] shrink-0 rounded-[4px] bg-[#56c186] px-[20px] py-[14px] text-center text-[18px] font-medium whitespace-nowrap text-white transition-colors hover:bg-[#4aae76] [font-family:var(--font-space-grotesk)]"
+            >
+              Track Your Next Round Free
+            </a>
+          </div>
+
+          <div className="relative aspect-[838/768] w-full overflow-hidden rounded-[20px] md:w-[46%]">
+            <Image
+              src="/images/hero-golf-shot-tracker.jpg"
+              alt="A golfer mid-swing with GPS shot markers showing a 250 yard drive, a 150 yard 7-iron approach, and a 2-putt on the green"
+              fill
+              priority
+              sizes="(min-width: 768px) 560px, 100vw"
+              className="object-cover"
+            />
+          </div>
         </div>
 
         <section className="flex w-full max-w-[1120px] flex-col items-center gap-10 px-6">
@@ -84,12 +104,21 @@ export default async function GolfShotTracker() {
             {HOW_IT_WORKS.map((step, index) => (
               <div
                 key={step.title}
-                className="flex h-full w-full flex-col gap-5 rounded-[20px] border border-white/15 bg-white/[0.04] p-8"
+                className="flex h-full w-full flex-col gap-5 overflow-hidden rounded-[20px] border border-white/15 bg-white/[0.04]"
               >
-                <span className="flex h-[44px] w-[44px] shrink-0 items-center justify-center rounded-full border border-[#87ffad]/40 text-[16px] font-bold text-[#87ffad] [font-family:var(--font-space-grotesk)]">
-                  {String(index + 1).padStart(2, "0")}
-                </span>
-                <div className="flex flex-1 flex-col gap-3">
+                <div className="relative aspect-[390/550] w-full overflow-hidden">
+                  <Image
+                    src={step.image}
+                    alt={step.alt}
+                    fill
+                    sizes="(min-width: 768px) 360px, 100vw"
+                    className="object-cover object-top"
+                  />
+                  <span className="absolute left-4 top-4 flex h-[36px] w-[36px] shrink-0 items-center justify-center rounded-full border border-[#87ffad]/60 bg-[#212121] text-[14px] font-bold text-[#87ffad] [font-family:var(--font-space-grotesk)]">
+                    {String(index + 1).padStart(2, "0")}
+                  </span>
+                </div>
+                <div className="flex flex-1 flex-col gap-3 px-8 pb-8">
                   <h3 className="text-[20px] leading-[1.15] font-medium tracking-[-0.4px] text-white [font-family:var(--font-space-grotesk)]">
                     {step.title}
                   </h3>
