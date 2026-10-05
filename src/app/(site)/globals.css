@@ -13,7 +13,7 @@
 }
 
 html {
-  overflow-x: hidden;
+  overflow-x: clip;
   scroll-behavior: smooth;
 }
 
@@ -21,7 +21,7 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-42dot-sans), Arial, Helvetica, sans-serif;
-  overflow-x: hidden;
+  overflow-x: clip;
 }
 
 @keyframes hero-fade {
