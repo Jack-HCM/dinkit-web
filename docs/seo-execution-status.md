@@ -24,8 +24,18 @@ survives context resets.
   Bag club distances → tee off at Highgate Golf Club (`cmriy0uv80004de62tsgmy73m`, fully mapped,
   multiple tees) → screenshot the relevant screens with `context.setGeolocation` mocking GPS).
   **Local dev and prod share one Neon DB** — any signup/round this produces is a real prod row.
-  One test account remains live (`seo-test-12323521@dinkitgolf.com`) — **flag for deletion once all
-  Phase 1 pages' screenshot batches are done**, per explicit user sign-off, not before.
+  One test account remains live (`seo-test-13219133@dinkitgolf.com`) — **flag for deletion once all
+  Phase 1 pages' screenshot batches are done**, per explicit user sign-off, not before. Reuse this
+  single account for future pages' captures rather than signing up fresh each time.
+  - **Shot placement**: interpolate along the hole's real `Hole.path` fairway polyline (arc-length,
+    not straight tee-green `lerp`) with a small perpendicular lateral offset, so the shot markers
+    trace a natural-looking route rather than a dead-straight line.
+  - **Before every screenshot**, dismiss in-app coaching tips (`button[aria-label="Dismiss"]`) —
+    the general shot tip opens a "Just this once" confirm sub-dialog (two clicks), the aim-mode tip
+    closes directly (one click).
+  - **Image display**: show the full, uncropped phone screenshot (390:844 aspect, `object-contain`),
+    inset/centered within the card rather than cropped full-bleed — matches how the homepage's
+    feature-carousel phone shots read, without needing the same bespoke 3D-tilt PNG assets.
 - `/golf-shot-tracker` is the reference implementation of this template.
 
 ## Deferred until all feature pages are finished
