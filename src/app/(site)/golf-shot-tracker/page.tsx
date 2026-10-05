@@ -60,7 +60,7 @@ export default async function GolfShotTracker() {
     <div className="flex flex-1 flex-col bg-[#347e55]">
       <SiteNav alwaysVisible />
       <main className="flex flex-1 flex-col items-center gap-16 sm:gap-20">
-        <div className="flex w-full flex-col items-center gap-10 px-6 pt-[130px] pb-0 sm:pt-[150px] sm:pb-6 sm:px-10 md:flex-row md:items-center md:gap-14 md:px-14">
+        <div className="flex w-full max-w-[1326px] flex-col items-center gap-10 px-6 pt-[130px] pb-0 sm:pt-[150px] sm:pb-6 sm:px-10 md:flex-row md:items-center md:gap-14 md:px-14">
           <div className="flex w-full flex-col items-center text-center md:flex-1 md:items-start md:text-left">
             <span className="inline-block rounded-[24px] border border-[#87ffad] bg-[#212121] px-[10px] py-[4px] text-[14px] font-bold text-[#87ffad] [font-family:var(--font-space-grotesk)] sm:text-[16px]">
               Golf Shot Tracker
