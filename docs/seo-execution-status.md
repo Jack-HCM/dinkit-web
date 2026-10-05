@@ -15,6 +15,25 @@ survives context resets.
   must fetch live from the app, not be hand-typed — see `src/lib/course-coverage.ts` for the
   pattern (ISR fetch with `revalidate`, not a static figure).
 
+## Template standard (set 2026-10-05, applies to all future Phase 1 pages)
+- **Split hero**: text left / image right (`md:flex-1` + `aspect-[838/768]` image container,
+  pattern copied from `about-teaser.tsx`). User supplies the hero image per page.
+- **"How it works" 1/2/3 boxes use real app screenshots**, not plain numbered text cards —
+  captured live from `fairway-finder` via a disposable test account + Playwright (signup → approve
+  via direct DB flip, since new accounts land unapproved behind the closed-beta gate → populate My
+  Bag club distances → tee off at Highgate Golf Club (`cmriy0uv80004de62tsgmy73m`, fully mapped,
+  multiple tees) → screenshot the relevant screens with `context.setGeolocation` mocking GPS).
+  **Local dev and prod share one Neon DB** — any signup/round this produces is a real prod row.
+  One test account remains live (`seo-test-12323521@dinkitgolf.com`) — **flag for deletion once all
+  Phase 1 pages' screenshot batches are done**, per explicit user sign-off, not before.
+- `/golf-shot-tracker` is the reference implementation of this template.
+
+## Deferred until all feature pages are finished
+- Educational article pages (e.g. `/strokes-gained/what-is-strokes-gained`) get a left-hand
+  sticky/scroll-spy TOC + right-hand content layout, under the H1/subhead, modeled on
+  https://www.tryprofound.com/aeo-guide/chapter-6 — **do not start until the feature-page batch is
+  done**, per explicit user instruction 2026-10-05.
+
 ## Shipped
 - **2026-10-05 — Phase 1 technical SEO** (`dinkit-web` `main`): sitemap completion (all 8 real
   pages), `SoftwareApplication` JSON-LD with real pricing, `next/image` conversion for the 3 logo
