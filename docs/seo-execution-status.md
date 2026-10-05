@@ -93,6 +93,22 @@ survives context resets.
   duplicating the existing card pattern, with 3 new screenshots: Strokes Gained by category for a
   real tracked round (`/scorecards/[id]/game-stats`), club-by-club distances from the dashboard's
   Club and total stats panel, and an AI coaching narrative from `/scorecards/[id]/analyse`.
+- **2026-10-05 — `/golf-performance-analysis/`** (`dinkit-web` `staging`): split hero (image is a
+  **placeholder box**, user to supply later, same as `/golf-stats-app/`), 3-box "how it works"
+  using real screenshots of `/scorecards/[id]/analyse` (AI coaching narrative, Overall Play and
+  category breakdown) and `/scorecards/[id]/compare` (side-by-side scorecard + Strokes Gained)
+  captured from the shared `seo-test-13219133@dinkitgolf.com` test account, reusing its 2 existing
+  fully GPS-tracked Highgate rounds (same course, required for Compare Rounds) rather than seeding
+  new ones. Copy is grounded in the live `featuresPage` Sanity doc's premium section: Analyse Round
+  and Compare Rounds are both scoped to Premium (£5.99/month), the AI coaching narrative's 5 real
+  section labels (Overall Play, Driving, Approach, Short Game, Putting), the 5 AI analyses/month
+  cap shared between coaching and comparison narratives, the GPS-data-on-≥50%-of-shots requirement
+  for Analyse Round, and the same-course-only constraint on Compare Rounds (confirmed directly in
+  `compare/page.tsx`'s candidate query). Deliberately does not claim cross-course comparison or a
+  free tier for this feature, since neither exists. Test account's password was reset to a known
+  value directly in the DB (bcrypt) to allow Playwright login; left set for reuse in future capture
+  batches, per the standing single-test-account rule.
+
 The strategy doc's own "Phase 1 — first 15 pages" (commercial + educational pillar around Shot
 Tracking / Stats / Strokes Gained / Dispersion / Club Distances — see source doc lines 1231–1250)
 is the thing the playbook calls P0. The coverage page above is useful and user-requested, but it's
@@ -101,7 +117,7 @@ playbook P1–P2 territory, not P0 — this list is the real priority order.
 Phase 1 list (playbook's own order):
 1. `/golf-shot-tracker/` — commercial pillar, P0 — **shipped to `staging` 2026-10-05**
 2. `/golf-stats-app/` — commercial pillar, P0 — **shipped to `staging` 2026-10-05**
-3. `/golf-performance-analysis/` — commercial pillar, P0
+3. `/golf-performance-analysis/` — commercial pillar, P0 — **shipped to `staging` 2026-10-05**
 4. `/strokes-gained/` — pillar, P0 (not yet built — the article below currently stands alone,
    cross-linked from the shot tracker page instead of from a parent pillar)
 5. `/golf-shot-dispersion/` — commercial pillar, P0
