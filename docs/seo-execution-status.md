@@ -14,6 +14,8 @@ survives context resets.
 - **No hardcoded numbers that will go stale.** Anything citing live counts (course totals, etc.)
   must fetch live from the app, not be hand-typed — see `src/lib/course-coverage.ts` for the
   pattern (ISR fetch with `revalidate`, not a static figure).
+- **No em dashes in page copy.** Standing rule since 2026-10-05 — rewrite with periods, commas, or
+  colons instead. Applies to all body copy, headings, and metadata on every page in this batch.
 
 ## Template standard (set 2026-10-05, applies to all future Phase 1 pages)
 - **Split hero**: text left / image right (`md:flex-1` + `aspect-[838/768]` image container,
@@ -42,7 +44,11 @@ survives context resets.
 - Educational article pages (e.g. `/strokes-gained/what-is-strokes-gained`) get a left-hand
   sticky/scroll-spy TOC + right-hand content layout, under the H1/subhead, modeled on
   https://www.tryprofound.com/aeo-guide/chapter-6 — **do not start until the feature-page batch is
-  done**, per explicit user instruction 2026-10-05.
+  done**, per explicit user instruction 2026-10-05. **Exception already shipped**: the one
+  strokes-gained sub-article above got its TOC early (user asked for it directly, same day), using
+  `src/components/article-toc.tsx`. Its sticky positioning required `overflow-x: hidden` →
+  `overflow-x: clip` on `html`/`body` in `globals.css` (hidden silently breaks `position: sticky`
+  on descendants) — apply that same TOC component to future article pages without re-deferring.
 
 ## Shipped
 - **2026-10-05 — Phase 1 technical SEO** (`dinkit-web` `main`): sitemap completion (all 8 real
@@ -65,6 +71,19 @@ survives context resets.
     have **zero production usage so far** (confirmed via DB query 2026-10-05: 0 rows in
     `HoleGeometrySample`, 0 courses ever published via `/admin/course-submissions`). Revisit this
     copy once that changes.
+- **2026-10-05 — `/golf-stats-app/`** (`dinkit-web` `staging`): split hero (image is a **placeholder
+  box**, user to supply a bespoke image later), 3-box "how it works" using real screenshots of
+  `/dashboard` (Career Stats), `/scorecards/[id]` (hole-by-hole scorecard), and `/bag` (My Bag club
+  distances) captured from the shared `seo-test-13219133@dinkitgolf.com` test account. Copy is
+  grounded in what the app actually shows: Average Score, Rounds Played, Best Score, Total Play
+  Time, Courses Played, per-round hole-by-hole breakdown, and free/non-gated club distances in My
+  Bag; Premium is scoped to Strokes Gained + round comparison only. Deliberately does **not**
+  invent fairways-hit%, GIR%, or putts-per-round-average stats — none of those exist anywhere in
+  the app. While capturing screenshots, found and fixed two pre-existing data artifacts on the test
+  account's single Highgate round (both DB-level, not app bugs): the dashboard showed a blank Total
+  Play Time because the round's `finishedAt` was never set, and the Driver's tracked distance in My
+  Bag read 82 yards because the shot's GPS position had been placed too close to the next shot
+  (both fixed directly against the test account's data).
 
 ## In progress: the playbook's actual Phase 1
 The strategy doc's own "Phase 1 — first 15 pages" (commercial + educational pillar around Shot
@@ -74,7 +93,7 @@ playbook P1–P2 territory, not P0 — this list is the real priority order.
 
 Phase 1 list (playbook's own order):
 1. `/golf-shot-tracker/` — commercial pillar, P0 — **shipped to `staging` 2026-10-05**
-2. `/golf-stats-app/` — commercial pillar, P0
+2. `/golf-stats-app/` — commercial pillar, P0 — **shipped to `staging` 2026-10-05**
 3. `/golf-performance-analysis/` — commercial pillar, P0
 4. `/strokes-gained/` — pillar, P0 (not yet built — the article below currently stands alone,
    cross-linked from the shot tracker page instead of from a parent pillar)
