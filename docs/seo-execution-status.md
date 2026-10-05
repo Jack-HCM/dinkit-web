@@ -37,21 +37,22 @@ survives context resets.
     `HoleGeometrySample`, 0 courses ever published via `/admin/course-submissions`). Revisit this
     copy once that changes.
 
-## Not yet started: the playbook's actual Phase 1
+## In progress: the playbook's actual Phase 1
 The strategy doc's own "Phase 1 — first 15 pages" (commercial + educational pillar around Shot
 Tracking / Stats / Strokes Gained / Dispersion / Club Distances — see source doc lines 1231–1250)
-is the thing the playbook calls P0 and hasn't been touched yet. The coverage page above is useful
-and user-requested, but it's playbook P1–P2 territory, not P0. **This is the real "next thing."**
+is the thing the playbook calls P0. The coverage page above is useful and user-requested, but it's
+playbook P1–P2 territory, not P0 — this list is the real priority order.
 
 Phase 1 list (playbook's own order):
-1. `/golf-shot-tracker/` — commercial pillar, P0
+1. `/golf-shot-tracker/` — commercial pillar, P0 — **shipped to `staging` 2026-10-05**
 2. `/golf-stats-app/` — commercial pillar, P0
 3. `/golf-performance-analysis/` — commercial pillar, P0
-4. `/strokes-gained/` — pillar, P0
+4. `/strokes-gained/` — pillar, P0 (not yet built — the article below currently stands alone,
+   cross-linked from the shot tracker page instead of from a parent pillar)
 5. `/golf-shot-dispersion/` — commercial pillar, P0
 6. `/golf-club-distance-tracker/` — commercial pillar, P0
 7. `/data-driven-golf/` — P1
-8. `/strokes-gained/what-is-strokes-gained/` — P0
+8. `/strokes-gained/what-is-strokes-gained/` — P0 — **shipped to `staging` 2026-10-05**
 9. `/blog/how-does-strokes-gained-work/` — P0
 10. `/blog/how-is-strokes-gained-calculated/` — P0
 11. `/blog/how-to-track-golf-shots/` — P1
@@ -62,7 +63,15 @@ Phase 1 list (playbook's own order):
 15. `/blog/how-to-measure-golf-club-distance/` — P1
 
 Playbook's own Month 1 Week 1 (the literal starting point): **Golf Shot Tracker landing page** +
-**What Is Strokes Gained? article**.
+**What Is Strokes Gained? article** — both shipped as plain static routes (same pattern as
+`/features`/`/courses`), on `dinkit-web` `staging`, pending user review before merging to `main`.
+Content is grounded in the live `featuresPage` Sanity doc (GPS shot tracking, Strokes Gained
+categories, AI coaching caveats) — no invented product claims.
+
+Content-type infra decision made: items 1–8 (landing pages + the one strokes-gained sub-article)
+are plain static routes, no new infra needed. Items 9–15 are explicitly `/blog/...` URLs in the
+source doc and *do* need a blog index + post template that doesn't exist yet — that's a real
+upcoming decision (static TSX per post vs. a new Sanity schema) when this batch is reached.
 
 ## Open questions / not yet decided
 - Content-type infra: these will need either new static page routes (like `/courses`) or a Sanity
