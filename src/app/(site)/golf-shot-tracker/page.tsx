@@ -106,7 +106,7 @@ export default async function GolfShotTracker() {
                 key={step.title}
                 className="flex h-full w-full flex-col gap-5 overflow-hidden rounded-[20px] border border-white/15 bg-white/[0.04]"
               >
-                <div className="relative flex w-full justify-center bg-[#1a1a1a] pt-8">
+                <div className="relative flex w-full justify-center pt-8">
                   <span className="absolute left-4 top-4 z-10 flex h-[36px] w-[36px] shrink-0 items-center justify-center rounded-full border border-[#87ffad]/60 bg-[#212121] text-[14px] font-bold text-[#87ffad] [font-family:var(--font-space-grotesk)]">
                     {String(index + 1).padStart(2, "0")}
                   </span>
