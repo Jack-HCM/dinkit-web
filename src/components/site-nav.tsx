@@ -9,6 +9,7 @@ import { useEffect, useState } from "react";
 // logo of their own (e.g. /features) pass alwaysVisible instead.
 const NAV_LINKS = [
   { href: "/features", label: "App features" },
+  { href: "/courses", label: "Course Coverage" },
   { href: "/about", label: "About Us" },
   { href: "/roadmap", label: "Roadmap" },
   { href: "/contact", label: "Contact" },
