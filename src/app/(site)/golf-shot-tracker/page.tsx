@@ -60,7 +60,7 @@ export default async function GolfShotTracker() {
     <div className="flex flex-1 flex-col bg-[#347e55]">
       <SiteNav alwaysVisible />
       <main className="flex flex-1 flex-col items-center gap-16 sm:gap-20">
-        <div className="flex w-full flex-col items-center gap-10 px-6 pt-[130px] pb-0 sm:pt-[150px] sm:pb-6 md:flex-row md:items-center md:gap-14 md:px-16">
+        <div className="flex w-full flex-col items-center gap-10 px-6 pt-[130px] pb-0 sm:pt-[150px] sm:pb-6 sm:px-10 md:flex-row md:items-center md:gap-14 md:px-14">
           <div className="flex w-full flex-col items-center text-center md:flex-1 md:items-start md:text-left">
             <span className="inline-block rounded-[24px] border border-[#87ffad] bg-[#212121] px-[10px] py-[4px] text-[14px] font-bold text-[#87ffad] [font-family:var(--font-space-grotesk)] sm:text-[16px]">
               Golf Shot Tracker
@@ -106,17 +106,19 @@ export default async function GolfShotTracker() {
                 key={step.title}
                 className="flex h-full w-full flex-col gap-5 overflow-hidden rounded-[20px] border border-white/15 bg-white/[0.04]"
               >
-                <div className="relative aspect-[390/550] w-full overflow-hidden">
-                  <Image
-                    src={step.image}
-                    alt={step.alt}
-                    fill
-                    sizes="(min-width: 768px) 360px, 100vw"
-                    className="object-cover object-top"
-                  />
-                  <span className="absolute left-4 top-4 flex h-[36px] w-[36px] shrink-0 items-center justify-center rounded-full border border-[#87ffad]/60 bg-[#212121] text-[14px] font-bold text-[#87ffad] [font-family:var(--font-space-grotesk)]">
+                <div className="relative flex w-full justify-center bg-[#1a1a1a] pt-8">
+                  <span className="absolute left-4 top-4 z-10 flex h-[36px] w-[36px] shrink-0 items-center justify-center rounded-full border border-[#87ffad]/60 bg-[#212121] text-[14px] font-bold text-[#87ffad] [font-family:var(--font-space-grotesk)]">
                     {String(index + 1).padStart(2, "0")}
                   </span>
+                  <div className="relative aspect-[390/844] w-[62%] max-w-[230px] overflow-hidden rounded-[18px] shadow-[0_12px_32px_rgba(0,0,0,0.35)]">
+                    <Image
+                      src={step.image}
+                      alt={step.alt}
+                      fill
+                      sizes="230px"
+                      className="object-contain object-top"
+                    />
+                  </div>
                 </div>
                 <div className="flex flex-1 flex-col gap-3 px-8 pb-8">
                   <h3 className="text-[20px] leading-[1.15] font-medium tracking-[-0.4px] text-white [font-family:var(--font-space-grotesk)]">
