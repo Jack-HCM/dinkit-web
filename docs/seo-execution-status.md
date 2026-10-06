@@ -146,6 +146,26 @@ survives context resets.
   bug before shipping: the cached AI coaching narrative for the nudged round still described shots
   as landing on line (generated before the GPS patch); cleared the stale `aiAnalysisUsage` cache
   row and regenerated it live so the narrative text matches the new pills.
+- **2026-10-06 — `/golf-club-distance-tracker/`** (`dinkit-web` `staging`): same commercial-pillar
+  template, placeholder hero image (user to supply later). Unlike the two prior pages, the
+  underlying feature (**My Bag**, `fairway-finder/src/app/bag/page.tsx` +
+  `src/lib/club-distances.ts`) is **free, not Premium** — confirmed via the live Sanity
+  `featuresPage` doc's own `my-bag` entry, which already matched the real code ("Average distance
+  per club, calculated from tracked shots, with manual override. Suggests the right club for a
+  target distance...") so no CMS discrepancy this time. `site-nav.tsx`'s existing
+  `/golf-club-distance-tracker` entry did have a minor overclaim ("not guesses") for clubs with no
+  tracked shots yet, which still show a generic estimate; softened to "Average distance per club,
+  from your tracked shots." Test account's `/bag` data was unrealistic for screenshots (per-club
+  averages like a 55-yard 6 Iron, left over from early synthetic seeding never meant to represent
+  real swings) — patched via a new geo-math script (`computeClubDistancesFromShots`-compatible:
+  rescales the existing shot-to-shot direction vector per hole to a target yardage per club,
+  processed in-order per hole so chained target clubs compound correctly) to realistic, properly
+  ordered distances for Driver, 4–7 and 9 Iron, Pitching Wedge, and Sand Wedge, leaving
+  never-tracked clubs on their existing generic estimates. 3-box "how it works" uses 2 new `/bag`
+  screenshots (top-of-bag with manual override visible; wedges/short-irons with the
+  exclude-from-suggestions checkbox visible on Sand Wedge) plus a reused
+  `howto-shot-tracker-2-aim-mode.jpg` (already captured for `/golf-shot-tracker/`, and it already
+  showed the live aim-mode club recommendation, so no new capture needed for that card).
 
 The strategy doc's own "Phase 1 — first 15 pages" (commercial + educational pillar around Shot
 Tracking / Stats / Strokes Gained / Dispersion / Club Distances — see source doc lines 1231–1250)
@@ -158,7 +178,7 @@ Phase 1 list (playbook's own order):
 3. `/golf-performance-analysis/` — commercial pillar, P0 — **shipped to `staging` 2026-10-05**
 4. `/strokes-gained/` — pillar, P0 — **shipped to `staging` 2026-10-06**
 5. `/golf-shot-dispersion/` — commercial pillar, P0 — **shipped to `staging` 2026-10-06**
-6. `/golf-club-distance-tracker/` — commercial pillar, P0
+6. `/golf-club-distance-tracker/` — commercial pillar, P0 — **shipped to `staging` 2026-10-06**
 7. `/data-driven-golf/` — P1
 8. `/strokes-gained/what-is-strokes-gained/` — P0 — **shipped to `staging` 2026-10-05**
 9. `/blog/how-does-strokes-gained-work/` — P0

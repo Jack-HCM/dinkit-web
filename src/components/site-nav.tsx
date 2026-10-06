@@ -108,7 +108,7 @@ const APP_FEATURES = [
   {
     href: "/golf-club-distance-tracker",
     title: "Club Distances",
-    body: "Real, tracked yardages for every club, not guesses.",
+    body: "Average distance per club, from your tracked shots.",
     Icon: IconClubDistance,
   },
 ];
