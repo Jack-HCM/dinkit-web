@@ -84,10 +84,15 @@ export default async function GolfPerformanceAnalysis() {
             </a>
           </div>
 
-          <div className="relative flex aspect-[838/768] w-full items-center justify-center overflow-hidden rounded-[20px] border border-dashed border-white/30 bg-white/[0.04] md:w-[46%]">
-            <span className="px-6 text-center text-[14px] font-medium text-white/50 [font-family:var(--font-space-grotesk)]">
-              Hero image placeholder
-            </span>
+          <div className="relative flex aspect-[838/768] w-full items-center justify-center overflow-hidden rounded-[20px] border border-white/15 bg-white/[0.04] md:w-[46%]">
+            <Image
+              src="/images/hero-golf-performance-analysis.jpg"
+              alt="A golfer teeing off with a 250-yard drive arc, next to the Dink'It dashboard showing Premium Stats: Strokes Gained, Tee-to-green, and Putting, plus Compare Rounds for Highgate Golf Club and Aquarius"
+              fill
+              sizes="(min-width: 768px) 46vw, 100vw"
+              className="object-contain"
+              priority
+            />
           </div>
         </div>
 
