@@ -93,6 +93,12 @@ survives context resets.
   duplicating the existing card pattern, with 3 new screenshots: Strokes Gained by category for a
   real tracked round (`/scorecards/[id]/game-stats`), club-by-club distances from the dashboard's
   Club and total stats panel, and an AI coaching narrative from `/scorecards/[id]/analyse`.
+- **2026-10-06 — `/golf-performance-analysis/` hero image** (`dinkit-web` `staging`): user supplied
+  the real hero (claymation golfer teeing off into a 250-yard drive arc, next to the Premium Stats
+  dashboard panel), `hero-golf-performance-analysis.jpg`. Wired in with `object-contain` (not
+  `cover`) since the image's 4:3 ratio doesn't match the `aspect-[838/768]` card and `cover` would
+  crop the phone panel's top icons or the golfer depending on crop side; contain letterboxes
+  top/bottom instead, which reads fine against the card background.
 - **2026-10-05 — `/golf-performance-analysis/`** (`dinkit-web` `staging`): split hero (image is a
   **placeholder box**, user to supply later, same as `/golf-stats-app/`), 3-box "how it works"
   using real screenshots of `/scorecards/[id]/analyse` (AI coaching narrative, Overall Play and
