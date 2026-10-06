@@ -5,55 +5,55 @@ import { AboutSection } from "@/components/about-section";
 import { getLandingPage } from "@/sanity/lib/landing-page";
 
 export const metadata: Metadata = {
-  title: "Golf Shot Tracker: GPS Shot-by-Shot Tracking",
+  title: "Strokes Gained | See Where You Actually Lose Shots",
   description:
-    "Track every shot's GPS position, club, and penalties as you play, on a satellite map that rotates to your direction. Free, no extra hardware, just your phone.",
+    "Strokes Gained broken down into Driving, Approach, Short Game, and Putting, logged for every round you track so you can see the trend, not just one round. Dink'It Premium.",
   alternates: {
-    canonical: "/golf-shot-tracker",
+    canonical: "/strokes-gained",
   },
 };
 
 const HOW_IT_WORKS = [
   {
-    title: "Tap to log each shot",
-    body: "Tap where you played from and Dink'It records that shot's GPS position, the club you used, and any penalty, with no continuous background tracking draining your battery.",
-    image: "/images/howto-shot-tracker-1-log-shot.jpg",
-    alt: "Dink'It live GPS screen showing a tracked tee shot on Hole 1, with distance to pin and the Log Shot button",
+    title: "Broken down into four categories",
+    body: "Every tracked round is split into Driving, Approach, Short Game, and Putting, benchmarked against a handicap-relative baseline, so you know which part of your game actually gained or cost you strokes.",
+    image: "/images/howto-stats-4-strokes-gained.jpg",
+    alt: "Dink'It Strokes Gained screen for a round at Highgate Golf Club, showing overall Strokes Gained, Putting, and Tee to Green totals",
   },
   {
-    title: "Aim before you swing, get a club suggestion",
-    body: "Not sure what to hit? Drop a target anywhere on the hole in Aim mode and Dink'It recommends a club, built from your own tracked and manual distances in My Bag, not a generic chart.",
-    image: "/images/howto-shot-tracker-2-aim-mode.jpg",
-    alt: "Dink'It Aim mode showing a recommended Sand Wedge at 39 yards to a target dropped on the green",
+    title: "Logged for every round you play",
+    body: "Each round you log adds a new entry to your Strokes Gained log, with the date, course, and headline number, so you can see how the figure moves over a season instead of chasing one good round.",
+    image: "/images/howto-sg-2-trend.jpg",
+    alt: "Dink'It Strokes Gained log showing total Strokes Gained logged for rounds played at Highgate Golf Club",
   },
   {
-    title: "Review a shot-by-shot log of the hole",
-    body: "Once a hole's done, every stroke is plotted on its own map with the club and distance attached: a full shot log you can look back on, not just a score.",
-    image: "/images/howto-shot-tracker-3-shot-log.jpg",
-    alt: "Dink'It shot log screen for Hole 1 at Highgate Golf Club, showing each tracked stroke's club and distance",
+    title: "Filter by Tee-to-green or Putting",
+    body: "Switch the log between overall Strokes Gained, Tee-to-green, and Putting to isolate the one category you're actually trying to fix.",
+    image: "/images/howto-sg-3-category.jpg",
+    alt: "Dink'It Strokes Gained log filtered to Putting, showing Putting Strokes Gained for each logged round",
   },
 ];
 
 const FAQS = [
   {
-    q: "Does the golf shot tracker need extra hardware?",
-    a: "No. Dink'It uses your phone's GPS, so there's no sensor, tag, or separate device to buy or charge.",
+    q: "Is Strokes Gained free?",
+    a: "No. The Strokes Gained breakdown and log are part of Dink'It Premium, £5.99 a month. Career Stats and round history stay free regardless.",
   },
   {
-    q: "Does it track my position continuously during a round?",
-    a: "No. Shot tracking is tap-to-track: you log a shot's position when you play it, rather than Dink'It recording your location continuously in the background. That keeps battery use and privacy exposure to a minimum.",
+    q: "What's the difference between tracked and Estimated?",
+    a: "Strokes Gained is exact when a round is fully GPS shot-tracked, including putts logged separately from full swings. Rounds without that, manually entered scorecards, rounds missing some logged shots, or rounds with no putts marked, use an estimate based on your handicap index and average putts instead, marked Estimated.",
   },
   {
-    q: "Is shot tracking free?",
-    a: "Yes. GPS shot tracking, the shot log map, and per-round stats are all part of Dink'It's free tier. Strokes Gained and shot dispersion analysis built from your tracked shots are part of Premium.",
+    q: "What are the four categories?",
+    a: "Driving, Approach, Short Game, and Putting. Each one shows how many strokes you gained or lost against a handicap-relative baseline for that part of the round.",
   },
   {
-    q: "What do I get once I've tracked a few rounds?",
-    a: "Lifetime stats, per-round breakdowns, and (on Premium) Strokes Gained and shot dispersion analysis, which need tracked shot data to work. The more rounds you track, the more those numbers mean.",
+    q: "Can I see one round or the trend over time?",
+    a: "Both. Open a round's game stats for that round's breakdown, or use the Strokes Gained log here to see every tracked round's totals in one place.",
   },
 ];
 
-export default async function GolfShotTracker() {
+export default async function StrokesGained() {
   const { footer } = await getLandingPage();
 
   return (
@@ -63,41 +63,37 @@ export default async function GolfShotTracker() {
         <div className="flex w-full max-w-[1326px] flex-col items-center gap-10 px-6 pt-[130px] pb-0 sm:pt-[150px] sm:pb-6 sm:px-10 md:flex-row md:items-center md:gap-14 md:px-14">
           <div className="flex w-full flex-col items-center text-center md:flex-1 md:items-start md:text-left">
             <span className="inline-block rounded-[24px] border border-[#87ffad] bg-[#212121] px-[10px] py-[4px] text-[14px] font-bold text-[#87ffad] [font-family:var(--font-space-grotesk)] sm:text-[16px]">
-              Golf Shot Tracker
+              Strokes Gained
             </span>
 
             <h1 className="mt-[18px] max-w-[560px] text-[36px] leading-[1.1] font-medium tracking-[-0.72px] text-white [font-family:var(--font-space-grotesk)] sm:text-[52px] sm:tracking-[-0.9px]">
-              Track every shot&apos;s <span className="text-[#87ffad]">GPS position</span>, free
+              See exactly where a round was <span className="text-[#87ffad]">won or lost</span>
             </h1>
 
             <p className="mt-[21px] max-w-[500px] text-[16px] leading-[1.4] text-white [font-family:var(--font-42dot-sans)] sm:text-[18px]">
-              Tap-to-track each shot&apos;s position, club, and penalties on a satellite map that
-              rotates to your play direction, with no extra hardware and no subscription required.
+              Driving, Approach, Short Game, and Putting, benchmarked against a
+              handicap-relative baseline and logged for every round you track. Dink&apos;It
+              Premium.
             </p>
 
             <a
               href="https://app.dinkitgolf.com/dashboard"
               className="mt-[28px] shrink-0 rounded-[4px] bg-[#56c186] px-[20px] py-[14px] text-center text-[18px] font-medium whitespace-nowrap text-white transition-colors hover:bg-[#4aae76] [font-family:var(--font-space-grotesk)]"
             >
-              Track Your Next Round Free
+              Try Strokes Gained
             </a>
           </div>
 
-          <div className="relative aspect-[838/768] w-full overflow-hidden rounded-[20px] md:w-[46%]">
-            <Image
-              src="/images/hero-golf-shot-tracker.jpg"
-              alt="A golfer mid-swing with GPS shot markers showing a 250 yard drive, a 150 yard 7-iron approach, and a 2-putt on the green"
-              fill
-              priority
-              sizes="(min-width: 768px) 560px, 100vw"
-              className="object-cover"
-            />
+          <div className="relative flex aspect-[838/768] w-full items-center justify-center overflow-hidden rounded-[20px] border border-dashed border-white/30 bg-white/[0.04] md:w-[46%]">
+            <span className="px-6 text-center text-[14px] font-medium text-white/50 [font-family:var(--font-space-grotesk)]">
+              Hero image placeholder
+            </span>
           </div>
         </div>
 
         <section className="flex w-full max-w-[1120px] flex-col items-center gap-10 px-6">
           <h2 className="max-w-[640px] text-center text-[28px] leading-[1.15] font-medium tracking-[-0.48px] text-white [font-family:var(--font-space-grotesk)] sm:text-[36px]">
-            How shot tracking works
+            How Dink&apos;It tracks Strokes Gained
           </h2>
 
           <div className="grid w-full grid-cols-1 gap-6 md:grid-cols-3 md:gap-8">
@@ -135,27 +131,38 @@ export default async function GolfShotTracker() {
 
         <section className="flex w-full max-w-[920px] flex-col items-center gap-6 px-6 text-center">
           <h2 className="max-w-[640px] text-[28px] leading-[1.15] font-medium tracking-[-0.48px] text-white [font-family:var(--font-space-grotesk)] sm:text-[36px]">
-            Shot tracking is the data behind everything else
+            Built on your tracked shot data
           </h2>
           <p className="max-w-[640px] text-[16px] leading-[1.5] text-white/80 [font-family:var(--font-42dot-sans)] sm:text-[18px]">
-            Every GPS-tracked shot feeds your lifetime stats for free, and powers Premium&apos;s{" "}
-            <a href="/strokes-gained" className="text-[#87ffad] underline underline-offset-2">
-              Strokes Gained analysis
+            Strokes Gained comes from the same{" "}
+            <a href="/golf-shot-tracker" className="text-[#87ffad] underline underline-offset-2">
+              GPS shot tracking
             </a>{" "}
-            and shot dispersion breakdowns, so the more rounds you track, the sharper the picture
-            of where you&apos;re actually gaining and losing strokes.
+            that powers{" "}
+            <a href="/golf-performance-analysis" className="text-[#87ffad] underline underline-offset-2">
+              AI coaching and round comparison
+            </a>
+            , so the same tracked round feeds all three. Not sure what Strokes Gained actually
+            means?{" "}
+            <a
+              href="/strokes-gained/what-is-strokes-gained"
+              className="text-[#87ffad] underline underline-offset-2"
+            >
+              Read the full explainer
+            </a>
+            .
           </p>
           <a
-            href="/features"
+            href="/golf-stats-app"
             className="text-[15px] font-medium text-[#87ffad] underline underline-offset-2 [font-family:var(--font-space-grotesk)]"
           >
-            See every Dink&apos;It feature →
+            See the free Golf Stats App →
           </a>
         </section>
 
         <section className="flex w-full max-w-[820px] flex-col gap-8 px-6 pb-4">
           <h2 className="text-center text-[28px] leading-[1.15] font-medium tracking-[-0.48px] text-white [font-family:var(--font-space-grotesk)] sm:text-[36px]">
-            Questions about shot tracking
+            Questions about Strokes Gained
           </h2>
           <div className="flex flex-col gap-4">
             {FAQS.map((faq) => (

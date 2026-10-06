@@ -164,7 +164,7 @@ export default async function GolfStatsApp() {
               GPS shot tracking
             </a>{" "}
             and every tracked round also feeds Premium&apos;s{" "}
-            <a href="/strokes-gained/what-is-strokes-gained" className="text-[#87ffad] underline underline-offset-2">
+            <a href="/strokes-gained" className="text-[#87ffad] underline underline-offset-2">
               Strokes Gained analysis
             </a>
             , so you can see exactly where a round was won or lost, not just the final score.

@@ -108,6 +108,23 @@ survives context resets.
   free tier for this feature, since neither exists. Test account's password was reset to a known
   value directly in the DB (bcrypt) to allow Playwright login; left set for reuse in future capture
   batches, per the standing single-test-account rule.
+- **2026-10-06 — `/strokes-gained/`** (`dinkit-web` `staging`): the pillar page (distinct from the
+  already-shipped `/strokes-gained/what-is-strokes-gained/` sub-article), same commercial-pillar
+  template as the other P0 pages, **not** blog content, no new infra, and no nav change needed
+  since `site-nav.tsx`'s mega-menu already had a `/strokes-gained` entry from earlier nav work.
+  Split hero (placeholder image, user to supply later). 3-box "how it works" reuses
+  `howto-stats-4-strokes-gained.jpg` (single-round by-category breakdown, already captured for
+  `/golf-stats-app/`) for card 1, plus 2 new screenshots of the previously-unshipped **Strokes
+  Gained log/history** feature at `/premium-stats?tab=strokes-gained` (`PremiumStatsTabs` →
+  `StrokesGainedPanel` in `fairway-finder`): one showing the default "Strokes Gained" (total)
+  category log across the test account's 3 Highgate rounds, one showing the log filtered to
+  Putting. FAQ's "tracked vs Estimated" answer is copied near-verbatim from the real in-app
+  explainer text under the log (confirmed exact wording via screenshot) rather than paraphrased.
+  Also updated the 3 existing cross-links on `/golf-shot-tracker/`, `/golf-stats-app/`, and
+  `/golf-performance-analysis/` that previously pointed directly at
+  `/strokes-gained/what-is-strokes-gained` (the sub-article) to point at `/strokes-gained` (the
+  new parent pillar) instead, matching the feature-to-pillar cross-link convention used elsewhere;
+  the pillar itself still links down to the sub-article for the deep dive.
 
 The strategy doc's own "Phase 1 — first 15 pages" (commercial + educational pillar around Shot
 Tracking / Stats / Strokes Gained / Dispersion / Club Distances — see source doc lines 1231–1250)
@@ -118,8 +135,7 @@ Phase 1 list (playbook's own order):
 1. `/golf-shot-tracker/` — commercial pillar, P0 — **shipped to `staging` 2026-10-05**
 2. `/golf-stats-app/` — commercial pillar, P0 — **shipped to `staging` 2026-10-05**
 3. `/golf-performance-analysis/` — commercial pillar, P0 — **shipped to `staging` 2026-10-05**
-4. `/strokes-gained/` — pillar, P0 (not yet built — the article below currently stands alone,
-   cross-linked from the shot tracker page instead of from a parent pillar)
+4. `/strokes-gained/` — pillar, P0 — **shipped to `staging` 2026-10-06**
 5. `/golf-shot-dispersion/` — commercial pillar, P0
 6. `/golf-club-distance-tracker/` — commercial pillar, P0
 7. `/data-driven-golf/` — P1

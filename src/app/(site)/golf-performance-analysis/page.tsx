@@ -139,7 +139,7 @@ export default async function GolfPerformanceAnalysis() {
               GPS shot tracking
             </a>{" "}
             that powers{" "}
-            <a href="/strokes-gained/what-is-strokes-gained" className="text-[#87ffad] underline underline-offset-2">
+            <a href="/strokes-gained" className="text-[#87ffad] underline underline-offset-2">
               Strokes Gained
             </a>
             , so the coaching feedback and round comparisons are grounded in what actually
