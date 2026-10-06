@@ -173,6 +173,46 @@ survives context resets.
   `howto-shot-tracker-2-aim-mode.jpg` (already captured for `/golf-shot-tracker/`, and it already
   showed the live aim-mode club recommendation, so no new capture needed for that card).
 
+- **2026-10-07 — `/golf-handicap-tracker/` and `/golf-head-to-head-comparison/`** (`dinkit-web`
+  `staging`): not part of the official Phase 1 list below — built at the user's explicit request
+  to round the `site-nav.tsx` "App features" mega-menu out to 8 entries (a clean 4x2 grid), after
+  which the plan is to ship this whole features-umbrella batch to `staging` for review before
+  merging to `main`, rather than continuing straight into non-feature pillar pages like
+  `/data-driven-golf/`. Both use the same commercial-pillar template, placeholder hero image (user
+  to supply later), and `site-nav.tsx`'s `APP_FEATURES` array grew from 6 to 8 entries (new
+  `IconHandicap` and `IconHeadToHead` inline SVGs added alongside the existing icon set).
+  - **`/golf-handicap-tracker/`**: grounded in `fairway-finder/src/lib/handicap.ts`'s
+    `computeHandicapIndex()` — WHS-style differential, best-N-of-last-20 average with the standard
+    adjustment table, minimum 3 rated rounds before a computed index appears, and a **hard
+    cutover** (`?? user.currentHandicap`, no blending) once that threshold is hit. Free feature, no
+    Premium gate anywhere in the code. A "rated round" only needs a logged score against a rated
+    tee (course rating + slope); GPS shot tracking isn't required. 3-box "how it works" uses one
+    new screenshot of the first-run `HandicapPromptModal` (captured by temporarily nulling the test
+    account's `currentHandicap`/`handicapPromptDismissedAt` in the DB, screenshotting, then
+    restoring both — reversible, same account) plus the existing dashboard and account-page
+    screenshots showing the computed badge next to the self-reported field.
+  - **`/golf-head-to-head-comparison/`**: grounded in `head-to-head-stats.tsx` — hard-gated to
+    accepted friends only, Premium-gated on the **viewing** account's status only (the friend being
+    compared against doesn't need Premium), exactly 5 compared stats (Best Score, Longest Drive,
+    Longest Putt, Handicap, one overall Strokes Gained figure), all-time/career scope rather than
+    tied to a single shared round. **CMS discrepancy found, not fixed**: the live Sanity
+    `featuresPage` doc's `head-to-head` entry overclaims "...using the same categories as your own
+    Strokes Gained breakdown" — the real feature only shows one total Strokes Gained number, no
+    category breakdown. Flagged here per the established pattern (same as the 2026-09-23 USGA→WHS
+    and 2026-10-06 Shot Dispersion overclaims), not silently corrected. **Separate production bug
+    found, not fixed**: `fairway-finder/src/app/friends/[id]/page.tsx:240` renders a literal
+    leftover dev label, `"Head to Head (prem)"`, as the section heading shown to every user above
+    the real stats/paywall — worth a real cleanup pass outside this SEO workstream. Needed a new
+    disposable friend account (`seo-friend-13219133@dinkitgolf.com`, "Jamie Carter") seeded with a
+    GPS-tracked round and an accepted `Friendship` row to the existing test account, since
+    Head-to-Head requires two distinct users. Hit and fixed a seeding bug along the way: computing
+    "longest drive" depends on each hole's chronologically-*first* non-putt shot, so shots seeded
+    across separate `createMany` calls at different times let old putts outrank new drives and
+    nulled the result — fixed by rebuilding the whole round's shots in one call, drive before putts
+    per hole. 3-box "how it works" uses 3 new screenshots: the friends list, the Premium upgrade
+    gate (captured by temporarily flipping the test account's `betaTester` flag off, screenshotting,
+    then restoring it), and the full 5-stat comparison card.
+
 The strategy doc's own "Phase 1 — first 15 pages" (commercial + educational pillar around Shot
 Tracking / Stats / Strokes Gained / Dispersion / Club Distances — see source doc lines 1231–1250)
 is the thing the playbook calls P0. The coverage page above is useful and user-requested, but it's

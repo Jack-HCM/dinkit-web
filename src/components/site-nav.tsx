@@ -74,6 +74,27 @@ function IconClubDistance() {
   );
 }
 
+function IconHandicap() {
+  return (
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M4 16a8 8 0 1116 0" />
+      <path d="M12 16l4-5" />
+      <circle cx="12" cy="16" r="1" fill="currentColor" stroke="none" />
+    </svg>
+  );
+}
+
+function IconHeadToHead() {
+  return (
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+      <circle cx="8" cy="8" r="3" />
+      <circle cx="16" cy="8" r="3" />
+      <path d="M3 20c0-3 2.5-5 5-5s5 2 5 5" />
+      <path d="M11 20c0-3 2.5-5 5-5s5 2 5 5" />
+    </svg>
+  );
+}
+
 const APP_FEATURES = [
   {
     href: "/golf-shot-tracker",
@@ -94,6 +115,12 @@ const APP_FEATURES = [
     Icon: IconAnalysis,
   },
   {
+    href: "/golf-handicap-tracker",
+    title: "Handicap Index",
+    body: "A handicap that updates itself from your rated rounds.",
+    Icon: IconHandicap,
+  },
+  {
     href: "/strokes-gained",
     title: "Strokes Gained",
     body: "See where every stroke was gained or lost, by category.",
@@ -110,6 +137,12 @@ const APP_FEATURES = [
     title: "Club Distances",
     body: "Average distance per club, from your tracked shots.",
     Icon: IconClubDistance,
+  },
+  {
+    href: "/golf-head-to-head-comparison",
+    title: "Head-to-Head",
+    body: "Compare 5 real stats against a friend, side by side.",
+    Icon: IconHeadToHead,
   },
 ];
 
