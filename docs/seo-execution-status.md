@@ -125,6 +125,27 @@ survives context resets.
   `/strokes-gained/what-is-strokes-gained` (the sub-article) to point at `/strokes-gained` (the
   new parent pillar) instead, matching the feature-to-pillar cross-link convention used elsewhere;
   the pillar itself still links down to the sub-article for the deep dive.
+- **2026-10-06 — `/golf-shot-dispersion/`** (`dinkit-web` `staging`): same commercial-pillar
+  template, placeholder hero image (user to supply later, same as the other hero-pending pages).
+  Copy grounded directly in `fairway-finder/src/lib/shot-dispersion.ts` and `geo.ts` (the real
+  algorithm), **not** the live Sanity `featuresPage` CMS doc or the in-app `upgrade-modal.tsx`
+  paywall copy, both of which overclaim: they describe Shot Dispersion as covering short/long
+  *and* left/right bias, and the Sanity copy additionally claims a by-club breakdown. The shipped
+  feature only computes **left/right (lateral) bias, grouped by category** (Driving, Approach,
+  Short Game), with no short/long dimension and no per-club breakdown anywhere in the code — same
+  class of issue as the 2026-09-23 USGA→WHS fix above, flagged here rather than silently
+  corrected since the CMS/in-app copy is out of scope for this page-building pass. `site-nav.tsx`'s
+  existing `/golf-shot-dispersion` mega-menu entry had the same "every club in the bag" overclaim
+  in its body text; corrected to "Driving, Approach, and Short Game" while here. 3-box "how it
+  works" uses 3 new screenshots from the shared `seo-test-13219133@dinkitgolf.com` test account:
+  one round's shots had their GPS coordinates deliberately nudged (via a geo-math patch script,
+  not fabricated numbers) to produce a legible non-zero left/right bias for card 1, contrasted
+  with the other existing round's untouched "On line" result for card 2, plus the dashboard-level
+  "Shot placement (GPS-tracked holes)" teaser card (`expandable-career-stats.tsx`, gated behind a
+  collapsed-by-default "See all stats" toggle) for card 3. Also caught and fixed a self-introduced
+  bug before shipping: the cached AI coaching narrative for the nudged round still described shots
+  as landing on line (generated before the GPS patch); cleared the stale `aiAnalysisUsage` cache
+  row and regenerated it live so the narrative text matches the new pills.
 
 The strategy doc's own "Phase 1 — first 15 pages" (commercial + educational pillar around Shot
 Tracking / Stats / Strokes Gained / Dispersion / Club Distances — see source doc lines 1231–1250)
@@ -136,7 +157,7 @@ Phase 1 list (playbook's own order):
 2. `/golf-stats-app/` — commercial pillar, P0 — **shipped to `staging` 2026-10-05**
 3. `/golf-performance-analysis/` — commercial pillar, P0 — **shipped to `staging` 2026-10-05**
 4. `/strokes-gained/` — pillar, P0 — **shipped to `staging` 2026-10-06**
-5. `/golf-shot-dispersion/` — commercial pillar, P0
+5. `/golf-shot-dispersion/` — commercial pillar, P0 — **shipped to `staging` 2026-10-06**
 6. `/golf-club-distance-tracker/` — commercial pillar, P0
 7. `/data-driven-golf/` — P1
 8. `/strokes-gained/what-is-strokes-gained/` — P0 — **shipped to `staging` 2026-10-05**

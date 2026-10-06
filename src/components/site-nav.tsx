@@ -102,7 +102,7 @@ const APP_FEATURES = [
   {
     href: "/golf-shot-dispersion",
     title: "Shot Dispersion",
-    body: "Your real shot pattern for every club in the bag.",
+    body: "Your real left-right miss for Driving, Approach, and Short Game.",
     Icon: IconDispersion,
   },
   {
