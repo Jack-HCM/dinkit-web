@@ -88,10 +88,15 @@ export default async function GolfClubDistanceTracker() {
             </a>
           </div>
 
-          <div className="relative flex aspect-[838/768] w-full items-center justify-center overflow-hidden rounded-[20px] border border-dashed border-white/30 bg-white/[0.04] md:w-[46%]">
-            <span className="px-6 text-center text-[14px] font-medium text-white/50 [font-family:var(--font-space-grotesk)]">
-              Hero image placeholder
-            </span>
+          <div className="relative aspect-[838/768] w-full overflow-hidden rounded-[20px] md:w-[46%]">
+            <Image
+              src="/images/hero-golf-club-distance-tracker.jpg"
+              alt="A golf bag with clubs showing distance callouts for Driver 274 yards, 7 iron 140 yards, and Putter 22 yards"
+              fill
+              priority
+              sizes="(min-width: 768px) 560px, 100vw"
+              className="object-cover"
+            />
           </div>
         </div>
 
