@@ -212,6 +212,25 @@ survives context resets.
     per hole. 3-box "how it works" uses 3 new screenshots: the friends list, the Premium upgrade
     gate (captured by temporarily flipping the test account's `betaTester` flag off, screenshotting,
     then restoring it), and the full 5-stat comparison card.
+  - **2026-10-08 screenshot revision pass** (user feedback on the above): the test account's
+    auto-generated identity (`seotest13219133` as both name fallback and username) read as obviously
+    synthetic, so it's now `Ryan Mitchell` / `ryan_mitchell` — re-fixes the "Hello there" dashboard
+    greeting, the dashboard avatar initial, and the account page's "User ID" line, all of which
+    derive from `name`/`username`. Re-captured both handicap screenshots. Separately, the
+    Head-to-Head screenshots had drifted from this project's full-phone-frame convention (two were
+    tight `clip`-based crops) — fixed by recapturing all three at the standard uncropped 390x844.
+    Seeded two more disposable friend accounts (`seo-friend-2-13219133@dinkitgolf.com` "Sophie
+    Clarke", `seo-friend-3-13219133@dinkitgolf.com` "Tom Richardson", each with one rated `ScoreCard`
+    at Highgate for a "Last played" date) so the friends-list screenshot shows three friends instead
+    of one; their handicap column reads "—" since WHS needs 3 rated rounds, which is real app
+    behavior, not a seeding gap. The premium-gate screenshot now captures the actual `UpgradeModal`
+    popup (triggered live via Playwright click) instead of the static inline locked card, full
+    screen. The comparison screenshot is now scrolled to the bottom of the real friend-profile page
+    instead of being `clip`-cropped to just the stat rows, so it shows real surrounding chrome
+    (header, "Head to Head" section, Remove Friend link, bottom nav) — the leftover `"(prem)"` dev
+    label (still an open, separately-flagged production bug, see above) was patched to plain "Head
+    to Head" client-side for this capture only, not touched on disk or in the DB. Updated the
+    friends-list and premium-gate `alt` text in `golf-head-to-head-comparison/page.tsx` to match.
 
 The strategy doc's own "Phase 1 — first 15 pages" (commercial + educational pillar around Shot
 Tracking / Stats / Strokes Gained / Dispersion / Club Distances — see source doc lines 1231–1250)

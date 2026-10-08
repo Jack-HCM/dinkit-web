@@ -18,13 +18,13 @@ const HOW_IT_WORKS = [
     title: "Add a friend to compare against",
     body: "Head-to-Head only works between accepted friends. Send a request from Find Friends, and once they accept, they show up with their own live handicap.",
     image: "/images/howto-h2h-0-friends.jpg",
-    alt: "Dink'It Friends screen showing an accepted friend, Jamie Carter, with a Handicap of 11.3",
+    alt: "Dink'It Friends screen showing three accepted friends with handicaps and last-played dates, including Jamie Carter at a Handicap of 11.3",
   },
   {
     title: "Unlock it with Premium",
     body: "Head-to-Head is a Premium feature on the viewing account only, your friend doesn't need Premium for you to compare against them.",
     image: "/images/howto-h2h-2-premium-gate.jpg",
-    alt: "Dink'It premium upgrade prompt reading Unlock head-to-head stats, best score, longest drive, longest putt, handicap and strokes gained, with a premium account",
+    alt: "Dink'It Upgrade to Premium modal listing Strokes Gained Analytics, Shot Dispersion Mapping, Course-Specific Trends and AI Performance Summaries, with monthly and annual pricing",
   },
   {
     title: "See exactly where you compare",
