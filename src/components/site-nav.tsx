@@ -150,6 +150,7 @@ export function SiteNav({ alwaysVisible = false }: { alwaysVisible?: boolean } =
   const [visible, setVisible] = useState(alwaysVisible);
   const [menuOpen, setMenuOpen] = useState(false);
   const [featuresOpen, setFeaturesOpen] = useState(false);
+  const [mobileFeaturesOpen, setMobileFeaturesOpen] = useState(false);
 
   useEffect(() => {
     if (alwaysVisible) return;
@@ -171,6 +172,10 @@ export function SiteNav({ alwaysVisible = false }: { alwaysVisible?: boolean } =
       setFeaturesOpen(false);
     }
   }, [visible]);
+
+  useEffect(() => {
+    if (!menuOpen) setMobileFeaturesOpen(false);
+  }, [menuOpen]);
 
   return (
     <>
@@ -294,16 +299,75 @@ export function SiteNav({ alwaysVisible = false }: { alwaysVisible?: boolean } =
 
         {menuOpen && (
           <div className="mt-2 flex w-full max-w-[1326px] flex-col gap-1 rounded-[8px] bg-[rgba(25,75,52,0.92)] p-[12px] backdrop-blur-[24px] [font-family:var(--font-space-grotesk)] text-[17px] font-medium text-white md:hidden">
-            {NAV_LINKS.map((link) => (
-              <a
-                key={link.href}
-                href={link.href}
-                onClick={() => setMenuOpen(false)}
-                className="rounded-[4px] px-[12px] py-[12px] transition-colors hover:bg-white/10"
-              >
-                {link.label}
-              </a>
-            ))}
+            {NAV_LINKS.map((link) =>
+              link.href === "/features" ? (
+                <div key={link.href} className="flex flex-col">
+                  <div className="flex items-center justify-between rounded-[4px] transition-colors hover:bg-white/10">
+                    <a
+                      href={link.href}
+                      onClick={() => setMenuOpen(false)}
+                      className="flex-1 px-[12px] py-[12px]"
+                    >
+                      {link.label}
+                    </a>
+                    <button
+                      type="button"
+                      onClick={() => setMobileFeaturesOpen((open) => !open)}
+                      aria-label={mobileFeaturesOpen ? "Collapse app features" : "Expand app features"}
+                      aria-expanded={mobileFeaturesOpen}
+                      className="flex h-[40px] w-[44px] shrink-0 items-center justify-center text-white/80"
+                    >
+                      <svg
+                        width="10"
+                        height="6"
+                        viewBox="0 0 10 6"
+                        fill="none"
+                        className={`transition-transform duration-300 ${mobileFeaturesOpen ? "rotate-180" : ""}`}
+                      >
+                        <path d="M1 1L5 5L9 1" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                      </svg>
+                    </button>
+                  </div>
+
+                  <div
+                    className={`grid transition-[grid-template-rows] duration-300 ease-in-out ${
+                      mobileFeaturesOpen ? "grid-rows-[1fr]" : "grid-rows-[0fr]"
+                    }`}
+                  >
+                    <div className="overflow-hidden">
+                      <div className="flex flex-col gap-1 py-1 pl-[12px]">
+                        {APP_FEATURES.map(({ href, title }) => (
+                          <a
+                            key={href}
+                            href={href}
+                            onClick={() => setMenuOpen(false)}
+                            className="rounded-[4px] px-[12px] py-[10px] text-[15px] font-normal text-white/75 transition-colors hover:bg-white/10 hover:text-white"
+                          >
+                            {title}
+                          </a>
+                        ))}
+                        <a
+                          href="/features"
+                          onClick={() => setMenuOpen(false)}
+                          className="rounded-[4px] px-[12px] py-[10px] text-[15px] font-medium text-[#87ffad] transition-colors hover:bg-white/10"
+                        >
+                          View all features →
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              ) : (
+                <a
+                  key={link.href}
+                  href={link.href}
+                  onClick={() => setMenuOpen(false)}
+                  className="rounded-[4px] px-[12px] py-[12px] transition-colors hover:bg-white/10"
+                >
+                  {link.label}
+                </a>
+              )
+            )}
           </div>
         )}
       </div>
