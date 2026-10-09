@@ -84,10 +84,15 @@ export default async function StrokesGained() {
             </a>
           </div>
 
-          <div className="relative flex aspect-[838/768] w-full items-center justify-center overflow-hidden rounded-[20px] border border-dashed border-white/30 bg-white/[0.04] md:w-[46%]">
-            <span className="px-6 text-center text-[14px] font-medium text-white/50 [font-family:var(--font-space-grotesk)]">
-              Hero image placeholder
-            </span>
+          <div className="relative aspect-[838/768] w-full overflow-hidden rounded-[20px] md:w-[46%]">
+            <Image
+              src="/images/hero-strokes-gained.jpg"
+              alt="A golf hole mapped into Driving, Approach, Putting and Short game zones, the four Strokes Gained categories"
+              fill
+              priority
+              sizes="(min-width: 768px) 560px, 100vw"
+              className="object-cover"
+            />
           </div>
         </div>
 
